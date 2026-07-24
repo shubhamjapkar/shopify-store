@@ -1,0 +1,23 @@
+# Astuvita — Checkout UI Extension
+# NOTE: Checkout UI extensions belong to a Shopify APP, not a theme.
+# This folder must sit inside a Shopify app project (created with
+# `shopify app init`) under its `extensions/` directory, then deployed
+# with `shopify app deploy`. Requires Shopify Plus + Checkout Extensibility.
+
+api_version = "2025-07"
+
+[[extensions]]
+name = "Astuvita Checkout Reassurance"
+handle = "astuvita-checkout"
+type = "ui_extension"
+
+  # Dynamic target: after deploying, place this block in the Checkout editor
+  # (Settings → Checkout → Customize → Add app block) exactly where you want it.
+  [[extensions.targeting]]
+  module = "./src/Checkout.jsx"
+  target = "purchase.checkout.block.render"
+
+  # Also render a matching message on the Thank-you / Order-status pages.
+  [[extensions.targeting]]
+  module = "./src/ThankYou.jsx"
+  target = "purchase.thank-you.block.render"
