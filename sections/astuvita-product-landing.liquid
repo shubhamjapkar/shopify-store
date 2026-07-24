@@ -270,7 +270,7 @@
     <div class="av-marquee">
       <div class="av-marquee__track">
         {%- assign press = section.settings.press_logos | split: ',' -%}
-        {%- for i in (1..3) -%}
+        {%- for i in (1..2) -%}
           {%- for logo in press -%}
             <span class="av-press__logo"><img src="{{ logo | strip }}" alt="" loading="lazy"></span>
           {%- endfor -%}
@@ -312,64 +312,113 @@
       <div class="av-review-form__row">
         <textarea class="av-review-form__textarea" name="content" rows="4" placeholder="Describe your experience with the Astuvita cane…" required></textarea>
       </div>
+      <div class="av-review-form__row">
+        <label class="av-review-form__label" for="av-review-photo-{{ section.id }}">Add a photo (optional)</label>
+        <label class="av-review-form__file-btn" for="av-review-photo-{{ section.id }}">
+          <span aria-hidden="true">📷</span> Choose a photo
+        </label>
+        <input class="av-review-form__file" type="file" accept="image/*" id="av-review-photo-{{ section.id }}" data-av-photo-input hidden>
+        <div class="av-review-form__preview" data-av-photo-preview hidden>
+          <img alt="">
+          <button type="button" class="av-review-form__remove" data-av-photo-remove aria-label="Remove photo">✕</button>
+        </div>
+      </div>
       <button type="submit" class="av-review-form__submit">Publish my review</button>
       <p class="av-review-form__msg" data-av-review-msg role="status" aria-live="polite" hidden></p>
     </form>
 
+    {%- liquid
+      assign review_imgs = "https://astuvita.com/cdn/shop/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1779006668&width=800|https://astuvita.com/cdn/shop/files/1716391083-StandSecureAdvertorial_2_1.webp?v=1779006607&width=800|https://astuvita.com/cdn/shop/files/Sd56ad8843a80431eac1c4220bc749c078.webp?v=1779006668&width=800|https://astuvita.com/cdn/shop/files/preview_images/713472fdec454112a0d22c5b85601475.thumbnail.0000000000_2500x.jpg?v=1778870527&width=800|https://astuvita.com/cdn/shop/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1779006668&width=800|https://astuvita.com/cdn/shop/files/Sd56ad8843a80431eac1c4220bc749c078.webp?v=1779006668&width=800" | split: '|'
+    -%}
     <div class="av-reviews__grid" data-av-reviews-grid>
       <figure class="av-review">
-        <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
-        <figcaption class="av-review__name">Brigitte F. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ Most canes I've tried feel hollow or a little unstable on pavement. This one gives a real feeling of grip and safety when my weight shifts. I no longer tense up like before. ”</blockquote>
-        <time class="av-review__date">April 11, 2026</time>
+        <img class="av-review__img" src="{{ review_imgs[0] }}" alt="" loading="lazy" width="600" height="600">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Brigitte</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">April 11, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
+          <blockquote>“ Most canes I've tried feel hollow or a little unstable on pavement. This one gives a real feeling of grip and safety when my weight shifts. I no longer tense up like before. ”</blockquote>
+        </div>
       </figure>
       <figure class="av-review">
-        <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
-        <figcaption class="av-review__name">Bernard M. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ The second handle gives me something solid to push straight down on. I no longer twist my wrist and I don't struggle to find support. It's steady from top to bottom. ”</blockquote>
-        <time class="av-review__date">May 2, 2026</time>
+        <img class="av-review__img" src="{{ review_imgs[1] }}" alt="" loading="lazy" width="600" height="450">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Bernard</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">May 2, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
+          <blockquote>“ The second handle gives me something solid to push straight down on. I no longer twist my wrist and I don't struggle to find support. It's steady from top to bottom. ”</blockquote>
+        </div>
       </figure>
       <figure class="av-review">
-        <div class="av-stars" aria-hidden="true" style="--pct:80%;">★★★★★</div>
-        <figcaption class="av-review__name">Caroline R. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ Parking lots and sidewalks used to make me cautious. The 360° base stays aligned instead of tipping under me. I feel much more stable when I walk outside. ”</blockquote>
-        <time class="av-review__date">March 27, 2026</time>
+        <img class="av-review__img" src="{{ review_imgs[2] }}" alt="" loading="lazy" width="600" height="800">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Caroline</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">March 27, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:80%;">★★★★★</div>
+          <blockquote>“ Parking lots and sidewalks used to make me cautious. The 360° base stays aligned instead of tipping under me. I feel much more stable when I walk outside. ”</blockquote>
+        </div>
+      </figure>
+      <figure class="av-review">
+        <img class="av-review__img" src="{{ review_imgs[3] }}" alt="" loading="lazy" width="600" height="600">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Amélie</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">March 30, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:80%;">★★★★★</div>
+          <blockquote>“ Good quality item, solid and reliable for everyday use. ”</blockquote>
+        </div>
+      </figure>
+      <figure class="av-review">
+        <img class="av-review__img" src="{{ review_imgs[4] }}" alt="" loading="lazy" width="600" height="750">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Danielle</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">March 18, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
+          <blockquote>“ I use it every morning to go to the market. The handle is comfortable and I feel far more confident on cobblestones. ”</blockquote>
+        </div>
+      </figure>
+      <figure class="av-review">
+        <img class="av-review__img" src="{{ review_imgs[5] }}" alt="" loading="lazy" width="600" height="450">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Jean-Pierre</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">March 9, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
+          <blockquote>“ Very good stability, and the built-in light is really handy when I get up at night. An excellent purchase. ”</blockquote>
+        </div>
       </figure>
       <figure class="av-review av-review--extra is-collapsed">
-        <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
-        <figcaption class="av-review__name">Danielle P. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ I use it every morning to go to the market. The handle is comfortable and I feel far more confident on cobblestones. ”</blockquote>
-        <time class="av-review__date">March 18, 2026</time>
+        <img class="av-review__img" src="{{ review_imgs[0] }}" alt="" loading="lazy" width="600" height="700">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Suzanne</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">February 28, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
+          <blockquote>“ Given to my 80-year-old mother, and she loves it. Easy to adjust, lightweight, and it stands up on its own. ”</blockquote>
+        </div>
       </figure>
       <figure class="av-review av-review--extra is-collapsed">
-        <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
-        <figcaption class="av-review__name">Jean-Pierre L. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ Very good stability, and the built-in light is really handy when I get up at night. An excellent purchase. ”</blockquote>
-        <time class="av-review__date">March 9, 2026</time>
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Acheteur</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">February 20, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:80%;">★★★★★</div>
+          <blockquote>“ Fast delivery and the product matches the description. The fact that it stands up on its own is truly life-changing. ”</blockquote>
+        </div>
       </figure>
       <figure class="av-review av-review--extra is-collapsed">
-        <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
-        <figcaption class="av-review__name">Suzanne M. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ Given to my 80-year-old mother, and she loves it. Easy to adjust, lightweight, and it stands up on its own. ”</blockquote>
-        <time class="av-review__date">February 28, 2026</time>
+        <img class="av-review__img" src="{{ review_imgs[2] }}" alt="" loading="lazy" width="600" height="500">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Françoise</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">February 12, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
+          <blockquote>“ Finally a cane that doesn't fall on the floor every time I set it down! I recommend it to all my friends. ”</blockquote>
+        </div>
       </figure>
       <figure class="av-review av-review--extra is-collapsed">
-        <div class="av-stars" aria-hidden="true" style="--pct:80%;">★★★★★</div>
-        <figcaption class="av-review__name">Robert D. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ Fast delivery and the product matches the description. The fact that it stands up on its own is truly life-changing. ”</blockquote>
-        <time class="av-review__date">February 20, 2026</time>
-      </figure>
-      <figure class="av-review av-review--extra is-collapsed">
-        <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
-        <figcaption class="av-review__name">Françoise B. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ Finally a cane that doesn't fall on the floor every time I set it down! I recommend it to all my friends. ”</blockquote>
-        <time class="av-review__date">February 12, 2026</time>
-      </figure>
-      <figure class="av-review av-review--extra is-collapsed">
-        <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
-        <figcaption class="av-review__name">Michel G. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
-        <blockquote>“ Sturdy and well thought out. The second handle really helps me get up from my armchair without straining my back. ”</blockquote>
-        <time class="av-review__date">February 3, 2026</time>
+        <img class="av-review__img" src="{{ review_imgs[3] }}" alt="" loading="lazy" width="600" height="650">
+        <div class="av-review__body">
+          <figcaption class="av-review__name"><span class="av-review__name-text">Michel</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+          <time class="av-review__date">February 3, 2026</time>
+          <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
+          <blockquote>“ Sturdy and well thought out. The second handle really helps me get up from my armchair without straining my back. ”</blockquote>
+        </div>
       </figure>
     </div>
 
@@ -654,7 +703,7 @@
   .av-rating { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
   .av-rating__text { font-weight: 600; }
   .av-rating__count { color: var(--av-muted); font-weight: 500; }
-  .av-title { font-size: clamp(1.7rem, 3vw, 2.35rem); font-weight: 700; line-height: 1.2; margin: 0 0 1.1rem; color: rgba(0,0,0,.82); }
+  .av-title { font-size: 34px; font-weight: 700; line-height: 1.2; margin: 0 0 1.1rem; color: rgba(0,0,0,.82); }
 
   .av-price { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; margin-bottom: 1.1rem; }
   .av-price__now { font-size: 1.75rem; font-weight: 700; }
@@ -742,9 +791,10 @@
   /* Press marquee */
   .av-press { padding: 2rem 0; background: var(--av-soft); }
   .av-marquee { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
-  .av-marquee__track { display: inline-flex; align-items: center; gap: 4rem; white-space: nowrap; animation: av-scroll 32s linear infinite; }
-  .av-press__logo img { height: 30px; width: auto; opacity: .85; }
-  @keyframes av-scroll { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
+  .av-marquee__track { display: inline-flex; align-items: center; gap: 4rem; white-space: nowrap; animation: av-scroll 24s linear infinite; }
+  .av-press__logo { display: inline-flex; align-items: center; justify-content: center; width: 140px; flex: 0 0 auto; }
+  .av-press__logo img { max-height: 30px; max-width: 100%; width: auto; height: auto; object-fit: contain; opacity: .85; }
+  @keyframes av-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .av-marquee__track { animation: none; } }
 
   /* Reviews */
@@ -775,15 +825,26 @@
   .av-review-form__msg[hidden] { display: none; }
   .av-review-form__msg.is-success { color: var(--av-green-dark); }
   .av-review-form__msg.is-error { color: #c0392b; }
+  .av-review-form__file-btn { display: inline-flex; align-items: center; gap: .5rem; background: #fff; color: var(--av-fg); border: 1px dashed var(--av-border); border-radius: 10px; padding: .65rem 1.1rem; font: inherit; font-weight: 600; font-size: .9rem; cursor: pointer; transition: border-color .15s ease, color .15s ease; }
+  .av-review-form__file-btn:hover { border-color: var(--av-green); color: var(--av-green-dark); }
+  .av-review-form__preview { position: relative; display: inline-block; margin-top: .8rem; }
+  .av-review-form__preview[hidden] { display: none; }
+  .av-review-form__preview img { display: block; width: 96px; height: 96px; object-fit: cover; border-radius: 10px; border: 1px solid var(--av-border); }
+  .av-review-form__remove { position: absolute; top: -8px; right: -8px; width: 24px; height: 24px; border-radius: 50%; background: #222; color: #fff; border: 2px solid #fff; font-size: .7rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-  .av-reviews__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-  .av-review { background: #fff; border: 1px solid var(--av-border); border-radius: 14px; padding: 1.6rem; margin: 0; }
+  .av-reviews__grid { column-count: 4; column-gap: 1.25rem; }
+  .av-review { display: block; width: 100%; break-inside: avoid; -webkit-column-break-inside: avoid; background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 16px; padding: 0; margin: 0 0 1.25rem; overflow: hidden; box-shadow: 0 1px 2px rgba(20,20,20,.04), 0 6px 16px rgba(20,20,20,.05); }
   .av-review--extra.is-collapsed { display: none; }
   .av-review--user { border-color: var(--av-green); box-shadow: 0 0 0 1px var(--av-green) inset; }
-  .av-review__name { font-weight: 700; margin: .7rem 0 .3rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
-  .av-review__badge { color: var(--av-green); font-size: .72rem; font-weight: 600; }
-  .av-review blockquote { margin: 0 0 1rem; font-size: 1rem; color: #333; }
-  .av-review__date { display: block; color: var(--av-muted); font-size: .9rem; font-style: italic; }
+  .av-review__img { display: block; width: 100%; height: auto; background: var(--av-soft); }
+  .av-review__body { padding: 1rem 1.15rem 1.25rem; }
+  .av-review__name { font-weight: 700; font-size: 1rem; margin: 0; display: flex; align-items: center; gap: .35rem; flex-wrap: nowrap; min-width: 0; }
+  .av-review__name-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .av-review__badge { flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: var(--av-green); color: #fff; font-size: 0; }
+  .av-review__badge::before { content: "✔"; font-size: 9px; line-height: 1; }
+  .av-review blockquote { margin: .55rem 0 0; font-size: .95rem; line-height: 1.55; color: #3a3a3a; }
+  .av-review__date { display: block; color: var(--av-muted); font-size: .82rem; margin-top: .2rem; }
+  .av-review .av-stars { margin-top: .55rem; }
   .av-reviews__more { text-align: center; margin-top: 2rem; }
   .av-reviews__more-btn { background: #fff; color: var(--av-fg); border: 2px solid var(--av-border); border-radius: 10px; padding: .85rem 1.75rem; font: inherit; font-weight: 600; cursor: pointer; transition: border-color .15s ease, color .15s ease; }
   .av-reviews__more-btn:hover { border-color: var(--av-green); color: var(--av-green-dark); }
@@ -912,6 +973,7 @@
   /* Responsive */
   @media (max-width: 900px) {
     .av-futil__card { grid-template-columns: repeat(2, 1fr); }
+    .av-reviews__grid { column-count: 2; }
   }
   @media (max-width: 749px) {
     .av-header__inner { grid-template-columns: auto 1fr auto; gap: .5rem; padding: .75rem 1rem; }
@@ -931,9 +993,17 @@
       scroll-padding: 0 1rem;
     }
     .av-gallery__rest::-webkit-scrollbar { display: none; }
-    .av-gallery__rest .av-gallery__img { flex: 0 0 30%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; scroll-snap-align: start; }
+    .av-gallery__rest .av-gallery__img { flex: 0 0 25%; width: 25%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; scroll-snap-align: start; }
     .av-title { font-size: 1.6rem; }
-    .av-reviews__grid { grid-template-columns: 1fr; }
+    .av-reviews__grid { column-count: 3; column-gap: .6rem; }
+    .av-review { border-radius: 14px; margin-bottom: .6rem; }
+    .av-review__body { padding: .7rem .65rem .85rem; }
+    .av-review__name { font-size: .8rem; gap: .25rem; }
+    .av-review__badge { width: 12px; height: 12px; }
+    .av-review__badge::before { font-size: 7px; }
+    .av-review__date { font-size: .7rem; margin-top: .15rem; }
+    .av-review blockquote { font-size: .78rem; line-height: 1.45; margin-top: .5rem; }
+    .av-review .av-stars { font-size: .78rem; margin-top: .5rem; }
     .av-stats__grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .av-futil__card { grid-template-columns: 1fr; }
     .av-footer__inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -1210,12 +1280,56 @@
           var pct = Math.max(0, Math.min(100, Math.round((r.rating / 5) * 100)));
           var fig = document.createElement('figure');
           fig.className = 'av-review av-review--user';
+          var imgHtml = r.photo ? '<img class="av-review__img" src="' + esc(r.photo) + '" alt="" loading="lazy">' : '';
           fig.innerHTML =
+            imgHtml +
+            '<div class="av-review__body">' +
+            '<figcaption class="av-review__name"><span class="av-review__name-text">' + esc(r.name) + '</span> <span class="av-review__badge">✔ Posted by you</span></figcaption>' +
+            '<time class="av-review__date">' + esc(r.date) + '</time>' +
             '<div class="av-stars" aria-hidden="true" style="--pct:' + pct + '%;">★★★★★</div>' +
-            '<figcaption class="av-review__name">' + esc(r.name) + ' <span class="av-review__badge">✔ Posted by you</span></figcaption>' +
             '<blockquote>« ' + esc(r.content) + ' »</blockquote>' +
-            '<time class="av-review__date">' + esc(r.date) + '</time>';
+            '</div>';
           return fig;
+        }
+
+        /* Photo upload: read + downscale to keep localStorage small */
+        var photoDataUrl = '';
+        var photoInput = form ? form.querySelector('[data-av-photo-input]') : null;
+        var photoPreview = form ? form.querySelector('[data-av-photo-preview]') : null;
+        var photoPreviewImg = photoPreview ? photoPreview.querySelector('img') : null;
+        var photoRemoveBtn = form ? form.querySelector('[data-av-photo-remove]') : null;
+        function resetPhoto() {
+          photoDataUrl = '';
+          if (photoInput) photoInput.value = '';
+          if (photoPreview) photoPreview.hidden = true;
+        }
+        if (photoInput) {
+          photoInput.addEventListener('change', function () {
+            var file = photoInput.files && photoInput.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var img = new Image();
+              img.onload = function () {
+                var maxDim = 800;
+                var scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+                var w = Math.round(img.width * scale);
+                var h = Math.round(img.height * scale);
+                var canvas = document.createElement('canvas');
+                canvas.width = w;
+                canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                photoDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+                if (photoPreviewImg) photoPreviewImg.src = photoDataUrl;
+                if (photoPreview) photoPreview.hidden = false;
+              };
+              img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          });
+        }
+        if (photoRemoveBtn) {
+          photoRemoveBtn.addEventListener('click', resetPhoto);
         }
         function showMsg(text, kind) {
           if (!msgEl) return;
@@ -1244,7 +1358,7 @@
             var content = (form.querySelector('[name="content"]').value || '').trim();
             if (!rating) { showMsg('Please select a rating.', 'error'); return; }
             if (!name || !content) { showMsg('Please enter your name and review.', 'error'); return; }
-            var review = { name: name, content: content, rating: rating, date: todayFr() };
+            var review = { name: name, content: content, rating: rating, date: todayFr(), photo: photoDataUrl };
             grid.insertBefore(makeCard(review), grid.firstChild);
             saved.unshift(review);
             try { localStorage.setItem(key, JSON.stringify(saved)); } catch (e) {}
@@ -1255,6 +1369,7 @@
             form.reset();
             rating = 0;
             paint(0);
+            resetPhoto();
             showMsg('Thank you! Your review has been published.', 'success');
           });
         }
