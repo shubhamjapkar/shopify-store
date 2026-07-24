@@ -90,15 +90,38 @@
   <div class="av-product">
     <div class="av-product__inner">
 
-      {%- comment -%} ----- Gallery (vertical stack) ----- {%- endcomment -%}
+      {%- comment -%}
+        Gallery: first image full-width (hero), then the rest 2-up on desktop
+        and a swipeable carousel on mobile.
+      {%- endcomment -%}
+      {%- assign gallery = section.settings.gallery_images | newline_to_br | strip_newlines | split: '<br />' -%}
       <div class="av-gallery">
-        {%- assign gallery = section.settings.gallery_images | newline_to_br | strip_newlines | split: '<br />' -%}
-        {%- for src in gallery -%}
-          {%- assign s = src | strip -%}
-          {%- if s != blank -%}
-            <img class="av-gallery__img" src="{{ s }}" alt="Astuvita support cane" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="1000" height="1000">
-          {%- endif -%}
-        {%- endfor -%}
+        <div class="av-gallery__hero">
+          {%- assign idx = 0 -%}
+          {%- for src in gallery -%}
+            {%- assign s = src | strip -%}
+            {%- if s != blank -%}
+              {%- assign idx = idx | plus: 1 -%}
+              {%- if idx == 1 -%}
+                <img class="av-gallery__img" src="{{ s }}" alt="Astuvita support cane" loading="eager" width="1000" height="1000">
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        {%- if idx > 1 -%}
+          <div class="av-gallery__rest" data-av-gallery-rest>
+            {%- assign idx = 0 -%}
+            {%- for src in gallery -%}
+              {%- assign s = src | strip -%}
+              {%- if s != blank -%}
+                {%- assign idx = idx | plus: 1 -%}
+                {%- if idx > 1 -%}
+                  <img class="av-gallery__img" src="{{ s }}" alt="Astuvita support cane" loading="lazy" width="1000" height="1000">
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
 
       {%- comment -%} ----- Buy box (sticky) ----- {%- endcomment -%}
@@ -622,8 +645,10 @@
   /* Product */
   .av-product { background: #fff; }
   .av-product__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; max-width: 1280px; margin: 0 auto; padding: 1.5rem 1.5rem 2.5rem; align-items: start; }
-  .av-gallery { display: flex; flex-direction: column; gap: .9rem; }
+  .av-gallery { display: block; }
   .av-gallery__img { width: 100%; height: auto; display: block; border-radius: 12px; background: var(--av-soft); }
+  .av-gallery__hero { margin-bottom: .9rem; }
+  .av-gallery__rest { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; }
 
   .av-buybox { position: sticky; top: 90px; }
   .av-rating { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
@@ -893,6 +918,20 @@
     .av-nav { display: none; }
     .av-product__inner { grid-template-columns: 1fr; gap: 1.5rem; padding: 1rem 1rem 2rem; }
     .av-buybox { position: static; top: auto; }
+    /* Gallery: hero image, then remaining images as a swipeable carousel */
+    .av-gallery__rest {
+      grid-template-columns: none;
+      display: flex;
+      gap: .6rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: .5rem;
+      scrollbar-width: none;
+      scroll-padding: 0 1rem;
+    }
+    .av-gallery__rest::-webkit-scrollbar { display: none; }
+    .av-gallery__rest .av-gallery__img { flex: 0 0 30%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px; scroll-snap-align: start; }
     .av-title { font-size: 1.6rem; }
     .av-reviews__grid { grid-template-columns: 1fr; }
     .av-stats__grid { grid-template-columns: 1fr; gap: 1.5rem; }
