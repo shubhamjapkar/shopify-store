@@ -9,7 +9,22 @@
 {%- endcomment -%}
 
 {%- liquid
+  # Use the product chosen in the theme editor. If none is set, fall back to the
+  # first available store product (then the first product overall) so that
+  # "Add to cart" works out of the box without any manual configuration.
   assign product = section.settings.product
+  if product == blank or product == empty
+    for p in collections.all.products
+      if p.available
+        assign product = p
+        break
+      endif
+    endfor
+  endif
+  if product == blank or product == empty
+    assign product = collections.all.products.first
+  endif
+
   assign has_product = false
   if product != blank and product != empty
     assign has_product = true
