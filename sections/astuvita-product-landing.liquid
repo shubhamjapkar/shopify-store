@@ -39,7 +39,8 @@
 <div class="av av--{{ section.id }}"
      data-av-root
      data-cart-add-url="{{ routes.cart_add_url }}"
-     data-cart-url="{{ routes.cart_url }}">
+     data-cart-url="{{ routes.cart_url }}"
+     data-cart-change-url="{{ routes.cart_change_url }}">
 
   {%- comment -%} ========== Announcement bar ========== {%- endcomment -%}
   <div class="av-ann" data-av-ann>
@@ -529,6 +530,45 @@
       </button>
     </form>
   </div>
+
+  {%- comment -%} ========== Cart drawer (slide-in) ========== {%- endcomment -%}
+  <div class="av-drawer" data-av-drawer aria-hidden="true">
+    <div class="av-drawer__overlay" data-av-drawer-close tabindex="-1"></div>
+    <aside class="av-drawer__panel" role="dialog" aria-modal="true" aria-label="Shopping cart">
+      <header class="av-drawer__head">
+        <h2 class="av-drawer__title"><span class="av-drawer__ico" aria-hidden="true">🛒</span> Your cart <span class="av-drawer__count" data-av-drawer-count></span></h2>
+        <button type="button" class="av-drawer__close" data-av-drawer-close aria-label="Close cart">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </header>
+
+      <div class="av-drawer__body" data-av-drawer-body>
+        <div class="av-drawer__loading" data-av-drawer-loading>Loading…</div>
+      </div>
+
+      <footer class="av-drawer__foot" data-av-drawer-foot hidden>
+        <div class="av-drawer__subtotal">
+          <span>Subtotal</span>
+          <span data-av-drawer-subtotal>€0.00</span>
+        </div>
+        <p class="av-drawer__note">🔒 Taxes and shipping calculated at checkout</p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="av-cta av-drawer__checkout">
+            <span>Checkout</span>
+          </button>
+        </form>
+        <button type="button" class="av-drawer__continue" data-av-drawer-close>Continue shopping</button>
+        <div class="av-drawer__pay" aria-label="Payment methods">
+          <span class="av-pay__card av-pay__visa">VISA</span>
+          <span class="av-pay__card av-pay__mc"><i></i><i></i></span>
+          <span class="av-pay__card av-pay__apple"> Pay</span>
+          <span class="av-pay__card av-pay__gpay">G Pay</span>
+          <span class="av-pay__card av-pay__pp">PayPal</span>
+          <span class="av-pay__card av-pay__amex">AMEX</span>
+        </div>
+      </footer>
+    </aside>
+  </div>
 </div>
 
 {% stylesheet %}
@@ -800,6 +840,50 @@
   .av-sticky__form { max-width: 1100px; margin: 0 auto; }
   .av-cta--sticky { min-height: 52px; font-size: 1.1rem; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
 
+  /* Cart drawer */
+  .av-drawer { position: fixed; inset: 0; z-index: 200; visibility: hidden; pointer-events: none; }
+  .av-drawer.is-open { visibility: visible; pointer-events: auto; }
+  .av-drawer__overlay { position: absolute; inset: 0; background: rgba(0,0,0,.45); opacity: 0; transition: opacity .35s ease; }
+  .av-drawer.is-open .av-drawer__overlay { opacity: 1; }
+  .av-drawer__panel { position: absolute; top: 0; right: 0; height: 100%; width: min(420px, 100%); background: var(--av-bg); display: flex; flex-direction: column; box-shadow: -12px 0 40px rgba(0,0,0,.18); transform: translateX(100%); transition: transform .38s cubic-bezier(.22,.61,.36,1); will-change: transform; }
+  .av-drawer.is-open .av-drawer__panel { transform: translateX(0); }
+  @media (prefers-reduced-motion: reduce) { .av-drawer__panel, .av-drawer__overlay { transition: none; } }
+
+  .av-drawer__head { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.4rem; border-bottom: 1px solid var(--av-border); }
+  .av-drawer__title { font-size: 1.2rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: .5rem; }
+  .av-drawer__count { color: var(--av-muted); font-weight: 600; font-size: 1rem; }
+  .av-drawer__close { background: none; border: none; cursor: pointer; color: var(--av-fg); display: inline-flex; padding: .25rem; border-radius: 8px; }
+  .av-drawer__close:hover { background: var(--av-soft); }
+
+  .av-drawer__body { flex: 1 1 auto; overflow-y: auto; padding: .5rem 1.4rem; }
+  .av-drawer__loading { text-align: center; color: var(--av-muted); padding: 3rem 1rem; }
+  .av-drawer__empty { text-align: center; color: var(--av-muted); padding: 3.5rem 1rem; }
+  .av-drawer__empty-ico { font-size: 2.75rem; margin-bottom: .5rem; }
+
+  .av-ci { display: grid; grid-template-columns: 72px 1fr auto; gap: .9rem; align-items: start; padding: 1.1rem 0; border-bottom: 1px solid var(--av-border); }
+  .av-ci__img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; background: var(--av-soft); }
+  .av-ci__img--ph { display: block; }
+  .av-ci__title { font-weight: 600; margin: 0; font-size: .98rem; line-height: 1.3; }
+  .av-ci__variant { color: var(--av-muted); font-size: .85rem; margin: .2rem 0 0; }
+  .av-ci__qty { display: inline-flex; align-items: center; gap: 0; margin-top: .6rem; border: 1px solid var(--av-border); border-radius: 8px; overflow: hidden; }
+  .av-ci__qbtn { width: 30px; height: 30px; background: #fff; border: none; cursor: pointer; font-size: 1.1rem; line-height: 1; color: var(--av-fg); }
+  .av-ci__qbtn:hover { background: var(--av-soft); }
+  .av-ci__qbtn:disabled { opacity: .5; cursor: default; }
+  .av-ci__qval { min-width: 34px; text-align: center; font-weight: 600; font-size: .95rem; }
+  .av-ci__right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; }
+  .av-ci__price { font-weight: 700; margin: 0; white-space: nowrap; }
+  .av-ci__remove { background: none; border: none; color: var(--av-muted); cursor: pointer; font-size: .82rem; text-decoration: underline; padding: 0; }
+  .av-ci__remove:hover { color: #c0392b; }
+
+  .av-drawer__foot { border-top: 1px solid var(--av-border); padding: 1.25rem 1.4rem calc(1.25rem + env(safe-area-inset-bottom)); }
+  .av-drawer__foot[hidden] { display: none; }
+  .av-drawer__subtotal { display: flex; align-items: center; justify-content: space-between; font-size: 1.15rem; font-weight: 700; margin-bottom: .35rem; }
+  .av-drawer__note { color: var(--av-muted); font-size: .85rem; text-align: center; margin: 0 0 1rem; }
+  .av-drawer__checkout { min-height: 56px; font-size: 1.15rem; }
+  .av-drawer__continue { display: block; width: 100%; background: none; border: none; color: var(--av-fg); text-decoration: underline; cursor: pointer; font: inherit; font-weight: 600; margin-top: .9rem; }
+  .av-drawer__continue:hover { color: var(--av-green-dark); }
+  .av-drawer__pay { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4rem; margin-top: 1rem; }
+
   /* Responsive */
   @media (max-width: 900px) {
     .av-futil__card { grid-template-columns: repeat(2, 1fr); }
@@ -898,19 +982,139 @@
               .then(function (r) {
                 if (btn) { btn.classList.remove('is-loading'); btn.removeAttribute('aria-busy'); }
                 if (!r.ok) { showMsg(form, (r.data && r.data.description) || 'Could not add to cart.', 'error'); return; }
-                showMsg(form, 'Added to cart ✓ Redirecting…', 'success');
-                document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
-                window.setTimeout(function () { window.location.href = cartUrl; }, 600);
+                showMsg(form, 'Added to cart ✓', 'success');
+                root.dispatchEvent(new CustomEvent('av:cart:open', { bubbles: false }));
+                window.setTimeout(function () { var m = form.querySelector('[data-av-cart-msg]'); if (m) { m.hidden = true; } }, 2500);
               })
               .catch(function () { if (btn) { btn.classList.remove('is-loading'); btn.removeAttribute('aria-busy'); } form.submit(); });
           });
         });
         function showMsg(form, text, kind) {
           var el = form.querySelector('[data-av-cart-msg]');
-          if (!el) { window.alert(text); return; }
+          if (!el) { return; }
           el.textContent = text; el.classList.remove('is-success', 'is-error');
           el.classList.add(kind === 'success' ? 'is-success' : 'is-error'); el.hidden = false;
         }
+      })();
+
+      /* Cart drawer (slide-in) */
+      (function () {
+        var drawer = root.querySelector('[data-av-drawer]');
+        if (!drawer) return;
+        var cartUrl = root.getAttribute('data-cart-url') || '/cart';
+        var changeUrl = root.getAttribute('data-cart-change-url') || (cartUrl + '/change');
+        var body = drawer.querySelector('[data-av-drawer-body]');
+        var foot = drawer.querySelector('[data-av-drawer-foot]');
+        var subtotalEl = drawer.querySelector('[data-av-drawer-subtotal]');
+        var countEl = drawer.querySelector('[data-av-drawer-count]');
+        var lastFocus = null;
+
+        function money(c) { return '€' + (c / 100).toFixed(2); }
+        function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
+
+        function updateCount(n) {
+          if (countEl) countEl.textContent = n ? '(' + n + ')' : '';
+          root.querySelectorAll('[data-av-cart-count]').forEach(function (el) { el.textContent = n; });
+        }
+
+        function render(cart) {
+          updateCount(cart.item_count);
+          if (!cart.items || !cart.items.length) {
+            body.innerHTML = '<div class="av-drawer__empty"><p class="av-drawer__empty-ico" aria-hidden="true">🛒</p><p>Your cart is empty.</p></div>';
+            if (foot) foot.hidden = true;
+            return;
+          }
+          var html = '';
+          cart.items.forEach(function (it) {
+            var variant = (it.variant_title && it.variant_title !== 'Default Title') ? '<p class="av-ci__variant">' + esc(it.variant_title) + '</p>' : '';
+            var img = it.image ? '<img class="av-ci__img" src="' + it.image + '" alt="" width="72" height="72" loading="lazy">' : '<span class="av-ci__img av-ci__img--ph" aria-hidden="true"></span>';
+            html +=
+              '<div class="av-ci" data-key="' + it.key + '">' +
+                img +
+                '<div class="av-ci__info">' +
+                  '<p class="av-ci__title">' + esc(it.product_title) + '</p>' +
+                  variant +
+                  '<div class="av-ci__qty">' +
+                    '<button type="button" class="av-ci__qbtn" data-av-qminus aria-label="Decrease quantity">−</button>' +
+                    '<span class="av-ci__qval">' + it.quantity + '</span>' +
+                    '<button type="button" class="av-ci__qbtn" data-av-qplus aria-label="Increase quantity">+</button>' +
+                  '</div>' +
+                '</div>' +
+                '<div class="av-ci__right">' +
+                  '<p class="av-ci__price">' + money(it.final_line_price) + '</p>' +
+                  '<button type="button" class="av-ci__remove" data-av-remove>Remove</button>' +
+                '</div>' +
+              '</div>';
+          });
+          body.innerHTML = html;
+          if (subtotalEl) subtotalEl.textContent = money(cart.total_price);
+          if (foot) foot.hidden = false;
+        }
+
+        function refresh() {
+          body.innerHTML = '<div class="av-drawer__loading">Loading…</div>';
+          fetch(cartUrl + '.js', { headers: { 'Accept': 'application/json' } })
+            .then(function (res) { return res.json(); })
+            .then(render)
+            .catch(function () { body.innerHTML = '<div class="av-drawer__empty"><p>Could not load your cart.</p></div>'; });
+        }
+
+        function change(key, qty, rowBtn) {
+          if (rowBtn) rowBtn.disabled = true;
+          fetch(changeUrl + '.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({ id: key, quantity: qty })
+          })
+            .then(function (res) { return res.json(); })
+            .then(render)
+            .catch(function () { refresh(); });
+        }
+
+        function open() {
+          lastFocus = document.activeElement;
+          drawer.classList.add('is-open');
+          drawer.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          refresh();
+          var closeBtn = drawer.querySelector('.av-drawer__close');
+          if (closeBtn) closeBtn.focus();
+        }
+        function close() {
+          drawer.classList.remove('is-open');
+          drawer.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          if (lastFocus && lastFocus.focus) lastFocus.focus();
+        }
+
+        /* Item interactions (event delegation) */
+        body.addEventListener('click', function (e) {
+          var row = e.target.closest('.av-ci');
+          if (!row) return;
+          var key = row.getAttribute('data-key');
+          var qtyEl = row.querySelector('.av-ci__qval');
+          var qty = qtyEl ? parseInt(qtyEl.textContent, 10) || 0 : 0;
+          if (e.target.closest('[data-av-remove]')) { change(key, 0, e.target); }
+          else if (e.target.closest('[data-av-qplus]')) { change(key, qty + 1, e.target); }
+          else if (e.target.closest('[data-av-qminus]')) { change(key, Math.max(0, qty - 1), e.target); }
+        });
+
+        /* Open / close wiring */
+        root.addEventListener('av:cart:open', open);
+        drawer.querySelectorAll('[data-av-drawer-close]').forEach(function (el) { el.addEventListener('click', close); });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && drawer.classList.contains('is-open')) close();
+        });
+
+        /* Header cart icon opens the drawer instead of navigating */
+        var cartLink = root.querySelector('.av-cart-link');
+        if (cartLink) { cartLink.addEventListener('click', function (e) { e.preventDefault(); open(); }); }
+
+        /* Reflect current count on page load */
+        fetch(cartUrl + '.js', { headers: { 'Accept': 'application/json' } })
+          .then(function (r) { return r.json(); })
+          .then(function (c) { updateCount(c.item_count); })
+          .catch(function () {});
       })();
 
       /* Reviews: write a review + show more */
