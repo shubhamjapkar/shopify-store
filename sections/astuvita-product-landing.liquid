@@ -1,0 +1,1049 @@
+{%- comment -%}
+  Astuvita — Faithful (pixel-perfect) replica of the astuvita.com product page.
+  Self-contained section: announcement bar, header, full product page,
+  sales sections, and footer. The theme's header-group / footer-group
+  groups are emptied to avoid duplicates.
+
+  Add to cart: native product form + AJAX Cart API (routes.cart_add_url).
+  Select a product in the theme editor to enable add to cart.
+{%- endcomment -%}
+
+{%- liquid
+  assign product = section.settings.product
+  assign has_product = false
+  if product != blank and product != empty
+    assign has_product = true
+    assign current_variant = product.selected_or_first_available_variant
+  endif
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap">
+
+<div class="av av--{{ section.id }}"
+     data-av-root
+     data-cart-add-url="{{ routes.cart_add_url }}"
+     data-cart-url="{{ routes.cart_url }}">
+
+  {%- comment -%} ========== Announcement bar ========== {%- endcomment -%}
+  <div class="av-ann" data-av-ann>
+    <button class="av-ann__arrow" data-av-ann-prev aria-label="Previous" type="button">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="av-ann__viewport">
+      <span class="av-ann__slide is-active" data-av-ann-slide>Special offers today only</span>
+      <span class="av-ann__slide" data-av-ann-slide>Free shipping on orders over €59</span>
+      <span class="av-ann__slide" data-av-ann-slide>60-Day Money-Back Guarantee</span>
+      <span class="av-ann__slide" data-av-ann-slide>15,000+ happy customers</span>
+    </div>
+    <button class="av-ann__arrow" data-av-ann-next aria-label="Next" type="button">
+      <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  {%- comment -%} ========== Header ========== {%- endcomment -%}
+  <header class="av-header">
+    <div class="av-header__inner">
+      <nav class="av-nav" aria-label="Main navigation">
+        <a href="{{ routes.root_url }}">Home</a>
+        <a href="{{ routes.root_url }}">Walking Cane</a>
+        <a href="{{ routes.root_url }}">3-in-1 Car Assist Handle</a>
+        <a href="{{ routes.root_url }}">Mobility</a>
+      </nav>
+      <a class="av-logo" href="{{ routes.root_url }}">
+        <span class="av-logo__text">Astu<span class="av-logo__accent">Vita</span></span><span class="av-logo__tm">™</span>
+      </a>
+      <div class="av-header__actions">
+        <button type="button" class="av-locale">
+          <span class="av-locale__flag" aria-hidden="true">🇪🇺</span> EUR
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="av-iconbtn" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <a href="{{ routes.cart_url }}" class="av-iconbtn av-cart-link" aria-label="Cart">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="av-cart-count" data-av-cart-count>{{ cart.item_count | default: 0 }}</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  {%- comment -%} ========== Product ========== {%- endcomment -%}
+  <div class="av-product">
+    <div class="av-product__inner">
+
+      {%- comment -%} ----- Gallery (vertical stack) ----- {%- endcomment -%}
+      <div class="av-gallery">
+        {%- assign gallery = section.settings.gallery_images | newline_to_br | strip_newlines | split: '<br />' -%}
+        {%- for src in gallery -%}
+          {%- assign s = src | strip -%}
+          {%- if s != blank -%}
+            <img class="av-gallery__img" src="{{ s }}" alt="Astuvita support cane" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="1000" height="1000">
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- comment -%} ----- Buy box (sticky) ----- {%- endcomment -%}
+      <div class="av-buybox">
+        <div class="av-rating">
+          <span class="av-stars" aria-hidden="true" style="--pct:92%;">★★★★★</span>
+          <span class="av-rating__text">4.6/5 <span class="av-rating__count">(437 reviews)</span></span>
+        </div>
+
+        <h1 class="av-title">The cane that helps you stand up on your own and walk without fear of falling</h1>
+
+        <div class="av-price">
+          <span class="av-price__now">€49.99</span>
+          <span class="av-price__was">€99.98</span>
+          <span class="av-price__badge">SAVE 50%</span>
+        </div>
+
+        <div class="av-pill"><span class="av-pill__ico" aria-hidden="true">✓</span> RECOMMENDED BY OCCUPATIONAL THERAPISTS</div>
+
+        <ul class="av-checks">
+          <li>A second handle to help you stand up effortlessly</li>
+          <li>Stable on every surface</li>
+          <li>Walk safely, even at night, with no risk of falling</li>
+        </ul>
+
+        <div class="av-offer-title"><span>Choose your offer</span></div>
+
+        <div class="av-offers" data-av-offers>
+          <label class="av-offer is-selected" data-price="€49.99" data-was="€99.98" data-qty="1">
+            <input type="radio" name="av-offer-{{ section.id }}" value="1" checked>
+            <span class="av-offer__flag">Today only</span>
+            <span class="av-offer__thumb"><img src="https://astuvita.com/cdn/shop/files/2.png?height=165&v=1775907050" alt="" width="56" height="56" loading="lazy"></span>
+            <span class="av-offer__main">
+              <span class="av-offer__name">1 Support Cane <span class="av-offer__tag">-50% off</span></span>
+            </span>
+            <span class="av-offer__price">
+              <span class="av-offer__now">€49.99</span>
+              <span class="av-offer__was">€99.98</span>
+            </span>
+          </label>
+
+          <label class="av-offer" data-price="€79.99" data-was="€199.96" data-qty="2">
+            <input type="radio" name="av-offer-{{ section.id }}" value="2">
+            <span class="av-offer__flag av-offer__flag--best">Best Offer</span>
+            <span class="av-offer__thumb"><img src="https://astuvita.com/cdn/shop/files/2.png?height=165&v=1775907050" alt="" width="56" height="56" loading="lazy"></span>
+            <span class="av-offer__main">
+              <span class="av-offer__name">2 Support Canes <span class="av-offer__tag">-60% + Free Shipping</span></span>
+              <span class="av-offer__sub">To gift or keep at home</span>
+            </span>
+            <span class="av-offer__price">
+              <span class="av-offer__now">€79.99</span>
+              <span class="av-offer__was">€199.96</span>
+            </span>
+          </label>
+        </div>
+
+        <p class="av-satisfied">Money-back guarantee ✅</p>
+
+        <form class="av-form"
+              action="{{ routes.cart_add_url }}"
+              method="post"
+              enctype="multipart/form-data"
+              data-av-cart-form>
+          {%- if has_product -%}
+            <input type="hidden" name="id" value="{{ current_variant.id }}" data-av-variant>
+          {%- endif -%}
+          <input type="hidden" name="quantity" value="1" data-av-qty>
+          <button type="submit" class="av-cta"
+                  {% if has_product and current_variant.available == false %}disabled{% endif %}
+                  data-av-cta>
+            <span class="av-cta__ico" aria-hidden="true">🛒</span>
+            <span data-av-cta-label>{% if has_product and current_variant.available == false %}Sold out{% else %}Add to cart{% endif %}</span>
+            <span class="av-cta__sep">|</span>
+            <span class="av-cta__price" data-av-cta-price>€49.99</span>
+            <span class="av-cta__was" data-av-cta-was>€99.98</span>
+          </button>
+          <p class="av-cart-msg" data-av-cart-msg role="status" aria-live="polite" hidden></p>
+        </form>
+
+        <p class="av-line"><span class="av-line__ico" aria-hidden="true">🚚</span> <span>Delivered between <strong data-av-ship-from>—</strong> and <strong data-av-ship-to>—</strong></span></p>
+        <p class="av-line"><span class="av-line__ico" aria-hidden="true">🔒</span> <span>Secure payment</span></p>
+
+        <div class="av-pay" aria-label="Payment methods">
+          <span class="av-pay__card av-pay__visa">VISA</span>
+          <span class="av-pay__card av-pay__mc"><i></i><i></i></span>
+          <span class="av-pay__card av-pay__apple"> Pay</span>
+          <span class="av-pay__card av-pay__gpay">G Pay</span>
+          <span class="av-pay__card av-pay__pp">PayPal</span>
+          <span class="av-pay__card av-pay__amex">AMEX</span>
+          <span class="av-pay__card av-pay__banc">Bancontact</span>
+        </div>
+
+        {%- comment -%} ----- Featured testimonial ----- {%- endcomment -%}
+        <figure class="av-hero-quote">
+          <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
+          <blockquote>After my fall last year, I had stopped going out alone. I was too afraid. Since I started using this cane, I've taken up my daily walks again and I finally feel free once more.</blockquote>
+          <figcaption>
+            <span class="av-hero-quote__name">Michèle, 72, Lyon</span>
+            <span class="av-hero-quote__meta">Astuvita customer since January 2026</span>
+          </figcaption>
+        </figure>
+
+        {%- comment -%} ----- Accordions ----- {%- endcomment -%}
+        <div class="av-acc-group">
+          <details class="av-acc">
+            <summary><span class="av-acc__ico" aria-hidden="true">ⓘ</span> Frequently Asked Questions</summary>
+            <div class="av-acc__body">
+              <p><strong>How high does the cane adjust?</strong><br>The Astuvita cane adjusts from 85 cm to 98 cm, which suits people roughly between 1.55 m and 1.85 m tall.</p>
+              <p><strong>How is the flashlight powered?</strong><br>The light runs on 2 AAA batteries.</p>
+              <p><strong>Is it lightweight?</strong><br>Yes! The Astuvita cane was designed to be light and easy to carry — it weighs less than 450 g.</p>
+              <p><strong>What is the maximum weight the cane supports?</strong><br>The Astuvita cane supports up to 115 kg.</p>
+              <p><strong>Does the cane fold for travel or easy storage?</strong><br>Yes, the Astuvita cane is foldable and stores easily in a bag or in the car trunk.</p>
+              <p><strong>Can it be used by both right- and left-handed people?</strong><br>Yes, its symmetrical design works equally well for the right or left hand.</p>
+            </div>
+          </details>
+          <details class="av-acc">
+            <summary><span class="av-acc__ico" aria-hidden="true">✎</span> How to use</summary>
+            <div class="av-acc__body">
+              <p><strong>1. Adjust the height</strong><br>Press the side button and adjust the cane until the handle reaches your wrist with your arm extended. Release to lock.</p>
+              <p><strong>2. Get up from the sofa or bed</strong><br>Place your hand on the lower handle (the second handle), push to lift yourself up, then grab the main handle to walk.</p>
+              <p><strong>3. Insert 2 AAA batteries, then turn on the light</strong><br>Press the light button to illuminate your path. Ideal for moving around at night.</p>
+              <p><strong>4. Use the alarm</strong><br>When needed, press the red button to trigger the alarm and alert those around you.</p>
+              <p><strong>5. Fold the cane</strong><br>Press the folding buttons and fold the sections. Compact and easy to store or carry.</p>
+            </div>
+          </details>
+          <details class="av-acc">
+            <summary><span class="av-acc__ico" aria-hidden="true">✔</span> 60-Day Money-Back Guarantee</summary>
+            <div class="av-acc__body">
+              <p>At Astuvita, your satisfaction is our top priority. We do everything we can to give you an experience that meets your expectations. That's why we offer a 60-day money-back guarantee — no questions, no hassle. If for any reason you are not completely satisfied with your purchase, we commit to refunding you in full. Your trust means everything to us.</p>
+            </div>
+          </details>
+          <details class="av-acc">
+            <summary><span class="av-acc__ico" aria-hidden="true">🚚</span> Shipping &amp; returns</summary>
+            <div class="av-acc__body">
+              <p>We work fast to ship your order within 48 hours. Once your order has shipped, you'll receive an email with additional information including your tracking number so you can follow your parcel.</p>
+              <p>Delivery times vary depending on your location. The average time is 5 to 9 business days.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ========== Press marquee ========== {%- endcomment -%}
+  <section class="av-press" aria-label="As featured in">
+    <div class="av-marquee">
+      <div class="av-marquee__track">
+        {%- assign press = section.settings.press_logos | split: ',' -%}
+        {%- for i in (1..3) -%}
+          {%- for logo in press -%}
+            <span class="av-press__logo"><img src="{{ logo | strip }}" alt="" loading="lazy"></span>
+          {%- endfor -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Reviews ========== {%- endcomment -%}
+  <section class="av-reviews" aria-label="Customer Reviews" data-av-reviews="{{ section.id }}">
+    <div class="av-reviews__head">
+      <div class="av-reviews__headings">
+        <h2 class="av-reviews__title">Customer Reviews</h2>
+        <div class="av-reviews__summary">
+          <span class="av-stars" aria-hidden="true" style="--pct:92%;">★★★★★</span>
+          <span class="av-reviews__score">4.6/5</span>
+          <span class="av-reviews__count">· <strong data-av-review-count>437</strong> reviews</span>
+        </div>
+      </div>
+      <button type="button" class="av-review-write-btn" data-av-write-toggle aria-expanded="false">
+        <span aria-hidden="true">✍️</span> Write a review
+      </button>
+    </div>
+
+    {%- comment -%} ----- Write a review form ----- {%- endcomment -%}
+    <form class="av-review-form" data-av-review-form hidden>
+      <h3 class="av-review-form__title">Share your experience</h3>
+      <label class="av-review-form__label">Your rating</label>
+      <div class="av-rate" data-av-rate role="radiogroup" aria-label="Your rating">
+        <button type="button" class="av-rate__star" data-val="1" aria-label="1 star">★</button>
+        <button type="button" class="av-rate__star" data-val="2" aria-label="2 stars">★</button>
+        <button type="button" class="av-rate__star" data-val="3" aria-label="3 stars">★</button>
+        <button type="button" class="av-rate__star" data-val="4" aria-label="4 stars">★</button>
+        <button type="button" class="av-rate__star" data-val="5" aria-label="5 stars">★</button>
+      </div>
+      <div class="av-review-form__row">
+        <input class="av-review-form__input" type="text" name="name" placeholder="Your name" autocomplete="name" required>
+      </div>
+      <div class="av-review-form__row">
+        <textarea class="av-review-form__textarea" name="content" rows="4" placeholder="Describe your experience with the Astuvita cane…" required></textarea>
+      </div>
+      <button type="submit" class="av-review-form__submit">Publish my review</button>
+      <p class="av-review-form__msg" data-av-review-msg role="status" aria-live="polite" hidden></p>
+    </form>
+
+    <div class="av-reviews__grid" data-av-reviews-grid>
+      <figure class="av-review">
+        <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
+        <figcaption class="av-review__name">Brigitte F. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ Most canes I've tried feel hollow or a little unstable on pavement. This one gives a real feeling of grip and safety when my weight shifts. I no longer tense up like before. ”</blockquote>
+        <time class="av-review__date">April 11, 2026</time>
+      </figure>
+      <figure class="av-review">
+        <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
+        <figcaption class="av-review__name">Bernard M. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ The second handle gives me something solid to push straight down on. I no longer twist my wrist and I don't struggle to find support. It's steady from top to bottom. ”</blockquote>
+        <time class="av-review__date">May 2, 2026</time>
+      </figure>
+      <figure class="av-review">
+        <div class="av-stars" aria-hidden="true" style="--pct:80%;">★★★★★</div>
+        <figcaption class="av-review__name">Caroline R. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ Parking lots and sidewalks used to make me cautious. The 360° base stays aligned instead of tipping under me. I feel much more stable when I walk outside. ”</blockquote>
+        <time class="av-review__date">March 27, 2026</time>
+      </figure>
+      <figure class="av-review av-review--extra is-collapsed">
+        <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
+        <figcaption class="av-review__name">Danielle P. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ I use it every morning to go to the market. The handle is comfortable and I feel far more confident on cobblestones. ”</blockquote>
+        <time class="av-review__date">March 18, 2026</time>
+      </figure>
+      <figure class="av-review av-review--extra is-collapsed">
+        <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
+        <figcaption class="av-review__name">Jean-Pierre L. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ Very good stability, and the built-in light is really handy when I get up at night. An excellent purchase. ”</blockquote>
+        <time class="av-review__date">March 9, 2026</time>
+      </figure>
+      <figure class="av-review av-review--extra is-collapsed">
+        <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
+        <figcaption class="av-review__name">Suzanne M. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ Given to my 80-year-old mother, and she loves it. Easy to adjust, lightweight, and it stands up on its own. ”</blockquote>
+        <time class="av-review__date">February 28, 2026</time>
+      </figure>
+      <figure class="av-review av-review--extra is-collapsed">
+        <div class="av-stars" aria-hidden="true" style="--pct:80%;">★★★★★</div>
+        <figcaption class="av-review__name">Robert D. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ Fast delivery and the product matches the description. The fact that it stands up on its own is truly life-changing. ”</blockquote>
+        <time class="av-review__date">February 20, 2026</time>
+      </figure>
+      <figure class="av-review av-review--extra is-collapsed">
+        <div class="av-stars" aria-hidden="true" style="--pct:100%;">★★★★★</div>
+        <figcaption class="av-review__name">Françoise B. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ Finally a cane that doesn't fall on the floor every time I set it down! I recommend it to all my friends. ”</blockquote>
+        <time class="av-review__date">February 12, 2026</time>
+      </figure>
+      <figure class="av-review av-review--extra is-collapsed">
+        <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
+        <figcaption class="av-review__name">Michel G. <span class="av-review__badge">✔ Verified purchase</span></figcaption>
+        <blockquote>“ Sturdy and well thought out. The second handle really helps me get up from my armchair without straining my back. ”</blockquote>
+        <time class="av-review__date">February 3, 2026</time>
+      </figure>
+    </div>
+
+    <div class="av-reviews__more">
+      <button type="button" class="av-reviews__more-btn" data-av-more>See more reviews</button>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Feature story ========== {%- endcomment -%}
+  <section class="av-story" aria-label="What makes this cane unique">
+    <h3 class="av-story__h3">Do you struggle to stand up on your own? Do you feel unsteady when walking? Are you afraid of falling in the dark?</h3>
+    <h5 class="av-story__h5">There is a solution. The Astuvita support cane will help you stand up on your own, walk longer distances, and regain your confidence!</h5>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0975/4279/9687/files/e574a046420d4818bd9f12131b2e3b13_img_multi-functional-foldable-led-walking-cane-extra-handle-ezgif.com-cut_1.gif?v=1777563572" alt="" loading="lazy"></p>
+    <h5 class="av-story__h5"><strong>What makes this cane unique</strong></h5>
+    <p class="av-story__p"><strong>✅ Dual support handle</strong> Designed by orthopedists, the cane features a second handle that helps you rise easily from a sofa, an armchair, or any seated position — without needing anyone else's help.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0975/4279/9687/files/1716391083-StandSecureAdvertorial_2_1.webp?v=1778865066" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>✅ Self-standing base</strong> Thanks to its wide base with 4 sturdy rubber feet, the cane stands up on its own. No more bending down dangerously to pick up a fallen cane!</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0975/4279/9687/files/9.png?v=1777557224" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>✅ Built-in LED flashlight</strong> Whether going to the bathroom at night or for an evening walk, the LED light lights your path and reduces the risk of falls.</p>
+    <p class="av-story__p"><strong>✅ Built-in emergency alarm</strong> In case of a fall or emergency, simply press the button to trigger a loud alarm that will alert people nearby.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0975/4279/9687/files/canne-de-marche-led-avec-alarme-securestep-8259726.webp?v=1778870627" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>✅ Foldable/telescopic design</strong> The cane folds easily to come along in the car or on a trip.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0975/4279/9687/files/935b03ab-cf30-4936-9e84-aece90417e6f-ezgif.com-speed.gif?v=1778870600" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>✅ Comfortable ergonomic handle</strong> The main handle is ergonomic, and the support handle is padded for extra comfort.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0975/4279/9687/files/Kaching-Bundles-NA.png?v=1778020053" alt="" loading="lazy"></p>
+    <h5 class="av-story__h5"><strong>Regain your freedom of movement</strong></h5>
+    <p class="av-story__p">Using the Astuvita support cane gives you the confidence to move more freely, regaining much of your independence. It supports you not only physically, but also eases the emotional weight of feeling like a burden to your loved ones.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0975/4279/9687/files/Gemini_Generated_Image_j3odv5j3odv5j3od.png?v=1777555431" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Geneviève M., 72</strong> <em>"Since I started using the Astuvita cane, I feel so much safer when I move around. The wide base keeps me from tripping and I can even set it down on its own without it falling. A real plus for my daily life!"</em></p>
+    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Raymond T., 68</strong> <em>"I was reluctant to use a cane, but this one is truly elegant and practical. The built-in light is great for going out in the evening. I recommend it to all my friends!"</em></p>
+    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Martine L., 65</strong> <em>"I gave this cane to my mother after her fall and she's thrilled. It's adjustable, lightweight, and very stable. Astuvita really thought of everything. Customer service was very responsive too. Thank you!"</em></p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0897/1606/4555/files/1772034192109-image-to-video-ezgif.com-video-to-gif-converter_2c21e61d-e84f-4766-af05-94d4ac40b623.gif" alt="" loading="lazy"></p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0975/4279/9687/files/Gemini_Generated_Image_pk6292pk6292pk62.png?v=1778019454" alt="" loading="lazy"></p>
+  </section>
+
+  {%- comment -%} ========== Stats ========== {%- endcomment -%}
+  <section class="av-stats" aria-label="Customer results">
+    <p class="av-stats__title"><strong>What our customers feel within the first few weeks</strong></p>
+    <div class="av-stats__grid">
+      <div class="av-stat"><span class="av-stat__num">96%</span><span class="av-stat__label">feel less dependent on those around them 🏩</span></div>
+      <div class="av-stat"><span class="av-stat__num">94%</span><span class="av-stat__label">have regained the confidence to go out alone ✅</span></div>
+      <div class="av-stat"><span class="av-stat__num">97%</span><span class="av-stat__label">feel safer at home and outdoors 🙏</span></div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Comparison table ========== {%- endcomment -%}
+  <section class="av-compare" aria-label="Comparison">
+    <h2 class="av-compare__h2">What makes the Astuvita cane unique</h2>
+    <p class="av-compare__sub"><strong>The Astuvita Cane vs. classic canes</strong></p>
+    <div class="av-table-wrap">
+      <table class="av-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" class="av-col-us"><span class="av-logo__text av-logo__text--sm">Astu<span class="av-logo__accent">Vita</span></span><span class="av-logo__tm">™</span></th>
+            <th scope="col">Classic canes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Helps you stand up</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+          <tr><th scope="row">Stands on its own</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+          <tr><th scope="row">Nighttime safety light</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+          <tr><th scope="row">Emergency alarm</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+          <tr><th scope="row">Heavy and bulky</th><td class="av-col-us av-no"></td><td class="av-yes"></td></tr>
+          <tr><th scope="row">Adjustable and foldable</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Video ========== {%- endcomment -%}
+  <section class="av-video" aria-label="Video">
+    <h2 class="av-video__title">Built-in light and alarm when you need them</h2>
+    <div class="av-video__frame" data-av-video>
+      <video class="av-video__el" controls playsinline preload="none"
+             poster="https://astuvita.com/cdn/shop/files/preview_images/713472fdec454112a0d22c5b85601475.thumbnail.0000000000_2500x.jpg?v=1778870527">
+        <source src="https://astuvita.com/cdn/shop/videos/c/vp/713472fdec454112a0d22c5b85601475/713472fdec454112a0d22c5b85601475.HD-1080p-2.5Mbps-84220819.mp4" type="video/mp4">
+      </video>
+      <button type="button" class="av-video__play" data-av-video-play aria-label="Play video">
+        <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Closing FAQ ========== {%- endcomment -%}
+  <section class="av-help" aria-label="Need help">
+    <h2 class="av-help__title">Need help?</h2>
+    <p class="av-help__lead">Our team is here to help you Monday to Friday, 8:30 AM–7 PM. Saturday, 10 AM–5 PM.</p>
+    <h3 class="av-help__faqtitle">Frequently Asked Questions</h3>
+    <div class="av-faq">
+      <details class="av-acc"><summary>How high does the cane adjust?</summary><div class="av-acc__body"><p>The Astuvita cane adjusts from 88 cm to 98 cm.</p></div></details>
+      <details class="av-acc"><summary>How is the flashlight powered?</summary><div class="av-acc__body"><p>The light is powered by 2 AAA batteries (not included).</p></div></details>
+      <details class="av-acc"><summary>Is it lightweight?</summary><div class="av-acc__body"><p>Yes! The Astuvita cane was specially designed to be light and easy to carry — it weighs less than 450 g.</p></div></details>
+      <details class="av-acc"><summary>What is the maximum weight the cane supports?</summary><div class="av-acc__body"><p>The Astuvita cane supports up to 115 kg.</p></div></details>
+      <details class="av-acc"><summary>What if it's not right for me?</summary><div class="av-acc__body"><p>We're so confident you'll love the Astuvita cane that we offer a 60-day money-back guarantee. If it's not right for you, contact us at bonjour@astuvita.com and we'll process a full refund, no questions asked!</p></div></details>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Footer utilities ========== {%- endcomment -%}
+  <section class="av-futil">
+    <div class="av-futil__card">
+      <div class="av-futil__item">
+        <span class="av-futil__ico" aria-hidden="true">🚚</span>
+        <h3>Free shipping</h3>
+        <p>Your order will be delivered free of charge to your home and shipped within 48 hours</p>
+      </div>
+      <div class="av-futil__item">
+        <span class="av-futil__ico" aria-hidden="true">🔒</span>
+        <h3>Secure payment</h3>
+        <p>We use SSL encryption for completely secure payments</p>
+      </div>
+      <div class="av-futil__item">
+        <span class="av-futil__ico" aria-hidden="true">🤝</span>
+        <h3>Satisfaction guarantee</h3>
+        <p>We guarantee the quality of our products. If you're not satisfied, we'll refund you</p>
+      </div>
+      <div class="av-futil__item">
+        <span class="av-futil__ico" aria-hidden="true">💬</span>
+        <h3>Have a question?</h3>
+        <p>Contact us here: bonjour@astuvita.com</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Footer ========== {%- endcomment -%}
+  <footer class="av-footer">
+    <div class="av-footer__inner">
+      <div class="av-footer__col">
+        <h4>Useful links</h4>
+        <ul>
+          <li><a href="{{ routes.root_url }}">FAQ</a></li>
+          <li><a href="{{ routes.root_url }}">Contact</a></li>
+          <li><a href="{{ routes.root_url }}">Terms & Conditions</a></li>
+          <li><a href="{{ routes.root_url }}">Privacy Policy</a></li>
+          <li><a href="{{ routes.root_url }}">Legal Notice</a></li>
+          <li><a href="{{ routes.root_url }}">Returns & Refunds</a></li>
+        </ul>
+      </div>
+      <div class="av-footer__col av-footer__news">
+        <h4>Subscribe to our newsletter</h4>
+        <p>Be the first to hear about our offers and news.</p>
+        <form class="av-news" onsubmit="return false;">
+          <input type="email" placeholder="Email address" aria-label="Email address">
+          <button type="submit" aria-label="Subscribe">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="av-footer__bottom">
+      <div class="av-pay av-pay--footer" aria-label="Payment methods">
+        <span class="av-pay__card av-pay__visa">VISA</span>
+        <span class="av-pay__card av-pay__mc"><i></i><i></i></span>
+        <span class="av-pay__card av-pay__apple"> Pay</span>
+        <span class="av-pay__card av-pay__gpay">G Pay</span>
+        <span class="av-pay__card av-pay__pp">PayPal</span>
+        <span class="av-pay__card av-pay__amex">AMEX</span>
+        <span class="av-pay__card av-pay__banc">Bancontact</span>
+      </div>
+      <p class="av-copy">© 2026 Astuvita</p>
+    </div>
+  </footer>
+
+  {%- comment -%} ========== Sticky add-to-cart bar ========== {%- endcomment -%}
+  <div class="av-sticky" data-av-sticky hidden>
+    <form class="av-form av-sticky__form"
+          action="{{ routes.cart_add_url }}"
+          method="post"
+          enctype="multipart/form-data"
+          data-av-cart-form>
+      {%- if has_product -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" data-av-variant>
+      {%- endif -%}
+      <input type="hidden" name="quantity" value="1" data-av-qty>
+      <button type="submit" class="av-cta av-cta--sticky" data-av-cta>
+        <span class="av-cta__ico" aria-hidden="true">🛒</span>
+        <span>Add to cart</span>
+        <span class="av-cta__sep">|</span>
+        <span class="av-cta__price" data-av-cta-price>€49.99</span>
+        <span class="av-cta__was" data-av-cta-was>€99.98</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+{% stylesheet %}
+  .av {
+    --av-green: #00a308;
+    --av-green-dark: #008a07;
+    --av-fg: #252525;
+    --av-muted: #6b6b6b;
+    --av-bg: #ffffff;
+    --av-soft: #f6f7f7;
+    --av-border: #e4e7e4;
+    --av-star: #f5b301;
+    --av-black: #111111;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--av-fg);
+    background: var(--av-bg);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .av *, .av *::before, .av *::after { box-sizing: border-box; }
+  .av img { max-width: 100%; }
+  .av a { color: inherit; text-decoration: none; }
+
+  /* Stars */
+  .av-stars { position: relative; display: inline-block; font-size: 1.15rem; letter-spacing: 2px; color: #dcdcdc; line-height: 1; white-space: nowrap; }
+  .av-stars::before { content: "★★★★★"; position: absolute; left: 0; top: 0; width: var(--pct, 92%); overflow: hidden; color: var(--av-star); white-space: nowrap; }
+
+  /* Announcement */
+  .av-ann { display: flex; align-items: center; justify-content: center; gap: 1rem; background: #000; color: #fff; padding: .7rem 1rem; font-size: .95rem; }
+  .av-ann__arrow { background: none; border: none; color: #fff; cursor: pointer; padding: 0 .25rem; display: inline-flex; }
+  .av-ann__viewport { position: relative; min-height: 1.4em; display: flex; align-items: center; justify-content: center; min-width: min(80vw, 360px); text-align: center; }
+  .av-ann__slide { position: absolute; opacity: 0; transition: opacity .4s ease; font-weight: 500; pointer-events: none; white-space: nowrap; }
+  .av-ann__slide.is-active { position: relative; opacity: 1; pointer-events: auto; }
+
+  /* Header */
+  .av-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid #f0f0f0; }
+  .av-header__inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; max-width: 1280px; margin: 0 auto; padding: 1rem 1.5rem; }
+  .av-nav { display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; font-size: 1rem; max-width: 34rem; }
+  .av-nav a { color: #1a1a1a; }
+  .av-nav a:hover { color: var(--av-green); }
+  .av-logo { justify-self: center; display: inline-flex; align-items: flex-start; font-weight: 700; }
+  .av-logo__text { font-size: 1.35rem; font-weight: 700; color: #1f5c33; letter-spacing: .2px; }
+  .av-logo__text--sm { font-size: 1.05rem; }
+  .av-logo__accent { color: var(--av-green); }
+  .av-logo__tm { font-size: .65rem; margin-top: .15rem; color: #1f5c33; }
+  .av-header__actions { justify-self: end; display: flex; align-items: center; gap: 1rem; }
+  .av-locale { display: inline-flex; align-items: center; gap: .3rem; background: none; border: none; cursor: pointer; font: inherit; color: #1a1a1a; }
+  .av-iconbtn { position: relative; background: none; border: none; cursor: pointer; color: #1a1a1a; display: inline-flex; padding: 0; }
+  .av-cart-count { position: absolute; top: -6px; right: -8px; background: var(--av-green); color: #fff; font-size: .68rem; font-weight: 700; min-width: 17px; height: 17px; border-radius: 50%; display: flex; align-items: center; justify-content: center; padding: 0 3px; }
+
+  /* Product */
+  .av-product { background: #fff; }
+  .av-product__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; max-width: 1280px; margin: 0 auto; padding: 1.5rem 1.5rem 2.5rem; align-items: start; }
+  .av-gallery { display: flex; flex-direction: column; gap: .9rem; }
+  .av-gallery__img { width: 100%; height: auto; display: block; border-radius: 12px; background: var(--av-soft); }
+
+  .av-buybox { position: sticky; top: 90px; }
+  .av-rating { display: flex; align-items: center; gap: .6rem; margin-bottom: .9rem; }
+  .av-rating__text { font-weight: 600; }
+  .av-rating__count { color: var(--av-muted); font-weight: 500; }
+  .av-title { font-size: clamp(1.7rem, 3vw, 2.35rem); font-weight: 700; line-height: 1.2; margin: 0 0 1.1rem; color: rgba(0,0,0,.82); }
+
+  .av-price { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; margin-bottom: 1.1rem; }
+  .av-price__now { font-size: 1.75rem; font-weight: 700; }
+  .av-price__was { font-size: 1.35rem; color: var(--av-muted); text-decoration: line-through; }
+  .av-price__badge { background: var(--av-green); color: #fff; font-weight: 700; font-size: .82rem; padding: .4rem .7rem; border-radius: 8px; letter-spacing: .3px; }
+
+  .av-pill { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--av-border); border-radius: 8px; padding: .65rem 1rem; font-size: .82rem; font-weight: 700; letter-spacing: .3px; margin-bottom: 1.4rem; text-transform: uppercase; }
+  .av-pill__ico { color: var(--av-green); }
+
+  .av-checks { list-style: none; padding: 0; margin: 0 0 1.75rem; }
+  .av-checks li { position: relative; padding-left: 2rem; margin-bottom: .85rem; font-size: 1.05rem; font-weight: 600; }
+  .av-checks li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--av-green); font-weight: 800; font-size: 1.2rem; }
+
+  .av-offer-title { display: flex; align-items: center; text-align: center; gap: 1rem; margin: 0 0 1rem; font-weight: 600; }
+  .av-offer-title::before, .av-offer-title::after { content: ""; flex: 1; height: 1px; background: var(--av-border); }
+  .av-offers { display: flex; flex-direction: column; gap: .9rem; margin-bottom: 1.4rem; }
+  .av-offer { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .8rem; border: 2px solid var(--av-border); border-radius: 12px; padding: 1.1rem 1.1rem; cursor: pointer; transition: border-color .15s ease, background .15s ease; }
+  .av-offer.is-selected { border-color: #111; }
+  .av-offer input { position: absolute; opacity: 0; pointer-events: none; }
+  .av-offer__flag { position: absolute; top: -.8rem; right: 1rem; background: #000; color: #fff; font-size: .72rem; font-weight: 600; padding: .28rem .65rem; border-radius: 6px; }
+  .av-offer__flag--best { background: var(--av-green); }
+  .av-offer__thumb { width: 56px; height: 56px; border-radius: 8px; overflow: hidden; background: var(--av-soft); flex: none; }
+  .av-offer__thumb img { width: 100%; height: 100%; object-fit: contain; }
+  .av-offer__name { font-weight: 700; font-size: 1.15rem; }
+  .av-offer__tag { display: inline-block; background: #ececec; color: var(--av-fg); font-size: .72rem; font-weight: 600; padding: .2rem .5rem; border-radius: 5px; margin-left: .3rem; vertical-align: middle; }
+  .av-offer__sub { display: block; font-size: .9rem; color: var(--av-muted); margin-top: .15rem; }
+  .av-offer__price { text-align: right; white-space: nowrap; }
+  .av-offer__now { display: block; font-weight: 700; font-size: 1.35rem; }
+  .av-offer__was { display: block; font-size: .9rem; color: var(--av-muted); text-decoration: line-through; }
+
+  .av-satisfied { text-align: center; font-weight: 600; margin: 0 0 1rem; }
+
+  /* CTA */
+  .av-form { margin: 0; }
+  .av-cta { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: .5rem; width: 100%; background: var(--av-green); color: #fff; font-size: 1.2rem; font-weight: 600; padding: 1.05rem 1.25rem; border: none; border-radius: 10px; cursor: pointer; min-height: 60px; transition: background .15s ease, transform .05s ease; font-family: inherit; }
+  .av-cta:hover { background: var(--av-green-dark); }
+  .av-cta:active { transform: translateY(1px); }
+  .av-cta:focus-visible { outline: 4px solid #f5b301; outline-offset: 3px; }
+  .av-cta[disabled], .av-cta.is-loading { background: #9aa5a2; cursor: not-allowed; }
+  .av-cta__sep { opacity: .55; }
+  .av-cta__was { text-decoration: line-through; opacity: .8; font-weight: 500; }
+
+  .av-cart-msg { margin: .75rem 0 0; text-align: center; font-weight: 600; font-size: .95rem; }
+  .av-cart-msg[hidden] { display: none; }
+  .av-cart-msg.is-success { color: var(--av-green-dark); }
+  .av-cart-msg.is-error { color: #c0392b; }
+
+  .av-line { display: flex; align-items: center; justify-content: center; gap: .5rem; text-align: center; font-size: 1rem; margin: 1rem 0 0; }
+  .av-line__ico { font-size: 1.1rem; }
+
+  /* Payment badges */
+  .av-pay { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4rem; margin-top: 1rem; }
+  .av-pay__card { height: 26px; min-width: 40px; padding: 0 6px; border-radius: 4px; background: #fff; border: 1px solid #e2e2e2; font-size: .62rem; font-weight: 800; letter-spacing: .3px; display: inline-flex; align-items: center; justify-content: center; color: #1a1a6b; }
+  .av-pay__visa { color: #1a1f71; }
+  .av-pay__mc { gap: 0; }
+  .av-pay__mc i { width: 15px; height: 15px; border-radius: 50%; display: inline-block; }
+  .av-pay__mc i:first-child { background: #eb001b; }
+  .av-pay__mc i:last-child { background: #f79e1b; margin-left: -6px; mix-blend-mode: multiply; }
+  .av-pay__apple { color: #000; }
+  .av-pay__apple::before { content: ""; display: inline-block; }
+  .av-pay__gpay { color: #5f6368; }
+  .av-pay__pp { color: #003087; }
+  .av-pay__amex { color: #fff; background: #2e77bc; border-color: #2e77bc; }
+  .av-pay__banc { color: #005498; font-size: .55rem; }
+
+  /* Featured testimonial */
+  .av-hero-quote { border: 1px solid var(--av-border); border-radius: 14px; padding: 1.5rem; margin: 1.75rem 0 0; }
+  .av-hero-quote blockquote { margin: .6rem 0 1rem; font-size: 1.02rem; }
+  .av-hero-quote figcaption { display: flex; flex-direction: column; }
+  .av-hero-quote__name { font-weight: 700; }
+  .av-hero-quote__meta { color: var(--av-muted); font-size: .85rem; }
+
+  /* Accordions */
+  .av-acc-group { margin-top: 1.25rem; }
+  .av-acc { border-bottom: 1px solid var(--av-border); }
+  .av-acc summary { cursor: pointer; list-style: none; padding: 1.15rem 2rem 1.15rem 0; position: relative; font-size: 1.05rem; font-weight: 600; display: flex; align-items: center; gap: .6rem; }
+  .av-acc summary::-webkit-details-marker { display: none; }
+  .av-acc summary::after { content: "+"; position: absolute; right: .1rem; top: 50%; transform: translateY(-50%); font-size: 1.6rem; color: #444; font-weight: 400; }
+  .av-acc[open] summary::after { content: "–"; }
+  .av-acc__ico { color: #444; font-size: 1rem; }
+  .av-acc__body { padding: 0 0 1.15rem; color: #444; }
+  .av-acc__body p { margin: 0 0 .8rem; }
+  .av-acc__body p:last-child { margin-bottom: 0; }
+
+  /* Press marquee */
+  .av-press { padding: 2rem 0; background: var(--av-soft); }
+  .av-marquee { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+  .av-marquee__track { display: inline-flex; align-items: center; gap: 4rem; white-space: nowrap; animation: av-scroll 32s linear infinite; }
+  .av-press__logo img { height: 30px; width: auto; opacity: .85; }
+  @keyframes av-scroll { from { transform: translateX(0); } to { transform: translateX(-33.333%); } }
+  @media (prefers-reduced-motion: reduce) { .av-marquee__track { animation: none; } }
+
+  /* Reviews */
+  .av-reviews { padding: 3rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+  .av-reviews__head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.75rem; }
+  .av-reviews__title { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 700; margin: 0; }
+  .av-reviews__summary { display: flex; align-items: center; gap: .5rem; margin-top: .4rem; }
+  .av-reviews__score { font-weight: 700; }
+  .av-reviews__count { color: var(--av-muted); }
+  .av-review-write-btn { display: inline-flex; align-items: center; gap: .5rem; background: #fff; color: var(--av-green-dark); border: 2px solid var(--av-green); border-radius: 10px; padding: .7rem 1.25rem; font: inherit; font-weight: 600; cursor: pointer; transition: background .15s ease, color .15s ease; }
+  .av-review-write-btn:hover { background: var(--av-green); color: #fff; }
+
+  .av-review-form { background: var(--av-soft); border: 1px solid var(--av-border); border-radius: 14px; padding: 1.5rem; margin-bottom: 1.75rem; max-width: 640px; }
+  .av-review-form[hidden] { display: none; }
+  .av-review-form__title { font-size: 1.2rem; font-weight: 700; margin: 0 0 1rem; }
+  .av-review-form__label { display: block; font-weight: 600; margin-bottom: .4rem; }
+  .av-rate { display: inline-flex; gap: .2rem; margin-bottom: 1rem; }
+  .av-rate__star { background: none; border: none; padding: 0 .1rem; font-size: 1.9rem; line-height: 1; cursor: pointer; color: #dcdcdc; transition: color .1s ease; }
+  .av-rate__star.is-on { color: var(--av-star); }
+  .av-rate__star:focus-visible { outline: 2px solid var(--av-green); outline-offset: 2px; border-radius: 4px; }
+  .av-review-form__row { margin-bottom: .9rem; }
+  .av-review-form__input, .av-review-form__textarea { width: 100%; border: 1px solid var(--av-border); border-radius: 10px; padding: .8rem 1rem; font: inherit; background: #fff; color: var(--av-fg); }
+  .av-review-form__input:focus, .av-review-form__textarea:focus { outline: none; border-color: var(--av-green); }
+  .av-review-form__textarea { resize: vertical; min-height: 96px; }
+  .av-review-form__submit { background: var(--av-green); color: #fff; border: none; border-radius: 10px; padding: .85rem 1.5rem; font: inherit; font-weight: 600; cursor: pointer; transition: background .15s ease; }
+  .av-review-form__submit:hover { background: var(--av-green-dark); }
+  .av-review-form__msg { margin: .85rem 0 0; font-weight: 600; font-size: .95rem; }
+  .av-review-form__msg[hidden] { display: none; }
+  .av-review-form__msg.is-success { color: var(--av-green-dark); }
+  .av-review-form__msg.is-error { color: #c0392b; }
+
+  .av-reviews__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .av-review { background: #fff; border: 1px solid var(--av-border); border-radius: 14px; padding: 1.6rem; margin: 0; }
+  .av-review--extra.is-collapsed { display: none; }
+  .av-review--user { border-color: var(--av-green); box-shadow: 0 0 0 1px var(--av-green) inset; }
+  .av-review__name { font-weight: 700; margin: .7rem 0 .3rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+  .av-review__badge { color: var(--av-green); font-size: .72rem; font-weight: 600; }
+  .av-review blockquote { margin: 0 0 1rem; font-size: 1rem; color: #333; }
+  .av-review__date { display: block; color: var(--av-muted); font-size: .9rem; font-style: italic; }
+  .av-reviews__more { text-align: center; margin-top: 2rem; }
+  .av-reviews__more-btn { background: #fff; color: var(--av-fg); border: 2px solid var(--av-border); border-radius: 10px; padding: .85rem 1.75rem; font: inherit; font-weight: 600; cursor: pointer; transition: border-color .15s ease, color .15s ease; }
+  .av-reviews__more-btn:hover { border-color: var(--av-green); color: var(--av-green-dark); }
+  .av-reviews__more-btn[hidden] { display: none; }
+
+  /* Feature story */
+  .av-story { max-width: 1180px; margin: 0 auto; padding: 1rem 1.5rem 2rem; }
+  .av-story__h3 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); font-weight: 700; margin: 1.5rem 0 1rem; line-height: 1.35; }
+  .av-story__h5 { font-size: 1.2rem; font-weight: 500; margin: 1.25rem 0; line-height: 1.6; }
+  .av-story__p { font-size: 1.15rem; margin: 1.1rem 0; line-height: 1.7; }
+  .av-story__p strong { font-weight: 700; }
+  .av-story__img { text-align: center; margin: 1.25rem 0; }
+  .av-story__img img { display: inline-block; border-radius: 8px; }
+
+  /* Stats */
+  .av-stats { padding: 2rem 1.5rem 3rem; background: var(--av-soft); }
+  .av-stats__title { text-align: center; font-size: 1.2rem; margin: 0 0 2rem; }
+  .av-stats__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
+  .av-stat { text-align: center; }
+  .av-stat__num { display: block; font-size: 3.2rem; font-weight: 800; line-height: 1; margin-bottom: .6rem; }
+  .av-stat__label { font-size: 1rem; color: #333; }
+
+  /* Comparison */
+  .av-compare { padding: 3rem 1.5rem; }
+  .av-compare__h2 { text-align: center; font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 700; margin: 0 0 1.5rem; }
+  .av-compare__sub { text-align: center; font-size: 1.15rem; margin: 0 0 1.5rem; }
+  .av-table-wrap { overflow-x: auto; max-width: 820px; margin: 0 auto; }
+  .av-table { width: 100%; border-collapse: collapse; font-size: 1.05rem; min-width: 480px; }
+  .av-table th, .av-table td { padding: 1rem; border-bottom: 1px solid var(--av-border); text-align: center; vertical-align: middle; }
+  .av-table thead th { font-weight: 700; padding-bottom: 1.25rem; }
+  .av-table tbody th { text-align: left; font-weight: 600; }
+  .av-table .av-col-us { background: #f4f4f4; }
+  .av-table tbody tr:last-child th, .av-table tbody tr:last-child td { border-bottom: none; }
+  .av-yes::before { content: "✓"; color: #111; font-size: 1.3rem; font-weight: 700; }
+  .av-no::before { content: "✕"; color: #111; font-size: 1.2rem; }
+
+  /* Video */
+  .av-video { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 3rem; text-align: center; }
+  .av-video__title { font-size: clamp(1.5rem, 2.8vw, 2rem); font-weight: 700; margin: 0 0 1.5rem; }
+  .av-video__frame { position: relative; border-radius: 14px; overflow: hidden; background: #000; }
+  .av-video__el { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+  .av-video__play { position: absolute; inset: 0; margin: auto; width: 74px; height: 74px; border-radius: 50%; border: 2px solid rgba(255,255,255,.9); background: rgba(0,0,0,.25); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; padding-left: 4px; }
+  .av-video__frame.is-playing .av-video__play { display: none; }
+
+  /* Help / FAQ */
+  .av-help { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+  .av-help__title { text-align: center; font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; margin: 0 0 1rem; }
+  .av-help__lead { text-align: center; color: #333; margin: 0 auto 2rem; max-width: 620px; }
+  .av-help__faqtitle { font-size: 1.4rem; font-weight: 700; margin: 0 0 .5rem; }
+  .av-faq .av-acc summary { font-weight: 600; }
+
+  /* Footer utilities */
+  .av-futil { background: #000; padding: 3.5rem 1.5rem 0; }
+  .av-futil__card { background: #000; border: 1px solid #2a2a2a; border-radius: 18px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; padding: 2.5rem 2rem; }
+  .av-futil__item { text-align: center; color: #fff; }
+  .av-futil__ico { font-size: 1.8rem; display: block; margin-bottom: .75rem; }
+  .av-futil__item h3 { font-size: 1.15rem; font-weight: 700; margin: 0 0 .6rem; }
+  .av-futil__item p { font-size: .92rem; color: #cfcfcf; margin: 0; }
+
+  /* Footer */
+  .av-footer { background: #000; color: #fff; padding: 3.5rem 1.5rem 1.5rem; }
+  .av-footer__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .av-footer__col h4 { font-size: 1.3rem; font-weight: 700; margin: 0 0 1.25rem; }
+  .av-footer__col ul { list-style: none; padding: 0; margin: 0; }
+  .av-footer__col li { margin-bottom: .9rem; }
+  .av-footer__col a { color: #eaeaea; }
+  .av-footer__col a:hover { color: #fff; text-decoration: underline; }
+  .av-footer__news p { color: #cfcfcf; margin: 0 0 1.25rem; }
+  .av-news { display: flex; align-items: center; gap: .5rem; max-width: 320px; border: 1px solid #fff; border-radius: 10px; padding: .3rem .3rem .3rem 1rem; }
+  .av-news input { flex: 1; background: none; border: none; color: #fff; font: inherit; padding: .7rem 0; outline: none; }
+  .av-news input::placeholder { color: #cfcfcf; }
+  .av-news button { background: none; border: none; color: #fff; cursor: pointer; display: inline-flex; padding: .5rem; }
+  .av-footer__bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .av-copy { margin: 0; color: #cfcfcf; }
+
+  /* Sticky bar */
+  .av-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: transparent; padding: .6rem 1rem; }
+  .av-sticky[hidden] { display: none; }
+  .av-sticky__form { max-width: 1100px; margin: 0 auto; }
+  .av-cta--sticky { min-height: 52px; font-size: 1.1rem; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .av-futil__card { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 749px) {
+    .av-header__inner { grid-template-columns: auto 1fr auto; gap: .5rem; padding: .75rem 1rem; }
+    .av-nav { display: none; }
+    .av-product__inner { grid-template-columns: 1fr; gap: 1.5rem; padding: 1rem 1rem 2rem; }
+    .av-buybox { position: static; top: auto; }
+    .av-title { font-size: 1.6rem; }
+    .av-reviews__grid { grid-template-columns: 1fr; }
+    .av-stats__grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .av-futil__card { grid-template-columns: 1fr; }
+    .av-footer__inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (function () {
+    document.querySelectorAll('[data-av-root]').forEach(function (root) {
+      /* Rotating announcement */
+      (function () {
+        var wrap = root.querySelector('[data-av-ann]');
+        if (!wrap) return;
+        var slides = Array.prototype.slice.call(wrap.querySelectorAll('[data-av-ann-slide]'));
+        if (slides.length < 2) return;
+        var idx = 0, timer;
+        function show(i) { idx = (i + slides.length) % slides.length; slides.forEach(function (s, n) { s.classList.toggle('is-active', n === idx); }); }
+        function next() { show(idx + 1); }
+        function prev() { show(idx - 1); }
+        function start() { stop(); timer = setInterval(next, 4000); }
+        function stop() { if (timer) clearInterval(timer); }
+        var n = wrap.querySelector('[data-av-ann-next]'), p = wrap.querySelector('[data-av-ann-prev]');
+        if (n) n.addEventListener('click', function () { next(); start(); });
+        if (p) p.addEventListener('click', function () { prev(); start(); });
+        start();
+      })();
+
+      /* Delivery estimate (today +5 to +9 days) */
+      (function () {
+        var from = root.querySelector('[data-av-ship-from]'), to = root.querySelector('[data-av-ship-to]');
+        if (!from || !to) return;
+        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        function fmt(d) { return months[d.getMonth()] + ' ' + d.getDate(); }
+        var a = new Date(); a.setDate(a.getDate() + 5);
+        var b = new Date(); b.setDate(b.getDate() + 9);
+        from.textContent = fmt(a); to.textContent = fmt(b);
+      })();
+
+      /* Offer selector */
+      (function () {
+        var group = root.querySelector('[data-av-offers]');
+        if (!group) return;
+        var offers = group.querySelectorAll('.av-offer');
+        offers.forEach(function (offer) {
+          offer.addEventListener('click', function () {
+            offers.forEach(function (o) { o.classList.remove('is-selected'); });
+            offer.classList.add('is-selected');
+            var radio = offer.querySelector('input[type="radio"]');
+            if (radio) radio.checked = true;
+            var price = offer.getAttribute('data-price'), was = offer.getAttribute('data-was'), qty = offer.getAttribute('data-qty');
+            root.querySelectorAll('[data-av-cta-price]').forEach(function (el) { if (price) el.textContent = price; });
+            root.querySelectorAll('[data-av-cta-was]').forEach(function (el) { if (was) el.textContent = was; });
+            root.querySelectorAll('[data-av-qty]').forEach(function (q) { if (qty) q.value = qty; });
+          });
+        });
+      })();
+
+      /* Video play */
+      (function () {
+        var frame = root.querySelector('[data-av-video]');
+        if (!frame) return;
+        var vid = frame.querySelector('video'), btn = frame.querySelector('[data-av-video-play]');
+        if (!vid || !btn) return;
+        btn.addEventListener('click', function () { frame.classList.add('is-playing'); vid.play(); });
+        vid.addEventListener('pause', function () { if (vid.currentTime === 0) frame.classList.remove('is-playing'); });
+      })();
+
+      /* Add to cart (AJAX with fallback) */
+      (function () {
+        var addUrl = root.getAttribute('data-cart-add-url') || '/cart/add';
+        var cartUrl = root.getAttribute('data-cart-url') || '/cart';
+        root.querySelectorAll('[data-av-cart-form]').forEach(function (form) {
+          form.addEventListener('submit', function (e) {
+            var variant = form.querySelector('[data-av-variant]');
+            if (!variant || !variant.value) {
+              e.preventDefault();
+              showMsg(form, 'Select a product in the theme editor to enable add to cart.', 'error');
+              return;
+            }
+            e.preventDefault();
+            var btn = form.querySelector('[data-av-cta]');
+            if (btn) { btn.classList.add('is-loading'); btn.setAttribute('aria-busy', 'true'); }
+            fetch(addUrl + '.js', { method: 'POST', headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }, body: new FormData(form) })
+              .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+              .then(function (r) {
+                if (btn) { btn.classList.remove('is-loading'); btn.removeAttribute('aria-busy'); }
+                if (!r.ok) { showMsg(form, (r.data && r.data.description) || 'Could not add to cart.', 'error'); return; }
+                showMsg(form, 'Added to cart ✓ Redirecting…', 'success');
+                document.dispatchEvent(new CustomEvent('cart:refresh', { bubbles: true }));
+                window.setTimeout(function () { window.location.href = cartUrl; }, 600);
+              })
+              .catch(function () { if (btn) { btn.classList.remove('is-loading'); btn.removeAttribute('aria-busy'); } form.submit(); });
+          });
+        });
+        function showMsg(form, text, kind) {
+          var el = form.querySelector('[data-av-cart-msg]');
+          if (!el) { window.alert(text); return; }
+          el.textContent = text; el.classList.remove('is-success', 'is-error');
+          el.classList.add(kind === 'success' ? 'is-success' : 'is-error'); el.hidden = false;
+        }
+      })();
+
+      /* Reviews: write a review + show more */
+      (function () {
+        var section = root.querySelector('[data-av-reviews]');
+        if (!section) return;
+        var grid = section.querySelector('[data-av-reviews-grid]');
+        var toggle = section.querySelector('[data-av-write-toggle]');
+        var form = section.querySelector('[data-av-review-form]');
+        var moreBtn = section.querySelector('[data-av-more]');
+        var countEls = section.querySelectorAll('[data-av-review-count]');
+        var msgEl = section.querySelector('[data-av-review-msg]');
+        var key = 'av_reviews_' + (section.getAttribute('data-av-reviews') || 'default');
+        var BATCH = 3;
+
+        /* Toggle the write-a-review form */
+        if (toggle && form) {
+          toggle.addEventListener('click', function () {
+            var isHidden = form.hasAttribute('hidden');
+            if (isHidden) {
+              form.removeAttribute('hidden');
+              toggle.setAttribute('aria-expanded', 'true');
+              var first = form.querySelector('input, textarea');
+              if (first) first.focus();
+            } else {
+              form.setAttribute('hidden', '');
+              toggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        }
+
+        /* Star rating input */
+        var rating = 0;
+        var rateWrap = section.querySelector('[data-av-rate]');
+        var stars = rateWrap ? Array.prototype.slice.call(rateWrap.querySelectorAll('.av-rate__star')) : [];
+        function paint(n) { stars.forEach(function (s, i) { s.classList.toggle('is-on', i < n); }); }
+        if (rateWrap) {
+          stars.forEach(function (s) {
+            var v = parseInt(s.getAttribute('data-val'), 10);
+            s.addEventListener('mouseenter', function () { paint(v); });
+            s.addEventListener('click', function () { rating = v; paint(v); });
+          });
+          rateWrap.addEventListener('mouseleave', function () { paint(rating); });
+        }
+
+        function esc(str) { var d = document.createElement('div'); d.textContent = str == null ? '' : str; return d.innerHTML; }
+        function todayFr() {
+          var d = new Date();
+          function p(n) { return (n < 10 ? '0' : '') + n; }
+          var mo = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+          return mo[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+        }
+        function makeCard(r) {
+          var pct = Math.max(0, Math.min(100, Math.round((r.rating / 5) * 100)));
+          var fig = document.createElement('figure');
+          fig.className = 'av-review av-review--user';
+          fig.innerHTML =
+            '<div class="av-stars" aria-hidden="true" style="--pct:' + pct + '%;">★★★★★</div>' +
+            '<figcaption class="av-review__name">' + esc(r.name) + ' <span class="av-review__badge">✔ Posted by you</span></figcaption>' +
+            '<blockquote>« ' + esc(r.content) + ' »</blockquote>' +
+            '<time class="av-review__date">' + esc(r.date) + '</time>';
+          return fig;
+        }
+        function showMsg(text, kind) {
+          if (!msgEl) return;
+          msgEl.textContent = text;
+          msgEl.classList.remove('is-success', 'is-error');
+          msgEl.classList.add(kind === 'success' ? 'is-success' : 'is-error');
+          msgEl.hidden = false;
+        }
+
+        /* Restore previously submitted reviews */
+        var saved = [];
+        try { saved = JSON.parse(localStorage.getItem(key) || '[]'); } catch (e) { saved = []; }
+        if (grid && saved.length) {
+          saved.forEach(function (r) { grid.insertBefore(makeCard(r), grid.firstChild); });
+          countEls.forEach(function (el) {
+            var n = parseInt((el.textContent || '').replace(/\D/g, ''), 10) || 0;
+            el.textContent = n + saved.length;
+          });
+        }
+
+        /* Submit a new review */
+        if (form && grid) {
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var name = (form.querySelector('[name="name"]').value || '').trim();
+            var content = (form.querySelector('[name="content"]').value || '').trim();
+            if (!rating) { showMsg('Please select a rating.', 'error'); return; }
+            if (!name || !content) { showMsg('Please enter your name and review.', 'error'); return; }
+            var review = { name: name, content: content, rating: rating, date: todayFr() };
+            grid.insertBefore(makeCard(review), grid.firstChild);
+            saved.unshift(review);
+            try { localStorage.setItem(key, JSON.stringify(saved)); } catch (e) {}
+            countEls.forEach(function (el) {
+              var n = parseInt((el.textContent || '').replace(/\D/g, ''), 10) || 0;
+              el.textContent = n + 1;
+            });
+            form.reset();
+            rating = 0;
+            paint(0);
+            showMsg('Thank you! Your review has been published.', 'success');
+          });
+        }
+
+        /* See more reviews */
+        if (moreBtn && grid) {
+          moreBtn.addEventListener('click', function () {
+            var extras = Array.prototype.slice.call(grid.querySelectorAll('.av-review--extra.is-collapsed'));
+            extras.slice(0, BATCH).forEach(function (el) { el.classList.remove('is-collapsed'); });
+            if (grid.querySelectorAll('.av-review--extra.is-collapsed').length === 0) {
+              moreBtn.hidden = true;
+            }
+          });
+          if (grid.querySelectorAll('.av-review--extra.is-collapsed').length === 0) {
+            moreBtn.hidden = true;
+          }
+        }
+      })();
+
+      /* Sticky bar */
+      (function () {
+        var bar = root.querySelector('[data-av-sticky]');
+        var anchor = root.querySelector('.av-buybox .av-cta');
+        if (!bar || !anchor || !('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { bar.hidden = en.isIntersecting || en.boundingClientRect.top > 0; });
+        }, { rootMargin: '0px 0px -100% 0px' });
+        io.observe(anchor);
+      })();
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Astuvita — Product Page",
+  "settings": [
+    { "type": "header", "content": "Product" },
+    { "type": "product", "id": "product", "label": "Product (enables add to cart)" },
+    { "type": "paragraph", "content": "Select your store's product so that “Add to cart” actually works." },
+    { "type": "header", "content": "Gallery (one URL per line)" },
+    { "type": "textarea", "id": "gallery_images", "label": "Product images (stacked)", "default": "https://astuvita.com/cdn/shop/files/Copie_de_x_31.png?v=1780095249&width=1200\nhttps://astuvita.com/cdn/shop/files/Canne_2.webp?v=1781586611&width=1200\nhttps://astuvita.com/cdn/shop/files/cane-dualHandle1-ezgif.com-optimize.gif?v=1778880494&width=1200\nhttps://astuvita.com/cdn/shop/files/170.webp?v=1781586610&width=1200\nhttps://astuvita.com/cdn/shop/files/Gemini_Generated_Image_ek1jf5ek1jf5ek1j.webp?v=1780343767&width=1200\nhttps://astuvita.com/cdn/shop/files/Copie_de_x_33.webp?v=1781527516&width=1200\nhttps://astuvita.com/cdn/shop/files/hf_20260224_181111_11dde6f0-5077-4837-82fe-6840a4e0c563.webp?v=1778275285&width=1200\nhttps://astuvita.com/cdn/shop/files/169.webp?v=1781586610&width=1200\nhttps://astuvita.com/cdn/shop/files/40.png?v=1780095250&width=1200\nhttps://astuvita.com/cdn/shop/files/Gemini_Generated_Image_iv7wikiv7wikiv7w.webp?v=1781586611&width=1200\nhttps://astuvita.com/cdn/shop/files/3.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/8.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/4.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/7.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/5.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/6.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/NA.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1779006668&width=1200\nhttps://astuvita.com/cdn/shop/files/1716391083-StandSecureAdvertorial_2_1.webp?v=1779006607&width=1200\nhttps://astuvita.com/cdn/shop/files/Sd56ad8843a80431eac1c4220bc749c078.webp?v=1779006668&width=1200\nhttps://astuvita.com/cdn/shop/files/9.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/2_34f3b381-37a8-47b6-8a42-1faaa5fa469d.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/S7224624b5f8947efadce522af8d63e3ed.webp?v=1777552755&width=1200\nhttps://astuvita.com/cdn/shop/files/Copie_de_x_25.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/hf_20260430_164859_e8daed1a-f99b-457c-b475-2d8693cf37b9_1.png?v=1779006612&width=1200" },
+    { "type": "header", "content": "Press bar (URLs, comma-separated)" },
+    { "type": "textarea", "id": "press_logos", "label": "Logos", "default": "https://astuvita.com/cdn/shop/files/logo_seniors_magazine.png?v=1778964466, https://astuvita.com/cdn/shop/files/Medisite.png?v=1778964792, https://astuvita.com/cdn/shop/files/Marie-Claire-Logo.png?v=1778964555, https://astuvita.com/cdn/shop/files/Logo_Le_Figaro_svg.png?v=1778964506" }
+  ],
+  "presets": [
+    { "name": "Astuvita — Product Page" }
+  ]
+}
+{% endschema %}
