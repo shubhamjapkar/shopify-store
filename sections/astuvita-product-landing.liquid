@@ -68,7 +68,7 @@
         <a href="{{ routes.root_url }}">Mobility</a>
       </nav>
       <a class="av-logo" href="{{ routes.root_url }}">
-        <span class="av-logo__text">Astu<span class="av-logo__accent">Vita</span></span><span class="av-logo__tm">™</span>
+        <img class="av-logo__img" src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/walk_wise_logo_2.png?v=1784951696" alt="WalkWise" width="120" height="120" loading="eager">
       </a>
       <div class="av-header__actions">
         <button type="button" class="av-locale">
@@ -681,7 +681,8 @@
   .av-nav { display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; font-size: 1rem; max-width: 34rem; }
   .av-nav a { color: #1a1a1a; }
   .av-nav a:hover { color: var(--av-green); }
-  .av-logo { justify-self: center; display: inline-flex; align-items: flex-start; font-weight: 700; }
+  .av-logo { justify-self: center; display: inline-flex; align-items: center; font-weight: 700; }
+  .av-logo__img { display: block; height: 48px; width: auto; }
   .av-logo__text { font-size: 1.35rem; font-weight: 700; color: #1f5c33; letter-spacing: .2px; }
   .av-logo__text--sm { font-size: 1.05rem; }
   .av-logo__accent { color: var(--av-green); }
@@ -858,6 +859,9 @@
   .av-story__p strong { font-weight: 700; }
   .av-story__img { text-align: center; margin: 1.25rem 0; }
   .av-story__img img { display: inline-block; border-radius: 8px; }
+  @media (min-width: 750px) {
+    .av-story__img img { max-width: 800px; }
+  }
 
   /* Stats */
   .av-stats { padding: 2rem 1.5rem 3rem; background: var(--av-soft); }
@@ -1411,7 +1415,7 @@
     { "type": "product", "id": "product", "label": "Product (enables add to cart)" },
     { "type": "paragraph", "content": "Select your store's product so that “Add to cart” actually works." },
     { "type": "header", "content": "Gallery (one URL per line)" },
-    { "type": "textarea", "id": "gallery_images", "label": "Product images (stacked)", "default": "https://astuvita.com/cdn/shop/files/Copie_de_x_31.png?v=1780095249&width=1200\nhttps://astuvita.com/cdn/shop/files/Canne_2.webp?v=1781586611&width=1200\nhttps://astuvita.com/cdn/shop/files/cane-dualHandle1-ezgif.com-optimize.gif?v=1778880494&width=1200\nhttps://astuvita.com/cdn/shop/files/170.webp?v=1781586610&width=1200\nhttps://astuvita.com/cdn/shop/files/Gemini_Generated_Image_ek1jf5ek1jf5ek1j.webp?v=1780343767&width=1200\nhttps://astuvita.com/cdn/shop/files/Copie_de_x_33.webp?v=1781527516&width=1200\nhttps://astuvita.com/cdn/shop/files/hf_20260224_181111_11dde6f0-5077-4837-82fe-6840a4e0c563.webp?v=1778275285&width=1200\nhttps://astuvita.com/cdn/shop/files/169.webp?v=1781586610&width=1200\nhttps://astuvita.com/cdn/shop/files/40.png?v=1780095250&width=1200\nhttps://astuvita.com/cdn/shop/files/Gemini_Generated_Image_iv7wikiv7wikiv7w.webp?v=1781586611&width=1200\nhttps://astuvita.com/cdn/shop/files/3.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/8.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/4.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/7.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/5.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/6.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/NA.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1779006668&width=1200\nhttps://astuvita.com/cdn/shop/files/1716391083-StandSecureAdvertorial_2_1.webp?v=1779006607&width=1200\nhttps://astuvita.com/cdn/shop/files/Sd56ad8843a80431eac1c4220bc749c078.webp?v=1779006668&width=1200\nhttps://astuvita.com/cdn/shop/files/9.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/2_34f3b381-37a8-47b6-8a42-1faaa5fa469d.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/S7224624b5f8947efadce522af8d63e3ed.webp?v=1777552755&width=1200\nhttps://astuvita.com/cdn/shop/files/Copie_de_x_25.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/hf_20260430_164859_e8daed1a-f99b-457c-b475-2d8693cf37b9_1.png?v=1779006612&width=1200" },
+    { "type": "textarea", "id": "gallery_images", "label": "Product images (stacked)", "default": "https://astuvita.com/cdn/shop/files/Copie_de_x_31.png?v=1780095249&width=1200\nhttps://astuvita.com/cdn/shop/files/Canne_2.webp?v=1781586611&width=1200\nhttps://astuvita.com/cdn/shop/files/cane-dualHandle1-ezgif.com-optimize.gif?v=1778880494&width=1200\nhttps://astuvita.com/cdn/shop/files/170.webp?v=1781586610&width=1200\nhttps://astuvita.com/cdn/shop/files/Gemini_Generated_Image_ek1jf5ek1jf5ek1j.webp?v=1780343767&width=1200\nhttps://astuvita.com/cdn/shop/files/Copie_de_x_33.webp?v=1781527516&width=1200\nhttps://astuvita.com/cdn/shop/files/hf_20260224_181111_11dde6f0-5077-4837-82fe-6840a4e0c563.webp?v=1778275285&width=1200\nhttps://astuvita.com/cdn/shop/files/169.webp?v=1781586610&width=1200\nhttps://astuvita.com/cdn/shop/files/40.png?v=1780095250&width=1200\nhttps://astuvita.com/cdn/shop/files/Gemini_Generated_Image_iv7wikiv7wikiv7w.webp?v=1781586611&width=1200\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/3.jpg?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/8.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/4.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/7.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/5.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/6.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/NA.png?v=1779006609&width=1200\nhttps://astuvita.com/cdn/shop/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1779006668&width=1200\nhttps://astuvita.com/cdn/shop/files/1716391083-StandSecureAdvertorial_2_1.webp?v=1779006607&width=1200\nhttps://astuvita.com/cdn/shop/files/Sd56ad8843a80431eac1c4220bc749c078.webp?v=1779006668&width=1200\nhttps://astuvita.com/cdn/shop/files/9.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/2_34f3b381-37a8-47b6-8a42-1faaa5fa469d.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/S7224624b5f8947efadce522af8d63e3ed.webp?v=1777552755&width=1200\nhttps://astuvita.com/cdn/shop/files/Copie_de_x_25.png?v=1779006669&width=1200\nhttps://astuvita.com/cdn/shop/files/hf_20260430_164859_e8daed1a-f99b-457c-b475-2d8693cf37b9_1.png?v=1779006612&width=1200" },
     { "type": "header", "content": "Press bar (URLs, comma-separated)" },
     { "type": "textarea", "id": "press_logos", "label": "Logos", "default": "https://astuvita.com/cdn/shop/files/logo_seniors_magazine.png?v=1778964466, https://astuvita.com/cdn/shop/files/Medisite.png?v=1778964792, https://astuvita.com/cdn/shop/files/Marie-Claire-Logo.png?v=1778964555, https://astuvita.com/cdn/shop/files/Logo_Le_Figaro_svg.png?v=1778964506" }
   ],
