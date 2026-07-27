@@ -1,5 +1,5 @@
 {%- comment -%}
-  Astuvita — Faithful (pixel-perfect) replica of the astuvita.com product page.
+  WalkWise — Faithful (pixel-perfect) replica of the walkwise.com product page.
   Self-contained section: announcement bar, header, full product page,
   sales sections, and footer. The theme's header-group / footer-group
   groups are emptied to avoid duplicates.
@@ -36,7 +36,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap">
 
-<div class="av av--{{ section.id }}"
+<div class="av av--{{ section.id }}" id="top"
      data-av-root
      data-cart-add-url="{{ routes.cart_add_url }}"
      data-cart-url="{{ routes.cart_url }}"
@@ -49,7 +49,7 @@
     </button>
     <div class="av-ann__viewport">
       <span class="av-ann__slide is-active" data-av-ann-slide>Special offers today only</span>
-      <span class="av-ann__slide" data-av-ann-slide>Free shipping on orders over €59</span>
+      <span class="av-ann__slide" data-av-ann-slide>Free shipping on orders over $59</span>
       <span class="av-ann__slide" data-av-ann-slide>60-Day Money-Back Guarantee</span>
       <span class="av-ann__slide" data-av-ann-slide>15,000+ happy customers</span>
     </div>
@@ -62,22 +62,15 @@
   <header class="av-header">
     <div class="av-header__inner">
       <nav class="av-nav" aria-label="Main navigation">
-        <a href="{{ routes.root_url }}">Home</a>
-        <a href="{{ routes.root_url }}">Walking Cane</a>
-        <a href="{{ routes.root_url }}">3-in-1 Car Assist Handle</a>
-        <a href="{{ routes.root_url }}">Mobility</a>
+        <a href="#features">Features</a>
+        <a href="#mobility">Results</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
       </nav>
       <a class="av-logo" href="{{ routes.root_url }}">
         <img class="av-logo__img" src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/walk_wise_logo_2.png?v=1784951696" alt="WalkWise" width="120" height="120" loading="eager">
       </a>
       <div class="av-header__actions">
-        <button type="button" class="av-locale">
-          <span class="av-locale__flag" aria-hidden="true">🇪🇺</span> EUR
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <button type="button" class="av-iconbtn" aria-label="Search">
-          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
         <a href="{{ routes.cart_url }}" class="av-iconbtn av-cart-link" aria-label="Cart">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 7a3 3 0 016 0" fill="none" stroke="currentColor" stroke-width="2"/></svg>
           <span class="av-cart-count" data-av-cart-count>{{ cart.item_count | default: 0 }}</span>
@@ -87,7 +80,7 @@
   </header>
 
   {%- comment -%} ========== Product ========== {%- endcomment -%}
-  <div class="av-product">
+  <div class="av-product" id="product">
     <div class="av-product__inner">
 
       {%- comment -%}
@@ -103,7 +96,7 @@
             {%- if s != blank -%}
               {%- assign idx = idx | plus: 1 -%}
               {%- if idx == 1 -%}
-                <img class="av-gallery__img" src="{{ s }}" alt="Astuvita support cane" loading="eager" width="1000" height="1000">
+                <img class="av-gallery__img" src="{{ s }}" alt="WalkWise support cane" loading="eager" width="1000" height="1000">
               {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
@@ -116,7 +109,7 @@
               {%- if s != blank -%}
                 {%- assign idx = idx | plus: 1 -%}
                 {%- if idx > 1 -%}
-                  <img class="av-gallery__img" src="{{ s }}" alt="Astuvita support cane" loading="lazy" width="1000" height="1000">
+                  <img class="av-gallery__img" src="{{ s }}" alt="WalkWise support cane" loading="lazy" width="1000" height="1000">
                 {%- endif -%}
               {%- endif -%}
             {%- endfor -%}
@@ -131,26 +124,34 @@
           <span class="av-rating__text">4.6/5 <span class="av-rating__count">(437 reviews)</span></span>
         </div>
 
-        <h1 class="av-title">The cane that helps you stand up on your own and walk without fear of falling</h1>
+        <h1 class="av-title">Stand Up with Ease. Walk with Confidence. ⭐</h1>
 
         <div class="av-price">
-          <span class="av-price__now">€49.99</span>
-          <span class="av-price__was">€99.98</span>
+          <span class="av-price__now">$49.99</span>
+          <span class="av-price__was">$99.98</span>
           <span class="av-price__badge">SAVE 50%</span>
         </div>
 
-        <div class="av-pill"><span class="av-pill__ico" aria-hidden="true">✓</span> RECOMMENDED BY OCCUPATIONAL THERAPISTS</div>
+        <div class="av-pro-badge">
+          <span class="av-pro-badge__ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none">
+              <path d="M12 2.5l7.5 2.7v5.6c0 4.6-3.2 7.9-7.5 10.2-4.3-2.3-7.5-5.6-7.5-10.2V5.2L12 2.5z" fill="none" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M8.4 12.2l2.5 2.5 4.7-5.2" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="av-pro-badge__text"><strong>Recommended</strong> by Occupational Therapists</span>
+        </div>
 
         <ul class="av-checks">
-          <li>A second handle to help you stand up effortlessly</li>
-          <li>Stable on every surface</li>
-          <li>Walk safely, even at night, with no risk of falling</li>
+          <li><svg class="av-checks__ico" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> A second handle to help you stand up effortlessly</li>
+          <li><svg class="av-checks__ico" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Stable on every surface</li>
+          <li><svg class="av-checks__ico" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Walk safely, even at night, with no risk of falling</li>
         </ul>
 
         <div class="av-offer-title"><span>Choose your offer</span></div>
 
         <div class="av-offers" data-av-offers>
-          <label class="av-offer is-selected" data-price="€49.99" data-was="€99.98" data-qty="1">
+          <label class="av-offer is-selected" data-price="$49.99" data-was="$99.98" data-qty="1">
             <input type="radio" name="av-offer-{{ section.id }}" value="1" checked>
             <span class="av-offer__flag">Today only</span>
             <span class="av-offer__thumb"><img src="https://astuvita.com/cdn/shop/files/2.png?height=165&v=1775907050" alt="" width="56" height="56" loading="lazy"></span>
@@ -158,12 +159,12 @@
               <span class="av-offer__name">1 Support Cane <span class="av-offer__tag">-50% off</span></span>
             </span>
             <span class="av-offer__price">
-              <span class="av-offer__now">€49.99</span>
-              <span class="av-offer__was">€99.98</span>
+              <span class="av-offer__now">$49.99</span>
+              <span class="av-offer__was">$99.98</span>
             </span>
           </label>
 
-          <label class="av-offer" data-price="€79.99" data-was="€199.96" data-qty="2">
+          <label class="av-offer" data-price="$79.99" data-was="$199.96" data-qty="2">
             <input type="radio" name="av-offer-{{ section.id }}" value="2">
             <span class="av-offer__flag av-offer__flag--best">Best Offer</span>
             <span class="av-offer__thumb"><img src="https://astuvita.com/cdn/shop/files/2.png?height=165&v=1775907050" alt="" width="56" height="56" loading="lazy"></span>
@@ -172,8 +173,8 @@
               <span class="av-offer__sub">To gift or keep at home</span>
             </span>
             <span class="av-offer__price">
-              <span class="av-offer__now">€79.99</span>
-              <span class="av-offer__was">€199.96</span>
+              <span class="av-offer__now">$79.99</span>
+              <span class="av-offer__was">$199.96</span>
             </span>
           </label>
         </div>
@@ -195,8 +196,8 @@
             <span class="av-cta__ico" aria-hidden="true">🛒</span>
             <span data-av-cta-label>{% if has_product and current_variant.available == false %}Sold out{% else %}Add to cart{% endif %}</span>
             <span class="av-cta__sep">|</span>
-            <span class="av-cta__price" data-av-cta-price>€49.99</span>
-            <span class="av-cta__was" data-av-cta-was>€99.98</span>
+            <span class="av-cta__price" data-av-cta-price>$49.99</span>
+            <span class="av-cta__was" data-av-cta-was>$99.98</span>
           </button>
           <p class="av-cart-msg" data-av-cart-msg role="status" aria-live="polite" hidden></p>
         </form>
@@ -214,26 +215,16 @@
           <span class="av-pay__card av-pay__banc">Bancontact</span>
         </div>
 
-        {%- comment -%} ----- Featured testimonial ----- {%- endcomment -%}
-        <figure class="av-hero-quote">
-          <div class="av-stars" aria-hidden="true" style="--pct:90%;">★★★★★</div>
-          <blockquote>After my fall last year, I had stopped going out alone. I was too afraid. Since I started using this cane, I've taken up my daily walks again and I finally feel free once more.</blockquote>
-          <figcaption>
-            <span class="av-hero-quote__name">Michèle, 72, Lyon</span>
-            <span class="av-hero-quote__meta">Astuvita customer since January 2026</span>
-          </figcaption>
-        </figure>
-
         {%- comment -%} ----- Accordions ----- {%- endcomment -%}
         <div class="av-acc-group">
           <details class="av-acc">
             <summary><span class="av-acc__ico" aria-hidden="true">ⓘ</span> Frequently Asked Questions</summary>
             <div class="av-acc__body">
-              <p><strong>How high does the cane adjust?</strong><br>The Astuvita cane adjusts from 85 cm to 98 cm, which suits people roughly between 1.55 m and 1.85 m tall.</p>
+              <p><strong>How high does the cane adjust?</strong><br>The WalkWise cane adjusts from 85 cm to 98 cm, which suits people roughly between 1.55 m and 1.85 m tall.</p>
               <p><strong>How is the flashlight powered?</strong><br>The light runs on 2 AAA batteries.</p>
-              <p><strong>Is it lightweight?</strong><br>Yes! The Astuvita cane was designed to be light and easy to carry — it weighs less than 450 g.</p>
-              <p><strong>What is the maximum weight the cane supports?</strong><br>The Astuvita cane supports up to 115 kg.</p>
-              <p><strong>Does the cane fold for travel or easy storage?</strong><br>Yes, the Astuvita cane is foldable and stores easily in a bag or in the car trunk.</p>
+              <p><strong>Is it lightweight?</strong><br>Yes! The WalkWise cane was designed to be light and easy to carry — it weighs less than 450 g.</p>
+              <p><strong>What is the maximum weight the cane supports?</strong><br>The WalkWise cane supports up to 115 kg.</p>
+              <p><strong>Does the cane fold for travel or easy storage?</strong><br>Yes, the WalkWise cane is foldable and stores easily in a bag or in the car trunk.</p>
               <p><strong>Can it be used by both right- and left-handed people?</strong><br>Yes, its symmetrical design works equally well for the right or left hand.</p>
             </div>
           </details>
@@ -250,7 +241,7 @@
           <details class="av-acc">
             <summary><span class="av-acc__ico" aria-hidden="true">✔</span> 60-Day Money-Back Guarantee</summary>
             <div class="av-acc__body">
-              <p>At Astuvita, your satisfaction is our top priority. We do everything we can to give you an experience that meets your expectations. That's why we offer a 60-day money-back guarantee — no questions, no hassle. If for any reason you are not completely satisfied with your purchase, we commit to refunding you in full. Your trust means everything to us.</p>
+              <p>At WalkWise, your satisfaction is our top priority. We do everything we can to give you an experience that meets your expectations. That's why we offer a 60-day money-back guarantee — no questions, no hassle. If for any reason you are not completely satisfied with your purchase, we commit to refunding you in full. Your trust means everything to us.</p>
             </div>
           </details>
           <details class="av-acc">
@@ -270,7 +261,7 @@
     <div class="av-marquee">
       <div class="av-marquee__track">
         {%- assign press = section.settings.press_logos | split: ',' -%}
-        {%- for i in (1..2) -%}
+        {%- for i in (1..4) -%}
           {%- for logo in press -%}
             <span class="av-press__logo"><img src="{{ logo | strip }}" alt="" loading="lazy"></span>
           {%- endfor -%}
@@ -279,8 +270,98 @@
     </div>
   </section>
 
+  {%- comment -%} ========== Feature story ========== {%- endcomment -%}
+  <section class="av-story" id="features" aria-label="What makes this cane unique">
+    <h3 class="av-story__h3">Do you struggle to stand up on your own? Do you feel unsteady when walking? Are you afraid of falling in the dark?</h3>
+    <h5 class="av-story__h5">There is a solution. The WalkWise support cane will help you stand up on your own, walk longer distances, and regain your confidence!</h5>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/e574a046420d4818bd9f12131b2e3b13_img_multi-functional-foldable-led-walking-cane-extra-handle-ezgif.com-cut_1.gif?v=1777563572" alt="" loading="lazy"></p>
+    <h5 class="av-story__h5"><strong>What makes this cane unique</strong></h5>
+    <p class="av-story__p"><strong>✅ Dual support handle</strong> Designed by orthopedists, the cane features a second handle that helps you rise easily from a sofa, an armchair, or any seated position — without needing anyone else's help.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1716391083-StandSecureAdvertorial_2_1.jpg?v=1784993679" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>✅ Self-standing base</strong> Thanks to its wide base with 4 sturdy rubber feet, the cane stands up on its own. No more bending down dangerously to pick up a fallen cane!</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/9.png?v=1777557224" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>✅ Built-in LED flashlight</strong> Whether going to the bathroom at night or for an evening walk, the LED light lights your path and reduces the risk of falls.</p>
+    <p class="av-story__p"><strong>✅ Built-in emergency alarm</strong> In case of a fall or emergency, simply press the button to trigger a loud alarm that will alert people nearby.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/canne-de-marche-led-avec-alarme-securestep-8259726.jpg?v=1784993682" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>✅ Foldable/telescopic design</strong> The cane folds easily to come along in the car or on a trip.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/935b03ab-cf30-4936-9e84-aece90417e6f-ezgif.com-speed.gif?v=1778870600" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>✅ Comfortable ergonomic handle</strong> The main handle is ergonomic, and the support handle is padded for extra comfort.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/NA.jpg?v=1784993690" alt="" loading="lazy"></p>
+    <h5 class="av-story__h5"><strong>Regain your freedom of movement</strong></h5>
+    <p class="av-story__p">Using the WalkWise support cane gives you the confidence to move more freely, regaining much of your independence. It supports you not only physically, but also eases the emotional weight of feeling like a burden to your loved ones.</p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_j3odv5j3odv5j3od.jpg?v=1784993689" alt="" loading="lazy"></p>
+    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Geneviève M., 72</strong> <em>"Since I started using the WalkWise cane, I feel so much safer when I move around. The wide base keeps me from tripping and I can even set it down on its own without it falling. A real plus for my daily life!"</em></p>
+    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Raymond T., 68</strong> <em>"I was reluctant to use a cane, but this one is truly elegant and practical. The built-in light is great for going out in the evening. I recommend it to all my friends!"</em></p>
+    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Martine L., 65</strong> <em>"I gave this cane to my mother after her fall and she's thrilled. It's adjustable, lightweight, and very stable. WalkWise really thought of everything. Customer service was very responsive too. Thank you!"</em></p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1772034192109-image-to-video-ezgif.com-video-to-gif-converter_2c21e61d-e84f-4766-af05-94d4ac40b623.gif?v=1784993698" alt="" loading="lazy"></p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_pk6292pk6292pk62.jpg?v=1784993690" alt="" loading="lazy"></p>
+  </section>
+
+  {%- comment -%} ========== Stats ========== {%- endcomment -%}
+  <section class="av-stats" id="mobility" aria-label="Customer results">
+    <p class="av-stats__title"><strong>What our customers feel within the first few weeks</strong></p>
+    <div class="av-stats__grid">
+      <div class="av-stat"><span class="av-stat__num">96%</span><span class="av-stat__label">feel less dependent on those around them 🏩</span></div>
+      <div class="av-stat"><span class="av-stat__num">94%</span><span class="av-stat__label">have regained the confidence to go out alone ✅</span></div>
+      <div class="av-stat"><span class="av-stat__num">97%</span><span class="av-stat__label">feel safer at home and outdoors 🙏</span></div>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Comparison table ========== {%- endcomment -%}
+  <section class="av-compare" aria-label="Comparison">
+    <h2 class="av-compare__h2">What makes the WalkWise cane unique</h2>
+    <p class="av-compare__sub"><strong>The WalkWise Cane vs. classic canes</strong></p>
+    <div class="av-table-wrap">
+      <table class="av-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" class="av-col-us"><span class="av-logo__text av-logo__text--sm">Astu<span class="av-logo__accent">Vita</span></span><span class="av-logo__tm">™</span></th>
+            <th scope="col">Classic canes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Helps you stand up</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+          <tr><th scope="row">Stands on its own</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+          <tr><th scope="row">Nighttime safety light</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+          <tr><th scope="row">Emergency alarm</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+          <tr><th scope="row">Heavy and bulky</th><td class="av-col-us av-no"></td><td class="av-yes"></td></tr>
+          <tr><th scope="row">Adjustable and foldable</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Video ========== {%- endcomment -%}
+  <section class="av-video" aria-label="Video">
+    <h2 class="av-video__title">Built-in light and alarm when you need them</h2>
+    <div class="av-video__frame" data-av-video>
+      <video class="av-video__el" controls playsinline preload="none"
+             poster="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/713472fdec454112a0d22c5b85601475.thumbnail.0000000000.jpg?v=1784993680">
+        <source src="https://astuvita.com/cdn/shop/videos/c/vp/713472fdec454112a0d22c5b85601475/713472fdec454112a0d22c5b85601475.HD-1080p-2.5Mbps-84220819.mp4" type="video/mp4">
+      </video>
+      <button type="button" class="av-video__play" data-av-video-play aria-label="Play video">
+        <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </section>
+
+  {%- comment -%} ========== Closing FAQ ========== {%- endcomment -%}
+  <section class="av-help" id="faq" aria-label="Need help">
+    <h2 class="av-help__title">Need help?</h2>
+    <p class="av-help__lead">Our team is here to help you Monday to Friday, 8:30 AM–7 PM. Saturday, 10 AM–5 PM.</p>
+    <h3 class="av-help__faqtitle">Frequently Asked Questions</h3>
+    <div class="av-faq">
+      <details class="av-acc"><summary>How high does the cane adjust?</summary><div class="av-acc__body"><p>The WalkWise cane adjusts from 88 cm to 98 cm.</p></div></details>
+      <details class="av-acc"><summary>How is the flashlight powered?</summary><div class="av-acc__body"><p>The light is powered by 2 AAA batteries (not included).</p></div></details>
+      <details class="av-acc"><summary>Is it lightweight?</summary><div class="av-acc__body"><p>Yes! The WalkWise cane was specially designed to be light and easy to carry — it weighs less than 450 g.</p></div></details>
+      <details class="av-acc"><summary>What is the maximum weight the cane supports?</summary><div class="av-acc__body"><p>The WalkWise cane supports up to 115 kg.</p></div></details>
+      <details class="av-acc"><summary>What if it's not right for me?</summary><div class="av-acc__body"><p>We're so confident you'll love the WalkWise cane that we offer a 60-day money-back guarantee. If it's not right for you, contact us at bonjour@walkwise.store and we'll process a full refund, no questions asked!</p></div></details>
+    </div>
+  </section>
+
   {%- comment -%} ========== Reviews ========== {%- endcomment -%}
-  <section class="av-reviews" aria-label="Customer Reviews" data-av-reviews="{{ section.id }}">
+  <section class="av-reviews" id="reviews" aria-label="Customer Reviews" data-av-reviews="{{ section.id }}">
     <div class="av-reviews__head">
       <div class="av-reviews__headings">
         <h2 class="av-reviews__title">Customer Reviews</h2>
@@ -310,7 +391,7 @@
         <input class="av-review-form__input" type="text" name="name" placeholder="Your name" autocomplete="name" required>
       </div>
       <div class="av-review-form__row">
-        <textarea class="av-review-form__textarea" name="content" rows="4" placeholder="Describe your experience with the Astuvita cane…" required></textarea>
+        <textarea class="av-review-form__textarea" name="content" rows="4" placeholder="Describe your experience with the WalkWise cane…" required></textarea>
       </div>
       <div class="av-review-form__row">
         <label class="av-review-form__label" for="av-review-photo-{{ section.id }}">Add a photo (optional)</label>
@@ -427,96 +508,6 @@
     </div>
   </section>
 
-  {%- comment -%} ========== Feature story ========== {%- endcomment -%}
-  <section class="av-story" aria-label="What makes this cane unique">
-    <h3 class="av-story__h3">Do you struggle to stand up on your own? Do you feel unsteady when walking? Are you afraid of falling in the dark?</h3>
-    <h5 class="av-story__h5">There is a solution. The Astuvita support cane will help you stand up on your own, walk longer distances, and regain your confidence!</h5>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/e574a046420d4818bd9f12131b2e3b13_img_multi-functional-foldable-led-walking-cane-extra-handle-ezgif.com-cut_1.gif?v=1777563572" alt="" loading="lazy"></p>
-    <h5 class="av-story__h5"><strong>What makes this cane unique</strong></h5>
-    <p class="av-story__p"><strong>✅ Dual support handle</strong> Designed by orthopedists, the cane features a second handle that helps you rise easily from a sofa, an armchair, or any seated position — without needing anyone else's help.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1716391083-StandSecureAdvertorial_2_1.jpg?v=1784993679" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>✅ Self-standing base</strong> Thanks to its wide base with 4 sturdy rubber feet, the cane stands up on its own. No more bending down dangerously to pick up a fallen cane!</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/9.png?v=1777557224" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>✅ Built-in LED flashlight</strong> Whether going to the bathroom at night or for an evening walk, the LED light lights your path and reduces the risk of falls.</p>
-    <p class="av-story__p"><strong>✅ Built-in emergency alarm</strong> In case of a fall or emergency, simply press the button to trigger a loud alarm that will alert people nearby.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/canne-de-marche-led-avec-alarme-securestep-8259726.jpg?v=1784993682" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>✅ Foldable/telescopic design</strong> The cane folds easily to come along in the car or on a trip.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/935b03ab-cf30-4936-9e84-aece90417e6f-ezgif.com-speed.gif?v=1778870600" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>✅ Comfortable ergonomic handle</strong> The main handle is ergonomic, and the support handle is padded for extra comfort.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/NA.jpg?v=1784993690" alt="" loading="lazy"></p>
-    <h5 class="av-story__h5"><strong>Regain your freedom of movement</strong></h5>
-    <p class="av-story__p">Using the Astuvita support cane gives you the confidence to move more freely, regaining much of your independence. It supports you not only physically, but also eases the emotional weight of feeling like a burden to your loved ones.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_j3odv5j3odv5j3od.jpg?v=1784993689" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Geneviève M., 72</strong> <em>"Since I started using the Astuvita cane, I feel so much safer when I move around. The wide base keeps me from tripping and I can even set it down on its own without it falling. A real plus for my daily life!"</em></p>
-    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Raymond T., 68</strong> <em>"I was reluctant to use a cane, but this one is truly elegant and practical. The built-in light is great for going out in the evening. I recommend it to all my friends!"</em></p>
-    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Martine L., 65</strong> <em>"I gave this cane to my mother after her fall and she's thrilled. It's adjustable, lightweight, and very stable. Astuvita really thought of everything. Customer service was very responsive too. Thank you!"</em></p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1772034192109-image-to-video-ezgif.com-video-to-gif-converter_2c21e61d-e84f-4766-af05-94d4ac40b623.gif?v=1784993698" alt="" loading="lazy"></p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_pk6292pk6292pk62.jpg?v=1784993690" alt="" loading="lazy"></p>
-  </section>
-
-  {%- comment -%} ========== Stats ========== {%- endcomment -%}
-  <section class="av-stats" aria-label="Customer results">
-    <p class="av-stats__title"><strong>What our customers feel within the first few weeks</strong></p>
-    <div class="av-stats__grid">
-      <div class="av-stat"><span class="av-stat__num">96%</span><span class="av-stat__label">feel less dependent on those around them 🏩</span></div>
-      <div class="av-stat"><span class="av-stat__num">94%</span><span class="av-stat__label">have regained the confidence to go out alone ✅</span></div>
-      <div class="av-stat"><span class="av-stat__num">97%</span><span class="av-stat__label">feel safer at home and outdoors 🙏</span></div>
-    </div>
-  </section>
-
-  {%- comment -%} ========== Comparison table ========== {%- endcomment -%}
-  <section class="av-compare" aria-label="Comparison">
-    <h2 class="av-compare__h2">What makes the Astuvita cane unique</h2>
-    <p class="av-compare__sub"><strong>The Astuvita Cane vs. classic canes</strong></p>
-    <div class="av-table-wrap">
-      <table class="av-table">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col" class="av-col-us"><span class="av-logo__text av-logo__text--sm">Astu<span class="av-logo__accent">Vita</span></span><span class="av-logo__tm">™</span></th>
-            <th scope="col">Classic canes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Helps you stand up</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
-          <tr><th scope="row">Stands on its own</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
-          <tr><th scope="row">Nighttime safety light</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
-          <tr><th scope="row">Emergency alarm</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
-          <tr><th scope="row">Heavy and bulky</th><td class="av-col-us av-no"></td><td class="av-yes"></td></tr>
-          <tr><th scope="row">Adjustable and foldable</th><td class="av-col-us av-yes"></td><td class="av-no"></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  {%- comment -%} ========== Video ========== {%- endcomment -%}
-  <section class="av-video" aria-label="Video">
-    <h2 class="av-video__title">Built-in light and alarm when you need them</h2>
-    <div class="av-video__frame" data-av-video>
-      <video class="av-video__el" controls playsinline preload="none"
-             poster="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/713472fdec454112a0d22c5b85601475.thumbnail.0000000000.jpg?v=1784993680">
-        <source src="https://astuvita.com/cdn/shop/videos/c/vp/713472fdec454112a0d22c5b85601475/713472fdec454112a0d22c5b85601475.HD-1080p-2.5Mbps-84220819.mp4" type="video/mp4">
-      </video>
-      <button type="button" class="av-video__play" data-av-video-play aria-label="Play video">
-        <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
-      </button>
-    </div>
-  </section>
-
-  {%- comment -%} ========== Closing FAQ ========== {%- endcomment -%}
-  <section class="av-help" aria-label="Need help">
-    <h2 class="av-help__title">Need help?</h2>
-    <p class="av-help__lead">Our team is here to help you Monday to Friday, 8:30 AM–7 PM. Saturday, 10 AM–5 PM.</p>
-    <h3 class="av-help__faqtitle">Frequently Asked Questions</h3>
-    <div class="av-faq">
-      <details class="av-acc"><summary>How high does the cane adjust?</summary><div class="av-acc__body"><p>The Astuvita cane adjusts from 88 cm to 98 cm.</p></div></details>
-      <details class="av-acc"><summary>How is the flashlight powered?</summary><div class="av-acc__body"><p>The light is powered by 2 AAA batteries (not included).</p></div></details>
-      <details class="av-acc"><summary>Is it lightweight?</summary><div class="av-acc__body"><p>Yes! The Astuvita cane was specially designed to be light and easy to carry — it weighs less than 450 g.</p></div></details>
-      <details class="av-acc"><summary>What is the maximum weight the cane supports?</summary><div class="av-acc__body"><p>The Astuvita cane supports up to 115 kg.</p></div></details>
-      <details class="av-acc"><summary>What if it's not right for me?</summary><div class="av-acc__body"><p>We're so confident you'll love the Astuvita cane that we offer a 60-day money-back guarantee. If it's not right for you, contact us at bonjour@astuvita.com and we'll process a full refund, no questions asked!</p></div></details>
-    </div>
-  </section>
-
   {%- comment -%} ========== Footer utilities ========== {%- endcomment -%}
   <section class="av-futil">
     <div class="av-futil__card">
@@ -538,7 +529,7 @@
       <div class="av-futil__item">
         <span class="av-futil__ico" aria-hidden="true">💬</span>
         <h3>Have a question?</h3>
-        <p>Contact us here: bonjour@astuvita.com</p>
+        <p>Contact us here: bonjour@walkwise.store</p>
       </div>
     </div>
   </section>
@@ -578,7 +569,7 @@
         <span class="av-pay__card av-pay__amex">AMEX</span>
         <span class="av-pay__card av-pay__banc">Bancontact</span>
       </div>
-      <p class="av-copy">© 2026 Astuvita</p>
+      <p class="av-copy">© 2026 WalkWise</p>
     </div>
   </footer>
 
@@ -597,8 +588,8 @@
         <span class="av-cta__ico" aria-hidden="true">🛒</span>
         <span>Add to cart</span>
         <span class="av-cta__sep">|</span>
-        <span class="av-cta__price" data-av-cta-price>€49.99</span>
-        <span class="av-cta__was" data-av-cta-was>€99.98</span>
+        <span class="av-cta__price" data-av-cta-price>$49.99</span>
+        <span class="av-cta__was" data-av-cta-was>$99.98</span>
       </button>
     </form>
   </div>
@@ -621,7 +612,7 @@
       <footer class="av-drawer__foot" data-av-drawer-foot hidden>
         <div class="av-drawer__subtotal">
           <span>Subtotal</span>
-          <span data-av-drawer-subtotal>€0.00</span>
+          <span data-av-drawer-subtotal>$0.00</span>
         </div>
         <p class="av-drawer__note">🔒 Taxes and shipping calculated at checkout</p>
         <form action="{{ routes.cart_url }}" method="post">
@@ -676,6 +667,8 @@
   .av-ann__slide.is-active { position: relative; opacity: 1; pointer-events: auto; }
 
   /* Header */
+  html { scroll-behavior: smooth; }
+  #features, #mobility, #reviews, #faq { scroll-margin-top: 96px; }
   .av-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid #f0f0f0; }
   .av-header__inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; max-width: 1280px; margin: 0 auto; padding: 1rem 1.5rem; }
   .av-nav { display: flex; flex-wrap: wrap; gap: .35rem 1.25rem; font-size: 1rem; max-width: 34rem; }
@@ -711,12 +704,14 @@
   .av-price__was { font-size: 1.35rem; color: var(--av-muted); text-decoration: line-through; }
   .av-price__badge { background: var(--av-green); color: #fff; font-weight: 700; font-size: .82rem; padding: .4rem .7rem; border-radius: 8px; letter-spacing: .3px; }
 
-  .av-pill { display: inline-flex; align-items: center; gap: .5rem; border: 1px solid var(--av-border); border-radius: 8px; padding: .65rem 1rem; font-size: .82rem; font-weight: 700; letter-spacing: .3px; margin-bottom: 1.4rem; text-transform: uppercase; }
-  .av-pill__ico { color: var(--av-green); }
+  .av-pro-badge { display: inline-flex; align-items: center; gap: .7rem; background: #eef6f6; border: 1px solid #cde3e2; border-radius: 999px; padding: .4rem 1.1rem .4rem .4rem; margin-bottom: 1.4rem; }
+  .av-pro-badge__ico { flex: none; width: 34px; height: 34px; border-radius: 50%; background: #0f6e6b; display: inline-flex; align-items: center; justify-content: center; }
+  .av-pro-badge__text { font-size: .84rem; font-weight: 600; letter-spacing: .2px; color: #1c3d3c; }
+  .av-pro-badge__text strong { text-transform: uppercase; font-weight: 800; letter-spacing: .3px; color: #0f6e6b; margin-right: .2rem; }
 
   .av-checks { list-style: none; padding: 0; margin: 0 0 1.75rem; }
-  .av-checks li { position: relative; padding-left: 2rem; margin-bottom: .85rem; font-size: 1.05rem; font-weight: 600; }
-  .av-checks li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--av-green); font-weight: 800; font-size: 1.2rem; }
+  .av-checks li { display: flex; align-items: center; gap: .6rem; margin-bottom: .85rem; font-size: 1.05rem; font-weight: 600; }
+  .av-checks__ico { flex: none; color: var(--av-green); }
 
   .av-offer-title { display: flex; align-items: center; text-align: center; gap: 1rem; margin: 0 0 1rem; font-weight: 600; }
   .av-offer-title::before, .av-offer-title::after { content: ""; flex: 1; height: 1px; background: var(--av-border); }
@@ -790,12 +785,12 @@
   .av-acc__body p:last-child { margin-bottom: 0; }
 
   /* Press marquee */
-  .av-press { padding: 2rem 0; background: var(--av-soft); }
+  .av-press { padding: 2.25rem 0; background: var(--av-soft); }
   .av-marquee { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
-  .av-marquee__track { display: inline-flex; align-items: center; gap: 4rem; white-space: nowrap; animation: av-scroll 24s linear infinite; }
-  .av-press__logo { display: inline-flex; align-items: center; justify-content: center; width: 140px; flex: 0 0 auto; }
-  .av-press__logo img { max-height: 30px; max-width: 100%; width: auto; height: auto; object-fit: contain; opacity: .85; }
-  @keyframes av-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .av-marquee__track { display: flex; align-items: center; gap: 3.5rem; width: max-content; animation: av-scroll 22s linear infinite; }
+  .av-press__logo { display: inline-flex; align-items: center; justify-content: center; height: 42px; flex: 0 0 auto; }
+  .av-press__logo img { display: block; max-height: 36px; max-width: 150px; width: auto; height: auto; object-fit: contain; opacity: .85; }
+  @keyframes av-scroll { from { transform: translateX(0); } to { transform: translateX(-25%); } }
   @media (prefers-reduced-motion: reduce) { .av-marquee__track { animation: none; } }
 
   /* Reviews */
@@ -1122,7 +1117,7 @@
         var countEl = drawer.querySelector('[data-av-drawer-count]');
         var lastFocus = null;
 
-        function money(c) { return '€' + (c / 100).toFixed(2); }
+        function money(c) { return '$' + (c / 100).toFixed(2); }
         function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : s; return d.innerHTML; }
 
         function updateCount(n) {
@@ -1409,18 +1404,18 @@
 
 {% schema %}
 {
-  "name": "Astuvita — Product Page",
+  "name": "WalkWise — Product Page",
   "settings": [
     { "type": "header", "content": "Product" },
     { "type": "product", "id": "product", "label": "Product (enables add to cart)" },
     { "type": "paragraph", "content": "Select your store's product so that “Add to cart” actually works." },
     { "type": "header", "content": "Gallery (one URL per line)" },
-    { "type": "textarea", "id": "gallery_images", "label": "Product images (stacked)", "default": "https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Copie_de_x_31.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Canne_2.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/cane-dualHandle1-ezgif.com-optimize.gif?v=1784993692\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/170.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_ek1jf5ek1jf5ek1j.jpg?v=1784993689\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Copie_de_x_33.jpg?v=1784993688\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/hf_20260224_181111_11dde6f0-5077-4837-82fe-6840a4e0c563.jpg?v=1784993686\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/9.jpg?v=1784993689\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/40.png?v=1784993687\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_iv7wikiv7wikiv7w.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/3.jpg?v=1784992100\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/8.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/4.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/7.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/5.jpg\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/6.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/NA.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1784993680\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/1716391083-StandSecureAdvertorial_2_1.jpg?v=1784993679\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Sd56ad8843a80431eac1c4220bc749c078.jpg?v=1784993680\nhttps://astuvita.com/cdn/shop/files/9.png?v=1779006669&width=1200\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/2_34f3b381-37a8-47b6-8a42-1faaa5fa469d.png?v=1784993694\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/S7224624b5f8947efadce522af8d63e3ed.jpg?v=1784993678\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/5.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/9_1.jpg?v=1784993689" },
+    { "type": "textarea", "id": "gallery_images", "label": "Product images (stacked)", "default": "https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Canne_2.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Copie_de_x_31.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/cane-dualHandle1-ezgif.com-optimize.gif?v=1784993692\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/170.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_ek1jf5ek1jf5ek1j.jpg?v=1784993689\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Copie_de_x_33.jpg?v=1784993688\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/hf_20260224_181111_11dde6f0-5077-4837-82fe-6840a4e0c563.jpg?v=1784993686\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/9.jpg?v=1784993689\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/40.png?v=1784993687\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_iv7wikiv7wikiv7w.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/3.jpg?v=1784992100\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/8.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/4.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/7.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/5.jpg\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/6.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1784993680\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Sd56ad8843a80431eac1c4220bc749c078.jpg?v=1784993680\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/2_34f3b381-37a8-47b6-8a42-1faaa5fa469d.png?v=1784993694\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/S7224624b5f8947efadce522af8d63e3ed.jpg?v=1784993678\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/5.jpg?v=1784993690" },
     { "type": "header", "content": "Press bar (URLs, comma-separated)" },
     { "type": "textarea", "id": "press_logos", "label": "Logos", "default": "https://cdn.shopify.com/s/files/1/0786/9854/5290/files/logo_seniors_magazine.png?v=1784993677, https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Medisite.png?v=1784993682, https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Marie-Claire-Logo.png?v=1784993677, https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Logo_Le_Figaro_svg.png?v=1784993681" }
   ],
   "presets": [
-    { "name": "Astuvita — Product Page" }
+    { "name": "WalkWise — Product Page" }
   ]
 }
 {% endschema %}

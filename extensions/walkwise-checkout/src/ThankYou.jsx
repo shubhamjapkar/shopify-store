@@ -6,12 +6,12 @@ import {
 } from '@shopify/ui-extensions-react/checkout';
 
 // Renders on the Thank-you / Order-status page where the merchant places it.
-export default reactExtension('purchase.thank-you.block.render', () => <AstuvitaThankYou />);
+export default reactExtension('purchase.thank-you.block.render', () => <WalkWiseThankYou />);
 
-function AstuvitaThankYou() {
+function WalkWiseThankYou() {
   return (
     <BlockStack spacing="base">
-      <Banner status="success" title="Thank you for choosing Astuvita!">
+      <Banner status="success" title="Thank you for choosing WalkWise!">
         <BlockStack spacing="tight">
           <Text>
             Your order ships within 48 hours. You'll get a tracking number by email as soon as it's on its way.

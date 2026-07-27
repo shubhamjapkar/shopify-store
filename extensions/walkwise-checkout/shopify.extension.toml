@@ -1,4 +1,4 @@
-# Astuvita — Checkout UI Extension
+# WalkWise — Checkout UI Extension
 # NOTE: Checkout UI extensions belong to a Shopify APP, not a theme.
 # This folder must sit inside a Shopify app project (created with
 # `shopify app init`) under its `extensions/` directory, then deployed
@@ -7,8 +7,8 @@
 api_version = "2025-07"
 
 [[extensions]]
-name = "Astuvita Checkout Reassurance"
-handle = "astuvita-checkout"
+name = "WalkWise Checkout Reassurance"
+handle = "walkwise-checkout"
 type = "ui_extension"
 
   # Dynamic target: after deploying, place this block in the Checkout editor

@@ -1,6 +1,6 @@
-# Astuvita — Checkout UI Extension
+# WalkWise — Checkout UI Extension
 
-Adds AstuVita-branded reassurance content to **Checkout** and the **Thank-you / Order-status** page:
+Adds WalkWise-branded reassurance content to **Checkout** and the **Thank-you / Order-status** page:
 
 - Checkout: a "60-Day Money-Back Guarantee" banner + trust line (free shipping, secure payment, therapist-recommended).
 - Thank-you page: a shipping-timeline + support banner.
@@ -22,7 +22,7 @@ This theme repo can't build or deploy checkout extensions — they belong to an 
 shopify app init            # choose "Start with Remix" or "Build a Shopify app" — any template
 
 # 2) Copy this folder into the app:
-#    <your-app>/extensions/astuvita-checkout/
+#    <your-app>/extensions/walkwise-checkout/
 
 # 3) From the app root, install deps and run locally:
 shopify app dev             # opens a dev checkout you can preview
@@ -37,7 +37,7 @@ After deploying, the block is **not** auto-placed (it uses a dynamic target so y
 
 1. Admin → **Settings → Checkout → Customize**.
 2. Click **Add app block** in the section where you want it (e.g. next to the order summary or above the pay button).
-3. Pick **Astuvita Checkout Reassurance** → **Save**.
+3. Pick **WalkWise Checkout Reassurance** → **Save**.
 4. Repeat on the **Thank-you** and **Order status** pages if desired.
 
 ## Matching the green / Poppins look

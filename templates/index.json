@@ -8,12 +8,12 @@
  * ------------------------------------------------------------
  */{
   "sections": {
-    "astuvita_landing": {
-      "type": "astuvita-product-landing",
+    "walkwise_landing": {
+      "type": "walkwise-product-landing",
       "settings": {}
     }
   },
   "order": [
-    "astuvita_landing"
+    "walkwise_landing"
   ]
 }

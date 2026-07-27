@@ -6,9 +6,9 @@ import {
 } from '@shopify/ui-extensions-react/checkout';
 
 // Renders wherever the merchant places the app block in the Checkout editor.
-export default reactExtension('purchase.checkout.block.render', () => <AstuvitaReassurance />);
+export default reactExtension('purchase.checkout.block.render', () => <WalkWiseReassurance />);
 
-function AstuvitaReassurance() {
+function WalkWiseReassurance() {
   return (
     <BlockStack spacing="base">
       <Banner status="success" title="60-Day Money-Back Guarantee">
