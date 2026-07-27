@@ -127,8 +127,8 @@
         <h1 class="av-title">Stand Up with Ease. Walk with Confidence. ⭐</h1>
 
         <div class="av-price">
-          <span class="av-price__now">$49.99</span>
-          <span class="av-price__was">$99.98</span>
+          <span class="av-price__now">$49.00</span>
+          <span class="av-price__was">$98.00</span>
           <span class="av-price__badge">SAVE 50%</span>
         </div>
 
@@ -151,7 +151,7 @@
         <div class="av-offer-title"><span>Choose your offer</span></div>
 
         <div class="av-offers" data-av-offers>
-          <label class="av-offer" data-price="$49.99" data-was="$99.98" data-qty="1">
+          <label class="av-offer" data-price="$49.00" data-was="$98.00" data-qty="1"{% if section.settings.variant_single != blank %} data-variant="{{ section.settings.variant_single }}"{% elsif has_product %} data-variant="{{ current_variant.id }}"{% endif %}>
             <input type="radio" name="av-offer-{{ section.id }}" value="1">
             <span class="av-offer__flag">Today only</span>
             <span class="av-offer__thumb"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_33yn6l33yn6l33yn.png?v=1785181297" alt="" width="56" height="56" loading="lazy"></span>
@@ -159,27 +159,25 @@
               <span class="av-offer__name">1 Support Cane <span class="av-offer__tag">-50% off</span></span>
             </span>
             <span class="av-offer__price">
-              <span class="av-offer__now">$49.99</span>
-              <span class="av-offer__was">$99.98</span>
+              <span class="av-offer__now">$49.00</span>
+              <span class="av-offer__was">$98.00</span>
             </span>
           </label>
 
-          <label class="av-offer is-selected" data-price="$79.99" data-was="$199.96" data-qty="2">
+          <label class="av-offer is-selected" data-price="$89.00" data-was="$196.00" {% if section.settings.variant_double != blank %}data-qty="1" data-variant="{{ section.settings.variant_double }}"{% else %}data-qty="2"{% endif %}>
             <input type="radio" name="av-offer-{{ section.id }}" value="2" checked>
             <span class="av-offer__flag av-offer__flag--best">Best Offer</span>
             <span class="av-offer__thumb"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_j2890uj2890uj289.png?v=1785181294" alt="" width="56" height="56" loading="lazy"></span>
             <span class="av-offer__main">
-              <span class="av-offer__name">2 Support Canes <span class="av-offer__tag">-60% + Free Shipping</span></span>
+              <span class="av-offer__name">2 Support Canes <span class="av-offer__tag">-55% + Free Shipping</span></span>
               <span class="av-offer__sub">To gift or keep at home</span>
             </span>
             <span class="av-offer__price">
-              <span class="av-offer__now">$79.99</span>
-              <span class="av-offer__was">$199.96</span>
+              <span class="av-offer__now">$89.00</span>
+              <span class="av-offer__was">$196.00</span>
             </span>
           </label>
         </div>
-
-        <p class="av-satisfied">Money-back guarantee ✅</p>
 
         <form class="av-form"
               action="{{ routes.cart_add_url }}"
@@ -187,23 +185,20 @@
               enctype="multipart/form-data"
               data-av-cart-form>
           {%- if has_product -%}
-            <input type="hidden" name="id" value="{{ current_variant.id }}" data-av-variant>
+            <input type="hidden" name="id" value="{% if section.settings.variant_double != blank %}{{ section.settings.variant_double }}{% else %}{{ current_variant.id }}{% endif %}" data-av-variant>
           {%- endif -%}
-          <input type="hidden" name="quantity" value="2" data-av-qty>
+          <input type="hidden" name="quantity" value="{% if section.settings.variant_double != blank %}1{% else %}2{% endif %}" data-av-qty>
           <button type="submit" class="av-cta"
                   {% if has_product and current_variant.available == false %}disabled{% endif %}
                   data-av-cta>
             <span class="av-cta__ico" aria-hidden="true">🛒</span>
             <span data-av-cta-label>{% if has_product and current_variant.available == false %}Sold out{% else %}Add to cart{% endif %}</span>
             <span class="av-cta__sep">|</span>
-            <span class="av-cta__price" data-av-cta-price>$79.99</span>
-            <span class="av-cta__was" data-av-cta-was>$199.96</span>
+            <span class="av-cta__price" data-av-cta-price>$89.00</span>
+            <span class="av-cta__was" data-av-cta-was>$196.00</span>
           </button>
           <p class="av-cart-msg" data-av-cart-msg role="status" aria-live="polite" hidden></p>
         </form>
-
-        <p class="av-line"><span class="av-line__ico" aria-hidden="true">🚚</span> <span>Delivered between <strong data-av-ship-from>—</strong> and <strong data-av-ship-to>—</strong></span></p>
-        <p class="av-line"><span class="av-line__ico" aria-hidden="true">🔒</span> <span>Secure payment</span></p>
 
         <div class="av-pay" aria-label="Payment methods">
           <span class="av-pay__card av-pay__visa">VISA</span>
@@ -214,6 +209,25 @@
           <span class="av-pay__card av-pay__amex">AMEX</span>
           <span class="av-pay__card av-pay__banc">Bancontact</span>
         </div>
+
+        <div class="av-trust">
+          <p class="av-trust__row">
+            <span class="av-trust__item"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Secure payment</span>
+            <span class="av-trust__item"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 7.4-7 10-4-2.6-7-5.6-7-10V6l7-3z"/><path d="M8.8 12l2.2 2.2 4.2-4.4"/></svg> Money-back guarantee</span>
+            <span class="av-trust__item"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 8h13v9H1z"/><path d="M14 11h4l3 3v3h-7"/><circle cx="6" cy="19" r="1.8"/><circle cx="17" cy="19" r="1.8"/></svg> Free shipping</span>
+          </p>
+          <p class="av-trust__delivery">Delivered between <strong data-av-ship-from>—</strong> and <strong data-av-ship-to>—</strong></p>
+        </div>
+        <script>
+          (function () {
+            var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+            function fmt(d) { return months[d.getMonth()] + ' ' + d.getDate(); }
+            var a = new Date(); a.setDate(a.getDate() + 3);
+            var b = new Date(); b.setDate(b.getDate() + 4);
+            document.querySelectorAll('[data-av-ship-from]').forEach(function (el) { el.textContent = fmt(a); });
+            document.querySelectorAll('[data-av-ship-to]').forEach(function (el) { el.textContent = fmt(b); });
+          })();
+        </script>
 
         {%- comment -%} ----- Accordions ----- {%- endcomment -%}
         <div class="av-acc-group">
@@ -333,8 +347,11 @@
       </div>
     </div>
 
-    <div style="display: flex; justify-content: center;">
-        <img style="max-width: 400px" src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/935b03ab-cf30-4936-9e84-aece90417e6f-ezgif.com-speed.gif?v=1778870600" alt="" loading="lazy">
+    <div class="av-media-duo">
+      <img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/935b03ab-cf30-4936-9e84-aece90417e6f-ezgif.com-speed.gif?v=1778870600" alt="" loading="lazy">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="https://cdn.shopify.com/videos/c/o/v/31452296f28e4cf1bb3910323999c5eb.mp4" type="video/mp4">
+      </video>
     </div>
     <h5 class="av-story__h5"><strong>Regain your freedom of movement</strong></h5>
     <p class="av-story__p">Using the WalkWise support cane gives you the confidence to move more freely, regaining much of your independence. It supports you not only physically, but also eases the emotional weight of feeling like a burden to your loved ones.</p>
@@ -706,15 +723,15 @@
           enctype="multipart/form-data"
           data-av-cart-form>
       {%- if has_product -%}
-        <input type="hidden" name="id" value="{{ current_variant.id }}" data-av-variant>
+        <input type="hidden" name="id" value="{% if section.settings.variant_double != blank %}{{ section.settings.variant_double }}{% else %}{{ current_variant.id }}{% endif %}" data-av-variant>
       {%- endif -%}
-      <input type="hidden" name="quantity" value="2" data-av-qty>
+      <input type="hidden" name="quantity" value="{% if section.settings.variant_double != blank %}1{% else %}2{% endif %}" data-av-qty>
       <button type="submit" class="av-cta av-cta--sticky" data-av-cta>
         <span class="av-cta__ico" aria-hidden="true">🛒</span>
         <span>Add to cart</span>
         <span class="av-cta__sep">|</span>
-        <span class="av-cta__price" data-av-cta-price>$79.99</span>
-        <span class="av-cta__was" data-av-cta-was>$199.96</span>
+        <span class="av-cta__price" data-av-cta-price>$89.00</span>
+        <span class="av-cta__was" data-av-cta-was>$196.00</span>
       </button>
     </form>
   </div>
@@ -855,7 +872,12 @@
   .av-offer__now { display: block; font-weight: 700; font-size: 1.35rem; }
   .av-offer__was { display: block; font-size: .9rem; color: var(--av-muted); text-decoration: line-through; }
 
-  .av-satisfied { text-align: center; font-weight: 600; margin: 0 0 1rem; }
+  .av-trust { margin-top: 1rem; text-align: center; }
+  .av-trust__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4rem 1.4rem; font-weight: 600; font-size: .88rem; margin: 0 0 .55rem; }
+  .av-trust__item { display: inline-flex; align-items: center; gap: .35rem; white-space: nowrap; }
+  .av-trust__item svg { color: var(--av-green); flex: none; }
+  .av-trust__delivery { font-size: .92rem; color: #444; margin: 0; }
+  .av-trust__delivery strong { color: var(--av-fg); }
 
   /* CTA */
   .av-form { margin: 0; }
@@ -872,8 +894,6 @@
   .av-cart-msg.is-success { color: var(--av-green-dark); }
   .av-cart-msg.is-error { color: #c0392b; }
 
-  .av-line { display: flex; align-items: center; justify-content: center; gap: .5rem; text-align: center; font-size: 1rem; margin: 1rem 0 0; }
-  .av-line__ico { font-size: 1.1rem; }
 
   /* Payment badges */
   .av-pay { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4rem; margin-top: 1rem; }
@@ -987,6 +1007,9 @@
   .av-quote__author { font-size: .88rem; font-weight: 700; color: #1a1a1a; }
   .av-quote__author::before { content: "— "; font-weight: 400; color: #888; }
   @media (max-width: 749px) { .av-quotes { grid-template-columns: 1fr; gap: .9rem; } }
+  .av-media-duo { display: flex; justify-content: center; align-items: stretch; gap: .9rem; margin: 1.25rem 0; }
+  .av-media-duo img, .av-media-duo video { height: 400px; width: auto; max-width: 48%; object-fit: cover; border-radius: 8px; display: block; }
+ 
   .av-story__imgpair { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; justify-items: center; align-items: center; margin: 1.25rem 0; }
   .av-story__imgpair img { width: 100%; max-width: 800px; height: auto; border-radius: 8px; }
   @media (max-width: 749px) { .av-story__imgpair { grid-template-columns: 1fr; } }
@@ -1209,17 +1232,6 @@
         });
       })();
 
-      /* Delivery estimate (today +3 to +4 days) */
-      (function () {
-        var from = root.querySelector('[data-av-ship-from]'), to = root.querySelector('[data-av-ship-to]');
-        if (!from || !to) return;
-        var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        function fmt(d) { return months[d.getMonth()] + ' ' + d.getDate(); }
-        var a = new Date(); a.setDate(a.getDate() + 3);
-        var b = new Date(); b.setDate(b.getDate() + 4);
-        from.textContent = fmt(a); to.textContent = fmt(b);
-      })();
-
       /* Offer selector */
       (function () {
         var group = root.querySelector('[data-av-offers]');
@@ -1231,10 +1243,11 @@
             offer.classList.add('is-selected');
             var radio = offer.querySelector('input[type="radio"]');
             if (radio) radio.checked = true;
-            var price = offer.getAttribute('data-price'), was = offer.getAttribute('data-was'), qty = offer.getAttribute('data-qty');
+            var price = offer.getAttribute('data-price'), was = offer.getAttribute('data-was'), qty = offer.getAttribute('data-qty'), variant = offer.getAttribute('data-variant');
             root.querySelectorAll('[data-av-cta-price]').forEach(function (el) { if (price) el.textContent = price; });
             root.querySelectorAll('[data-av-cta-was]').forEach(function (el) { if (was) el.textContent = was; });
             root.querySelectorAll('[data-av-qty]').forEach(function (q) { if (qty) q.value = qty; });
+            if (variant) { root.querySelectorAll('[data-av-variant]').forEach(function (v) { v.value = variant; }); }
           });
         });
       })();
@@ -1588,6 +1601,9 @@
     { "type": "header", "content": "Product" },
     { "type": "product", "id": "product", "label": "Product (enables add to cart)" },
     { "type": "paragraph", "content": "Select your store's product so that “Add to cart” actually works." },
+    { "type": "text", "id": "variant_single", "label": "Variant ID — 1 cane offer (optional)" },
+    { "type": "text", "id": "variant_double", "label": "Variant ID — 2-pack offer (optional)" },
+    { "type": "paragraph", "content": "Recommended: create a “2-Pack” variant priced at $79.99 and paste its ID above. Otherwise the 2-cane offer adds qty 2 of the base variant and checkout charges 2× its real price." },
     { "type": "header", "content": "Gallery (one URL per line)" },
     { "type": "textarea", "id": "gallery_images", "label": "Product images (stacked)", "default": "https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Canne_2.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Copie_de_x_31.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/cane-dualHandle1-ezgif.com-optimize.gif?v=1784993692\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/170.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_ek1jf5ek1jf5ek1j.jpg?v=1784993689\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Copie_de_x_33.jpg?v=1784993688\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/hf_20260224_181111_11dde6f0-5077-4837-82fe-6840a4e0c563.jpg?v=1784993686\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/9.jpg?v=1784993689\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/40.png?v=1784993687\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_iv7wikiv7wikiv7w.jpg?v=1784993690\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/3.jpg?v=1784992100\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/8.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/4.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/7.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/5.jpg\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/6.jpg?v=1784993691\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1784993680\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/Sd56ad8843a80431eac1c4220bc749c078.jpg?v=1784993680\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/2_34f3b381-37a8-47b6-8a42-1faaa5fa469d.png?v=1784993694\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/S7224624b5f8947efadce522af8d63e3ed.jpg?v=1784993678\nhttps://cdn.shopify.com/s/files/1/0786/9854/5290/files/5.jpg?v=1784993690" },
     { "type": "header", "content": "Press bar (URLs, comma-separated)" },
