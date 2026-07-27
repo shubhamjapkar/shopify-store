@@ -96,7 +96,7 @@
             {%- if s != blank -%}
               {%- assign idx = idx | plus: 1 -%}
               {%- if idx == 1 -%}
-                <img class="av-gallery__img" src="{{ s }}" alt="WalkWise support cane" loading="eager" width="1000" height="1000">
+                <img class="av-gallery__img" data-av-gallery-hero src="{{ s }}" alt="WalkWise support cane" loading="eager" width="1000" height="1000">
               {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
@@ -109,7 +109,7 @@
               {%- if s != blank -%}
                 {%- assign idx = idx | plus: 1 -%}
                 {%- if idx > 1 -%}
-                  <img class="av-gallery__img" src="{{ s }}" alt="WalkWise support cane" loading="lazy" width="1000" height="1000">
+                  <img class="av-gallery__img" data-av-gallery-thumb role="button" tabindex="0" src="{{ s }}" alt="WalkWise support cane" loading="lazy" width="1000" height="1000">
                 {%- endif -%}
               {%- endif -%}
             {%- endfor -%}
@@ -293,8 +293,7 @@
     <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Geneviève M., 72</strong> <em>"Since I started using the WalkWise cane, I feel so much safer when I move around. The wide base keeps me from tripping and I can even set it down on its own without it falling. A real plus for my daily life!"</em></p>
     <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Raymond T., 68</strong> <em>"I was reluctant to use a cane, but this one is truly elegant and practical. The built-in light is great for going out in the evening. I recommend it to all my friends!"</em></p>
     <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Martine L., 65</strong> <em>"I gave this cane to my mother after her fall and she's thrilled. It's adjustable, lightweight, and very stable. WalkWise really thought of everything. Customer service was very responsive too. Thank you!"</em></p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1772034192109-image-to-video-ezgif.com-video-to-gif-converter_2c21e61d-e84f-4766-af05-94d4ac40b623.gif?v=1784993698" alt="" loading="lazy"></p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_pk6292pk6292pk62.jpg?v=1784993690" alt="" loading="lazy"></p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1772034192109-image-to-video-ezgif.com-video-to-gif-converter_2c21e61d-e84f-4766-af05-94d4ac40b623.gif?v=1784993698" alt="WalkWise LED cane lighting the way at night" loading="lazy"></p>
   </section>
 
   {%- comment -%} ========== Stats ========== {%- endcomment -%}
@@ -316,7 +315,7 @@
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col" class="av-col-us"><span class="av-logo__text av-logo__text--sm">Astu<span class="av-logo__accent">Vita</span></span><span class="av-logo__tm">™</span></th>
+            <th scope="col" class="av-col-us"><span class="av-logo__text av-logo__text--sm">Walk<span class="av-logo__accent">Wise</span></span><span class="av-logo__tm">™</span></th>
             <th scope="col">Classic canes</th>
           </tr>
         </thead>
@@ -1028,6 +1027,26 @@
         if (n) n.addEventListener('click', function () { next(); start(); });
         if (p) p.addEventListener('click', function () { prev(); start(); });
         start();
+      })();
+
+      /* Mobile gallery: tap a thumbnail to swap it into the hero banner */
+      (function () {
+        var hero = root.querySelector('[data-av-gallery-hero]');
+        var rest = root.querySelector('[data-av-gallery-rest]');
+        if (!hero || !rest) return;
+        var mq = window.matchMedia('(max-width: 749px)');
+        function swap(thumb) {
+          if (!mq.matches) return;
+          var heroSrc = hero.src;
+          hero.src = thumb.src;
+          thumb.src = heroSrc;
+        }
+        rest.querySelectorAll('[data-av-gallery-thumb]').forEach(function (thumb) {
+          thumb.addEventListener('click', function () { swap(thumb); });
+          thumb.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); swap(thumb); }
+          });
+        });
       })();
 
       /* Delivery estimate (today +5 to +9 days) */
