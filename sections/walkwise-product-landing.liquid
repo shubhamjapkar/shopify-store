@@ -151,10 +151,10 @@
         <div class="av-offer-title"><span>Choose your offer</span></div>
 
         <div class="av-offers" data-av-offers>
-          <label class="av-offer is-selected" data-price="$49.99" data-was="$99.98" data-qty="1">
-            <input type="radio" name="av-offer-{{ section.id }}" value="1" checked>
+          <label class="av-offer" data-price="$49.99" data-was="$99.98" data-qty="1">
+            <input type="radio" name="av-offer-{{ section.id }}" value="1">
             <span class="av-offer__flag">Today only</span>
-            <span class="av-offer__thumb"><img src="https://astuvita.com/cdn/shop/files/2.png?height=165&v=1775907050" alt="" width="56" height="56" loading="lazy"></span>
+            <span class="av-offer__thumb"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_33yn6l33yn6l33yn.png?v=1785181297" alt="" width="56" height="56" loading="lazy"></span>
             <span class="av-offer__main">
               <span class="av-offer__name">1 Support Cane <span class="av-offer__tag">-50% off</span></span>
             </span>
@@ -164,10 +164,10 @@
             </span>
           </label>
 
-          <label class="av-offer" data-price="$79.99" data-was="$199.96" data-qty="2">
-            <input type="radio" name="av-offer-{{ section.id }}" value="2">
+          <label class="av-offer is-selected" data-price="$79.99" data-was="$199.96" data-qty="2">
+            <input type="radio" name="av-offer-{{ section.id }}" value="2" checked>
             <span class="av-offer__flag av-offer__flag--best">Best Offer</span>
-            <span class="av-offer__thumb"><img src="https://astuvita.com/cdn/shop/files/2.png?height=165&v=1775907050" alt="" width="56" height="56" loading="lazy"></span>
+            <span class="av-offer__thumb"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_j2890uj2890uj289.png?v=1785181294" alt="" width="56" height="56" loading="lazy"></span>
             <span class="av-offer__main">
               <span class="av-offer__name">2 Support Canes <span class="av-offer__tag">-60% + Free Shipping</span></span>
               <span class="av-offer__sub">To gift or keep at home</span>
@@ -189,15 +189,15 @@
           {%- if has_product -%}
             <input type="hidden" name="id" value="{{ current_variant.id }}" data-av-variant>
           {%- endif -%}
-          <input type="hidden" name="quantity" value="1" data-av-qty>
+          <input type="hidden" name="quantity" value="2" data-av-qty>
           <button type="submit" class="av-cta"
                   {% if has_product and current_variant.available == false %}disabled{% endif %}
                   data-av-cta>
             <span class="av-cta__ico" aria-hidden="true">🛒</span>
             <span data-av-cta-label>{% if has_product and current_variant.available == false %}Sold out{% else %}Add to cart{% endif %}</span>
             <span class="av-cta__sep">|</span>
-            <span class="av-cta__price" data-av-cta-price>$49.99</span>
-            <span class="av-cta__was" data-av-cta-was>$99.98</span>
+            <span class="av-cta__price" data-av-cta-price>$79.99</span>
+            <span class="av-cta__was" data-av-cta-was>$199.96</span>
           </button>
           <p class="av-cart-msg" data-av-cart-msg role="status" aria-live="polite" hidden></p>
         </form>
@@ -273,26 +273,89 @@
   {%- comment -%} ========== Feature story ========== {%- endcomment -%}
   <section class="av-story" id="features" aria-label="What makes this cane unique">
     <h3 class="av-story__h3">Do you struggle to stand up on your own? Do you feel unsteady when walking? Are you afraid of falling in the dark?</h3>
-    <h5 class="av-story__h5">There is a solution. The WalkWise support cane will help you stand up on your own, walk longer distances, and regain your confidence!</h5>
+    <p class="av-story__p">There is a solution. The WalkWise support cane will help you stand up on your own, walk longer distances, and regain your confidence!</p>
     <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/e574a046420d4818bd9f12131b2e3b13_img_multi-functional-foldable-led-walking-cane-extra-handle-ezgif.com-cut_1.gif?v=1777563572" alt="" loading="lazy"></p>
     <h5 class="av-story__h5"><strong>What makes this cane unique</strong></h5>
-    <p class="av-story__p"><strong>✅ Dual support handle</strong> Designed by orthopedists, the cane features a second handle that helps you rise easily from a sofa, an armchair, or any seated position — without needing anyone else's help.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1716391083-StandSecureAdvertorial_2_1.jpg?v=1784993679" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>✅ Self-standing base</strong> Thanks to its wide base with 4 sturdy rubber feet, the cane stands up on its own. No more bending down dangerously to pick up a fallen cane!</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/9.png?v=1777557224" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>✅ Built-in LED flashlight</strong> Whether going to the bathroom at night or for an evening walk, the LED light lights your path and reduces the risk of falls.</p>
-    <p class="av-story__p"><strong>✅ Built-in emergency alarm</strong> In case of a fall or emergency, simply press the button to trigger a loud alarm that will alert people nearby.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/canne-de-marche-led-avec-alarme-securestep-8259726.jpg?v=1784993682" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>✅ Foldable/telescopic design</strong> The cane folds easily to come along in the car or on a trip.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/935b03ab-cf30-4936-9e84-aece90417e6f-ezgif.com-speed.gif?v=1778870600" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>✅ Comfortable ergonomic handle</strong> The main handle is ergonomic, and the support handle is padded for extra comfort.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/NA.jpg?v=1784993690" alt="" loading="lazy"></p>
+    <div class="av-featgrid">
+      <div class="av-featcard">
+        <span class="av-featcard__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="M8 3h8"/><path d="M12 8h4a2 2 0 010 4h-4"/><path d="M9 21l3-5 3 5"/></svg>
+        </span>
+        <div class="av-featcard__body">
+          <h4 class="av-featcard__title">Dual support handle</h4>
+          <p class="av-featcard__text">Designed by orthopedists, the second handle helps you rise easily from a sofa, an armchair, or any seated position — without needing anyone else's help.</p>
+        </div>
+      </div>
+      <div class="av-featcard">
+        <span class="av-featcard__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M12 15l-5 4"/><path d="M12 15l5 4"/><path d="M12 15l-2 5"/><path d="M12 15l2 5"/><circle cx="12" cy="3" r="1.5"/></svg>
+        </span>
+        <div class="av-featcard__body">
+          <h4 class="av-featcard__title">Self-standing base</h4>
+          <p class="av-featcard__text">The wide base with 4 sturdy rubber feet lets the cane stand up on its own. No more bending down dangerously to pick up a fallen cane!</p>
+        </div>
+      </div>
+      <div class="av-featcard">
+        <span class="av-featcard__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 00-3.6 10.8c.6.5.9 1.2.9 2V16h5.4v-.2c0-.8.3-1.5.9-2A6 6 0 0012 3z"/></svg>
+        </span>
+        <div class="av-featcard__body">
+          <h4 class="av-featcard__title">Built-in LED flashlight</h4>
+          <p class="av-featcard__text">Whether going to the bathroom at night or for an evening walk, the LED light lights your path and reduces the risk of falls.</p>
+        </div>
+      </div>
+      <div class="av-featcard">
+        <span class="av-featcard__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M10.3 21a2 2 0 003.4 0"/></svg>
+        </span>
+        <div class="av-featcard__body">
+          <h4 class="av-featcard__title">Built-in emergency alarm</h4>
+          <p class="av-featcard__text">In case of a fall or emergency, simply press the button to trigger a loud alarm that will alert people nearby.</p>
+        </div>
+      </div>
+      <div class="av-featcard">
+        <span class="av-featcard__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14l6-6"/><path d="M4 9v5h5"/><path d="M20 10l-6 6"/><path d="M20 15v-5h-5"/></svg>
+        </span>
+        <div class="av-featcard__body">
+          <h4 class="av-featcard__title">Foldable &amp; telescopic</h4>
+          <p class="av-featcard__text">The cane folds easily in seconds to come along in the car or on a trip — compact enough for any bag.</p>
+        </div>
+      </div>
+      <div class="av-featcard">
+        <span class="av-featcard__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.5-9 9-9 9z"/></svg>
+        </span>
+        <div class="av-featcard__body">
+          <h4 class="av-featcard__title">Comfortable ergonomic handle</h4>
+          <p class="av-featcard__text">The main handle is ergonomically shaped, and the support handle is padded for extra comfort — gentle on your wrist all day.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+        <img style="max-width: 400px" src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/935b03ab-cf30-4936-9e84-aece90417e6f-ezgif.com-speed.gif?v=1778870600" alt="" loading="lazy">
+    </div>
     <h5 class="av-story__h5"><strong>Regain your freedom of movement</strong></h5>
     <p class="av-story__p">Using the WalkWise support cane gives you the confidence to move more freely, regaining much of your independence. It supports you not only physically, but also eases the emotional weight of feeling like a burden to your loved ones.</p>
-    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Gemini_Generated_Image_j3odv5j3odv5j3od.jpg?v=1784993689" alt="" loading="lazy"></p>
-    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Geneviève M., 72</strong> <em>"Since I started using the WalkWise cane, I feel so much safer when I move around. The wide base keeps me from tripping and I can even set it down on its own without it falling. A real plus for my daily life!"</em></p>
-    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Raymond T., 68</strong> <em>"I was reluctant to use a cane, but this one is truly elegant and practical. The built-in light is great for going out in the evening. I recommend it to all my friends!"</em></p>
-    <p class="av-story__p"><strong>⭐⭐⭐⭐⭐ — Martine L., 65</strong> <em>"I gave this cane to my mother after her fall and she's thrilled. It's adjustable, lightweight, and very stable. WalkWise really thought of everything. Customer service was very responsive too. Thank you!"</em></p>
+    <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/benifits.png?v=1784993689" alt="" loading="lazy"></p>
+    <div class="av-quotes">
+      <figure class="av-quote">
+        <span class="av-quote__stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote class="av-quote__text">Since I started using the WalkWise cane, I feel so much safer when I move around. The wide base keeps me from tripping and I can even set it down on its own without it falling. A real plus for my daily life!</blockquote>
+        <figcaption class="av-quote__author">Geneviève M., 72</figcaption>
+      </figure>
+      <figure class="av-quote">
+        <span class="av-quote__stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote class="av-quote__text">I was reluctant to use a cane, but this one is truly elegant and practical. The built-in light is great for going out in the evening. I recommend it to all my friends!</blockquote>
+        <figcaption class="av-quote__author">Raymond T., 68</figcaption>
+      </figure>
+      <figure class="av-quote">
+        <span class="av-quote__stars" aria-label="5 out of 5 stars">★★★★★</span>
+        <blockquote class="av-quote__text">I gave this cane to my mother after her fall and she's thrilled. It's adjustable, lightweight, and very stable. WalkWise really thought of everything. Customer service was very responsive too. Thank you!</blockquote>
+        <figcaption class="av-quote__author">Martine L., 65</figcaption>
+      </figure>
+    </div>
     <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1772034192109-image-to-video-ezgif.com-video-to-gif-converter_2c21e61d-e84f-4766-af05-94d4ac40b623.gif?v=1784993698" alt="WalkWise LED cane lighting the way at night" loading="lazy"></p>
   </section>
 
@@ -355,7 +418,7 @@
       <details class="av-acc"><summary>How is the flashlight powered?</summary><div class="av-acc__body"><p>The light is powered by 2 AAA batteries (not included).</p></div></details>
       <details class="av-acc"><summary>Is it lightweight?</summary><div class="av-acc__body"><p>Yes! The WalkWise cane was specially designed to be light and easy to carry — it weighs less than 450 g.</p></div></details>
       <details class="av-acc"><summary>What is the maximum weight the cane supports?</summary><div class="av-acc__body"><p>The WalkWise cane supports up to 115 kg.</p></div></details>
-      <details class="av-acc"><summary>What if it's not right for me?</summary><div class="av-acc__body"><p>We're so confident you'll love the WalkWise cane that we offer a 60-day money-back guarantee. If it's not right for you, contact us at bonjour@walkwise.store and we'll process a full refund, no questions asked!</p></div></details>
+      <details class="av-acc"><summary>What if it's not right for me?</summary><div class="av-acc__body"><p>We're so confident you'll love the WalkWise cane that we offer a 60-day money-back guarantee. If it's not right for you, contact us at help@walkwise.shop and we'll process a full refund, no questions asked!</p></div></details>
     </div>
   </section>
 
@@ -408,7 +471,7 @@
     </form>
 
     {%- liquid
-      assign review_imgs = "https://cdn.shopify.com/s/files/1/0786/9854/5290/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1784993680|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1716391083-StandSecureAdvertorial_2_1.jpg?v=1784993679|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Sd56ad8843a80431eac1c4220bc749c078.jpg?v=1784993680|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/713472fdec454112a0d22c5b85601475.thumbnail.0000000000.jpg?v=1784993680|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1784993680|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Sd56ad8843a80431eac1c4220bc749c078.jpg?v=1784993680" | split: '|'
+      assign review_imgs = "https://cdn.shopify.com/s/files/1/0786/9854/5290/files/018_484519775309923092-596a33b2-4b20-4d43-a6e5-89dbee7037ec.jpg?v=1784993680|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/1716391083-StandSecureAdvertorial_2_1.jpg?v=1784993679|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/Sd56ad8843a80431eac1c4220bc749c078.jpg?v=1784993680|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/713472fdec454112a0d22c5b85601475.thumbnail.0000000000.jpg?v=1784993680|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/product_1.avif?v=1785180616|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/product_2.avif?v=1785180616|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/product_3.avif?v=1785180616|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/product_4.avif?v=1785180616|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/product_5.avif?v=1785180616|https://cdn.shopify.com/s/files/1/0786/9854/5290/files/product_6.avif?v=1785180616" | split: '|'
     -%}
     <div class="av-reviews__grid" data-av-reviews-grid>
       <figure class="av-review">
@@ -466,7 +529,7 @@
         </div>
       </figure>
       <figure class="av-review av-review--extra is-collapsed">
-        <img class="av-review__img" src="{{ review_imgs[0] }}" alt="" loading="lazy" width="600" height="700">
+        <img class="av-review__img" src="{{ review_imgs[6] }}" alt="" loading="lazy" width="600" height="700">
         <div class="av-review__body">
           <figcaption class="av-review__name"><span class="av-review__name-text">Suzanne</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
           <time class="av-review__date">February 28, 2026</time>
@@ -475,6 +538,7 @@
         </div>
       </figure>
       <figure class="av-review av-review--extra is-collapsed">
+        <img class="av-review__img" src="{{ review_imgs[9] }}" alt="" loading="lazy" width="600" height="600">
         <div class="av-review__body">
           <figcaption class="av-review__name"><span class="av-review__name-text">Acheteur</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
           <time class="av-review__date">February 20, 2026</time>
@@ -483,7 +547,7 @@
         </div>
       </figure>
       <figure class="av-review av-review--extra is-collapsed">
-        <img class="av-review__img" src="{{ review_imgs[2] }}" alt="" loading="lazy" width="600" height="500">
+        <img class="av-review__img" src="{{ review_imgs[7] }}" alt="" loading="lazy" width="600" height="500">
         <div class="av-review__body">
           <figcaption class="av-review__name"><span class="av-review__name-text">Françoise</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
           <time class="av-review__date">February 12, 2026</time>
@@ -492,7 +556,7 @@
         </div>
       </figure>
       <figure class="av-review av-review--extra is-collapsed">
-        <img class="av-review__img" src="{{ review_imgs[3] }}" alt="" loading="lazy" width="600" height="650">
+        <img class="av-review__img" src="{{ review_imgs[8] }}" alt="" loading="lazy" width="600" height="650">
         <div class="av-review__body">
           <figcaption class="av-review__name"><span class="av-review__name-text">Michel</span> <span class="av-review__badge">✔ Verified purchase</span></figcaption>
           <time class="av-review__date">February 3, 2026</time>
@@ -511,24 +575,32 @@
   <section class="av-futil">
     <div class="av-futil__card">
       <div class="av-futil__item">
-        <span class="av-futil__ico" aria-hidden="true">🚚</span>
+        <span class="av-futil__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8h13v9H1z"/><path d="M14 11h4l3 3v3h-7"/><circle cx="6" cy="19" r="1.8"/><circle cx="17" cy="19" r="1.8"/></svg>
+        </span>
         <h3>Free shipping</h3>
-        <p>Your order will be delivered free of charge to your home and shipped within 48 hours</p>
+        <p>Delivered free to your home, shipped within 48 hours</p>
       </div>
       <div class="av-futil__item">
-        <span class="av-futil__ico" aria-hidden="true">🔒</span>
+        <span class="av-futil__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        </span>
         <h3>Secure payment</h3>
-        <p>We use SSL encryption for completely secure payments</p>
+        <p>SSL-encrypted checkout for completely secure payments</p>
       </div>
       <div class="av-futil__item">
-        <span class="av-futil__ico" aria-hidden="true">🤝</span>
-        <h3>Satisfaction guarantee</h3>
-        <p>We guarantee the quality of our products. If you're not satisfied, we'll refund you</p>
+        <span class="av-futil__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.4-3 7.4-7 10-4-2.6-7-5.6-7-10V6l7-3z"/><path d="M8.8 12l2.2 2.2 4.2-4.4"/></svg>
+        </span>
+        <h3>60-day guarantee</h3>
+        <p>Not satisfied? We'll refund you in full — no questions asked</p>
       </div>
       <div class="av-futil__item">
-        <span class="av-futil__ico" aria-hidden="true">💬</span>
+        <span class="av-futil__ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-8 8H4l2-3a8 8 0 1115-5z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>
+        </span>
         <h3>Have a question?</h3>
-        <p>Contact us here: bonjour@walkwise.store</p>
+        <p><a href="mailto:help@walkwise.shop">help@walkwise.shop</a></p>
       </div>
     </div>
   </section>
@@ -550,12 +622,66 @@
       <div class="av-footer__col av-footer__news">
         <h4>Subscribe to our newsletter</h4>
         <p>Be the first to hear about our offers and news.</p>
-        <form class="av-news" onsubmit="return false;">
-          <input type="email" placeholder="Email address" aria-label="Email address">
-          <button type="submit" aria-label="Subscribe">
-            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </form>
+        {%- form 'customer', class: 'av-news-form', return_to: request.path -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="av-news__msg av-news__msg--ok" role="status">✓ Thanks for subscribing! Check your inbox to confirm.</p>
+          {%- elsif form.errors -%}
+            <p class="av-news__msg av-news__msg--err" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+          {%- endif -%}
+          {%- unless form.posted_successfully? -%}
+            <div class="av-news">
+              <input type="email" name="contact[email]" value="{{ form.email }}" placeholder="Email address" aria-label="Email address" autocomplete="email" required>
+              <button type="submit" aria-label="Subscribe">
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          {%- endunless -%}
+        {%- endform -%}
+        <script>
+          (function () {
+            var form = document.querySelector('.av-footer__news form');
+            if (!form || form.dataset.avBound) return;
+            form.dataset.avBound = '1';
+            /* Fallback: even if preventDefault ever fails, post into a hidden iframe instead of navigating */
+            var sink = document.createElement('iframe');
+            sink.name = 'av-news-sink';
+            sink.style.display = 'none';
+            sink.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(sink);
+            form.setAttribute('target', 'av-news-sink');
+            function toast(text, isError) {
+              var t = document.createElement('div');
+              t.className = 'av-toast' + (isError ? ' av-toast--err' : '');
+              t.setAttribute('role', 'status');
+              t.innerHTML = '<span>' + text + '</span><button type="button" class="av-toast__close" aria-label="Close">&#10005;</button>';
+              document.body.appendChild(t);
+              requestAnimationFrame(function () { t.classList.add('is-visible'); });
+              function remove() {
+                t.classList.remove('is-visible');
+                setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 250);
+              }
+              t.querySelector('.av-toast__close').addEventListener('click', remove);
+              setTimeout(remove, 3000);
+            }
+            form.addEventListener('submit', function (e) {
+              e.preventDefault();
+              e.stopPropagation();
+              var input = form.querySelector('input[type="email"]');
+              var email = input ? input.value.trim() : '';
+              if (!email) { toast('Please enter your email address.', true); return false; }
+              fetch(form.getAttribute('action'), { method: 'POST', body: new FormData(form) })
+                .then(function () {
+                  toast('✓ Thanks for subscribing!');
+                  if (input) input.value = '';
+                })
+                .catch(function () {
+                  toast('Something went wrong. Please try again.', true);
+                });
+              return false;
+            });
+          })();
+        </script>
       </div>
     </div>
     <div class="av-footer__bottom">
@@ -582,13 +708,13 @@
       {%- if has_product -%}
         <input type="hidden" name="id" value="{{ current_variant.id }}" data-av-variant>
       {%- endif -%}
-      <input type="hidden" name="quantity" value="1" data-av-qty>
+      <input type="hidden" name="quantity" value="2" data-av-qty>
       <button type="submit" class="av-cta av-cta--sticky" data-av-cta>
         <span class="av-cta__ico" aria-hidden="true">🛒</span>
         <span>Add to cart</span>
         <span class="av-cta__sep">|</span>
-        <span class="av-cta__price" data-av-cta-price>$49.99</span>
-        <span class="av-cta__was" data-av-cta-was>$99.98</span>
+        <span class="av-cta__price" data-av-cta-price>$79.99</span>
+        <span class="av-cta__was" data-av-cta-was>$199.96</span>
       </button>
     </form>
   </div>
@@ -851,8 +977,27 @@
   .av-story__h5 { font-size: 1.2rem; font-weight: 500; margin: 1.25rem 0; line-height: 1.6; }
   .av-story__p { font-size: 1.15rem; margin: 1.1rem 0; line-height: 1.7; }
   .av-story__p strong { font-weight: 700; }
+  .av-story__gif_video { max-width: 800px }
   .av-story__img { text-align: center; margin: 1.25rem 0; }
   .av-story__img img { display: inline-block; border-radius: 8px; }
+  .av-quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin: 2rem 0; }
+  .av-quote { margin: 0; padding: 1.5rem 1.4rem; background: var(--av-soft); border-radius: 14px; display: flex; flex-direction: column; }
+  .av-quote__stars { color: #f5a623; font-size: 1rem; letter-spacing: 2px; margin-bottom: .75rem; }
+  .av-quote__text { margin: 0 0 1rem; font-size: .98rem; line-height: 1.65; color: #333; font-style: normal; flex: 1; }
+  .av-quote__author { font-size: .88rem; font-weight: 700; color: #1a1a1a; }
+  .av-quote__author::before { content: "— "; font-weight: 400; color: #888; }
+  @media (max-width: 749px) { .av-quotes { grid-template-columns: 1fr; gap: .9rem; } }
+  .av-story__imgpair { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem; justify-items: center; align-items: center; margin: 1.25rem 0; }
+  .av-story__imgpair img { width: 100%; max-width: 800px; height: auto; border-radius: 8px; }
+  @media (max-width: 749px) { .av-story__imgpair { grid-template-columns: 1fr; } }
+  .av-featgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; margin: 2rem 0 2.5rem; }
+  .av-featcard { display: flex; flex-direction: column; align-items: flex-start; gap: 0; background: var(--av-soft); border-radius: 16px; padding: 1.6rem 1.5rem; transition: transform .2s ease, box-shadow .2s ease; }
+  .av-featcard:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0, 0, 0, .07); }
+  .av-featcard__ico { flex: none; width: 44px; height: 44px; border-radius: 12px; background: var(--av-green); color: #fff; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+  .av-featcard__title { margin: 0 0 .45rem; font-family: inherit; font-size: 1.02rem; font-weight: 700; line-height: 1.3; }
+  .av-featcard__text { margin: 0; font-size: .92rem; line-height: 1.6; color: #555; }
+  @media (max-width: 989px) { .av-featgrid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 749px) { .av-featgrid { grid-template-columns: 1fr; gap: .9rem; } .av-featcard { flex-direction: row; gap: 1rem; padding: 1.25rem; } .av-featcard__ico { width: 40px; height: 40px; margin-bottom: 0; } }
   @media (min-width: 750px) {
     .av-story__img img { max-width: 800px; }
   }
@@ -896,11 +1041,14 @@
 
   /* Footer utilities */
   .av-futil { background: #000; padding: 3.5rem 1.5rem 0; }
-  .av-futil__card { background: #000; border: 1px solid #2a2a2a; border-radius: 18px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; padding: 2.5rem 2rem; }
+  .av-futil__card { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; padding: 0 1rem; }
   .av-futil__item { text-align: center; color: #fff; }
-  .av-futil__ico { font-size: 1.8rem; display: block; margin-bottom: .75rem; }
-  .av-futil__item h3 { font-size: 1.15rem; font-weight: 700; margin: 0 0 .6rem; }
-  .av-futil__item p { font-size: .92rem; color: #cfcfcf; margin: 0; }
+  .av-futil__item:not(:first-child) { border-left: 1px solid #232323; }
+  .av-futil__ico { width: 52px; height: 52px; border-radius: 50%; background: rgba(0, 163, 8, .12); color: var(--av-green); display: inline-flex; align-items: center; justify-content: center; margin-bottom: .9rem; }
+  .av-futil__item h3 { font-family: inherit; font-size: 1rem; font-weight: 600; margin: 0 0 .45rem; letter-spacing: .2px; }
+  .av-futil__item p { font-size: .88rem; line-height: 1.6; color: #9a9a9a; margin: 0; max-width: 24ch; margin-inline: auto; }
+  .av-futil__item a { color: #cfcfcf; text-decoration: underline; text-underline-offset: 3px; }
+  .av-futil__item a:hover { color: #fff; }
 
   /* Footer */
   .av-footer { background: #000; color: #fff; padding: 3.5rem 1.5rem 1.5rem; }
@@ -914,7 +1062,17 @@
   .av-news { display: flex; align-items: center; gap: .5rem; max-width: 320px; border: 1px solid #fff; border-radius: 10px; padding: .3rem .3rem .3rem 1rem; }
   .av-news input { flex: 1; background: none; border: none; color: #fff; font: inherit; padding: .7rem 0; outline: none; }
   .av-news input::placeholder { color: #cfcfcf; }
-  .av-news button { background: none; border: none; color: #fff; cursor: pointer; display: inline-flex; padding: .5rem; }
+  .av-news button { background: var(--av-green); border: none; color: #fff; cursor: pointer; display: inline-flex; padding: .6rem; border-radius: 7px; transition: background .15s ease; }
+  .av-news button:hover { background: var(--av-green-dark, #008a07); }
+  .av-news:focus-within { border-color: var(--av-green); }
+  .av-news__msg { font-size: .9rem; margin: 0 0 .75rem; padding: .65rem .9rem; border-radius: 8px; max-width: 320px; }
+  .av-news__msg--ok { background: rgba(0, 163, 8, .15); color: #7ed687; }
+  .av-news__msg--err { background: rgba(220, 60, 60, .15); color: #f2a1a1; }
+  .av-toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 12px); z-index: 300; display: flex; align-items: center; gap: .75rem; background: #1c1c1c; color: #fff; font-size: .92rem; padding: .8rem 1rem .8rem 1.15rem; border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .35); opacity: 0; transition: opacity .25s ease, transform .25s ease; max-width: calc(100vw - 2rem); }
+  .av-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+  .av-toast--err { background: #7a2222; }
+  .av-toast__close { background: none; border: none; color: #bbb; cursor: pointer; font-size: .85rem; padding: .2rem; line-height: 1; }
+  .av-toast__close:hover { color: #fff; }
   .av-footer__bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .av-copy { margin: 0; color: #cfcfcf; }
 
@@ -971,6 +1129,7 @@
   /* Responsive */
   @media (max-width: 900px) {
     .av-futil__card { grid-template-columns: repeat(2, 1fr); }
+    .av-futil__item:not(:first-child) { border-left: none; }
     .av-reviews__grid { column-count: 2; }
   }
   @media (max-width: 749px) {
@@ -1004,6 +1163,7 @@
     .av-review .av-stars { font-size: .78rem; margin-top: .5rem; }
     .av-stats__grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .av-futil__card { grid-template-columns: 1fr; }
+    .av-footer { padding-bottom: 120px; }
     .av-footer__inner { grid-template-columns: 1fr; gap: 2rem; }
   }
 {% endstylesheet %}
@@ -1049,14 +1209,14 @@
         });
       })();
 
-      /* Delivery estimate (today +5 to +9 days) */
+      /* Delivery estimate (today +3 to +4 days) */
       (function () {
         var from = root.querySelector('[data-av-ship-from]'), to = root.querySelector('[data-av-ship-to]');
         if (!from || !to) return;
         var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         function fmt(d) { return months[d.getMonth()] + ' ' + d.getDate(); }
-        var a = new Date(); a.setDate(a.getDate() + 5);
-        var b = new Date(); b.setDate(b.getDate() + 9);
+        var a = new Date(); a.setDate(a.getDate() + 3);
+        var b = new Date(); b.setDate(b.getDate() + 4);
         from.textContent = fmt(a); to.textContent = fmt(b);
       })();
 

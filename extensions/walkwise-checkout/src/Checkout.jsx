@@ -14,7 +14,7 @@ function WalkWiseReassurance() {
       <Banner status="success" title="60-Day Money-Back Guarantee">
         <BlockStack spacing="tight">
           <Text>
-            Not fully satisfied? Email bonjour@walkwise.store for a full refund — no questions asked.
+            Not fully satisfied? Email help@walkwise.shop for a full refund — no questions asked.
           </Text>
           <Text size="small" appearance="subdued">
             ✓ Free shipping, dispatched within 48h   ✓ Secure SSL-encrypted payment   ✓ Recommended by occupational therapists
