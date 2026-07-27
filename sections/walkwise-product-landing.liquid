@@ -349,10 +349,24 @@
 
     <div class="av-media-duo">
       <img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/935b03ab-cf30-4936-9e84-aece90417e6f-ezgif.com-speed.gif?v=1778870600" alt="" loading="lazy">
-      <video autoplay muted loop playsinline preload="metadata">
+      <video autoplay muted loop playsinline webkit-playsinline preload="auto" data-av-autoplay>
         <source src="https://cdn.shopify.com/videos/c/o/v/31452296f28e4cf1bb3910323999c5eb.mp4" type="video/mp4">
       </video>
     </div>
+    <script>
+      (function () {
+        var v = document.querySelector('[data-av-autoplay]');
+        if (!v) return;
+        v.muted = true;
+        v.setAttribute('muted', '');
+        function go() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+        if (document.readyState === 'complete') { go(); } else { window.addEventListener('load', go); }
+        document.addEventListener('touchstart', function once() {
+          if (v.paused) go();
+          document.removeEventListener('touchstart', once);
+        }, { passive: true });
+      })();
+    </script>
     <h5 class="av-story__h5"><strong>Regain your freedom of movement</strong></h5>
     <p class="av-story__p">Using the WalkWise support cane gives you the confidence to move more freely, regaining much of your independence. It supports you not only physically, but also eases the emotional weight of feeling like a burden to your loved ones.</p>
     <p class="av-story__img"><img src="https://cdn.shopify.com/s/files/1/0786/9854/5290/files/benifits.png?v=1784993689" alt="" loading="lazy"></p>
@@ -1083,9 +1097,10 @@
   .av-footer__col a:hover { color: #fff; text-decoration: underline; }
   .av-footer__news p { color: #cfcfcf; margin: 0 0 1.25rem; }
   .av-news { display: flex; align-items: center; gap: .5rem; max-width: 320px; border: 1px solid #fff; border-radius: 10px; padding: .3rem .3rem .3rem 1rem; }
-  .av-news input { flex: 1; background: none; border: none; color: #fff; font: inherit; padding: .7rem 0; outline: none; }
+  .av-news input { flex: 1 1 auto; min-width: 0; background: none; border: none; color: #fff; font: inherit; padding: .7rem 0; outline: none; -webkit-appearance: none; appearance: none; border-radius: 0; }
   .av-news input::placeholder { color: #cfcfcf; }
-  .av-news button { background: var(--av-green); border: none; color: #fff; cursor: pointer; display: inline-flex; padding: .6rem; border-radius: 7px; transition: background .15s ease; }
+  .av-news button { flex: none; width: 40px; height: 40px; box-sizing: border-box; background: var(--av-green); border: none; color: #fff; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; line-height: 0; border-radius: 7px; transition: background .15s ease; -webkit-appearance: none; appearance: none; }
+  .av-news button svg { display: block; }
   .av-news button:hover { background: var(--av-green-dark, #008a07); }
   .av-news:focus-within { border-color: var(--av-green); }
   .av-news__msg { font-size: .9rem; margin: 0 0 .75rem; padding: .65rem .9rem; border-radius: 8px; max-width: 320px; }
