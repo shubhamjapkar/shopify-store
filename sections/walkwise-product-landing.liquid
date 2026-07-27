@@ -933,8 +933,8 @@
   .av-press { padding: 2.25rem 0; background: var(--av-soft); }
   .av-marquee { overflow: hidden; width: 100%; -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
   .av-marquee__track { display: flex; align-items: center; gap: 3.5rem; width: max-content; animation: av-scroll 22s linear infinite; }
-  .av-press__logo { display: inline-flex; align-items: center; justify-content: center; height: 42px; flex: 0 0 auto; }
-  .av-press__logo img { display: block; max-height: 36px; max-width: 150px; width: auto; height: auto; object-fit: contain; opacity: .85; }
+  .av-press__logo { display: inline-flex; align-items: center; justify-content: center; width: 150px; height: 40px; flex: 0 0 auto; }
+  .av-press__logo img { display: block; width: 100%; height: 100%; object-fit: contain; opacity: .85; }
   @keyframes av-scroll { from { transform: translateX(0); } to { transform: translateX(-25%); } }
   @media (prefers-reduced-motion: reduce) { .av-marquee__track { animation: none; } }
 
