@@ -670,7 +670,6 @@
             <li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>
           {%- endif -%}
           <li><a href="/policies/terms-of-service">Terms of Service</a></li>
-          <li><a href="/pages/cookie-policy">Cookie Policy</a></li>
           {%- comment -%} Legal notice is a shop policy, but has no named shop.* property {%- endcomment -%}
           {%- for policy in shop.policies -%}
             {%- if policy.url contains '/policies/legal-notice' -%}
