@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Custom overrides
+   Kept out of base.css so "Update from Shopify" theme pulls can't clobber them.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Policy pages (/policies/*)
+
+   Shopify renders these itself and injects its own stylesheet (policy-*.css)
+   AFTER the theme's, so equal-specificity rules here lose the cascade. The
+   doubled class below raises specificity enough to win without !important.
+
+   Two problems being corrected:
+     1. Shopify's default caps the container at ~515px — cramped on desktop.
+     2. The theme's display headings land on the bare h1/h2 in policy markup,
+        rendering them at 120px / 72px against 12px body copy.
+   -------------------------------------------------------------------------- */
+
+.shopify-policy__container.shopify-policy__container {
+  /* Theme's own reading measure (--normal-content-width: 42rem) + gutters */
+  max-width: calc(var(--normal-content-width) + 2.5rem);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  padding-block: 3rem 4rem;
+}
+
+/* Body copy — Shopify's sheet drops this to 12px */
+.shopify-policy__container.shopify-policy__container .shopify-policy__body,
+.shopify-policy__container.shopify-policy__container .shopify-policy__body .rte,
+.shopify-policy__container.shopify-policy__container .shopify-policy__body p,
+.shopify-policy__container.shopify-policy__container .shopify-policy__body li {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.shopify-policy__container.shopify-policy__container .shopify-policy__body li {
+  margin-block-end: 0.5rem;
+}
+
+/* Page title */
+.shopify-policy__container.shopify-policy__container .shopify-policy__title h1 {
+  font-size: 2rem;
+  line-height: 1.25;
+  margin-block: 0 1.5rem;
+}
+
+/* In-body headings, stepped down to normal reading sizes */
+.shopify-policy__container.shopify-policy__container .shopify-policy__body :is(h1, h2) {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin-block: 2.25rem 0.75rem;
+}
+
+.shopify-policy__container.shopify-policy__container .shopify-policy__body h3 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  margin-block: 1.75rem 0.6rem;
+}
+
+.shopify-policy__container.shopify-policy__container .shopify-policy__body :is(h4, h5, h6) {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  margin-block: 1.5rem 0.5rem;
+}
+
+/* First heading shouldn't push the body away from the title */
+.shopify-policy__container.shopify-policy__container .shopify-policy__body :is(h1, h2, h3, h4):first-child {
+  margin-block-start: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .shopify-policy__container.shopify-policy__container {
+    padding-block: 2rem 3rem;
+  }
+
+  .shopify-policy__container.shopify-policy__container .shopify-policy__title h1 {
+    font-size: 1.625rem;
+  }
+
+  .shopify-policy__container.shopify-policy__container .shopify-policy__body :is(h1, h2) {
+    font-size: 1.3125rem;
+  }
+}

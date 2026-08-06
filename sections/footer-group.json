@@ -10,6 +10,33 @@
 {
   "type": "footer",
   "name": "t:names.footer",
-  "sections": {},
-  "order": []
+  "sections": {
+    "footer-utilities": {
+      "type": "footer-utilities",
+      "blocks": {
+        "copyright": {
+          "type": "footer-copyright",
+          "settings": {}
+        },
+        "social_icons": {
+          "type": "social-links",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "copyright",
+        "social_icons"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "divider_thickness": 1,
+        "padding-block-start": 20,
+        "padding-block-end": 20
+      }
+    }
+  },
+  "order": [
+    "footer-utilities"
+  ]
 }

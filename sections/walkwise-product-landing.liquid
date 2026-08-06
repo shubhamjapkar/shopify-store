@@ -640,14 +640,43 @@
   <footer class="av-footer">
     <div class="av-footer__inner">
       <div class="av-footer__col">
-        <h4>Useful links</h4>
+        <h4>Company</h4>
         <ul>
-          <li><a href="{{ routes.root_url }}">FAQ</a></li>
-          <li><a href="{{ routes.root_url }}">Contact</a></li>
-          <li><a href="{{ routes.root_url }}">Terms & Conditions</a></li>
-          <li><a href="{{ routes.root_url }}">Privacy Policy</a></li>
-          <li><a href="{{ routes.root_url }}">Legal Notice</a></li>
-          <li><a href="{{ routes.root_url }}">Returns & Refunds</a></li>
+          {%- if pages['about-us'] != blank -%}
+            <li><a href="{{ pages['about-us'].url }}">About Us</a></li>
+          {%- endif -%}
+          <li><a href="/pages/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="av-footer__col">
+        <h4>Customer Service</h4>
+        <ul>
+          {%- if pages['track-your-order'] != blank -%}
+            <li><a href="{{ pages['track-your-order'].url }}">Track Your Order</a></li>
+          {%- endif -%}
+          <li><a href="/policies/shipping-policy">Shipping Policy</a></li>
+          {%- if shop.refund_policy != blank -%}
+            <li><a href="{{ shop.refund_policy.url }}">Returns & Refunds</a></li>
+          {%- endif -%}
+          {%- if pages['payment-methods'] != blank -%}
+            <li><a href="{{ pages['payment-methods'].url }}">Payment Methods</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+      <div class="av-footer__col">
+        <h4>Legal</h4>
+        <ul>
+          {%- if shop.privacy_policy != blank -%}
+            <li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>
+          {%- endif -%}
+          <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+          <li><a href="/pages/cookie-policy">Cookie Policy</a></li>
+          {%- comment -%} Legal notice is a shop policy, but has no named shop.* property {%- endcomment -%}
+          {%- for policy in shop.policies -%}
+            {%- if policy.url contains '/policies/legal-notice' -%}
+              <li><a href="{{ policy.url }}">Legal Notice</a></li>
+            {%- endif -%}
+          {%- endfor -%}
         </ul>
       </div>
       <div class="av-footer__col av-footer__news">
@@ -725,7 +754,6 @@
         <span class="av-pay__card av-pay__amex">AMEX</span>
         <span class="av-pay__card av-pay__banc">Bancontact</span>
       </div>
-      <p class="av-copy">© 2026 WalkWise</p>
     </div>
   </footer>
 
@@ -1088,14 +1116,17 @@
   .av-futil__item a:hover { color: #fff; }
 
   /* Footer */
-  .av-footer { background: #000; color: #fff; padding: 3.5rem 1.5rem 120px; }
-  .av-footer__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-  .av-footer__col h4 { font-size: 1.3rem; font-weight: 700; margin: 0 0 1.25rem; }
+  /* No bottom gutter for the sticky bar: it hides once the footer is in view */
+  .av-footer { background: #000; color: #fff; padding: 3.5rem 1.5rem 2.5rem; }
+  .av-footer__inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr 1.4fr; gap: 3rem 2.5rem; }
+  .av-footer__col h4 { font-size: .8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: #8f8f8f; margin: 0 0 1.15rem; }
   .av-footer__col ul { list-style: none; padding: 0; margin: 0; }
-  .av-footer__col li { margin-bottom: .9rem; }
-  .av-footer__col a { color: #eaeaea; }
-  .av-footer__col a:hover { color: #fff; text-decoration: underline; }
-  .av-footer__news p { color: #cfcfcf; margin: 0 0 1.25rem; }
+  .av-footer__col li { margin-bottom: .7rem; }
+  .av-footer__col li:last-child { margin-bottom: 0; }
+  .av-footer__col a { color: #d6d6d6; font-size: .9375rem; line-height: 1.55; text-decoration: none; transition: color .15s ease; }
+  .av-footer__col a:hover { color: #fff; }
+  .av-footer__news h4 { font-size: 1.0625rem; font-weight: 700; text-transform: none; letter-spacing: normal; color: #fff; margin-bottom: .6rem; }
+  .av-footer__news p { color: #9a9a9a; font-size: .9375rem; line-height: 1.6; margin: 0 0 1.25rem; }
   .av-news { display: flex; align-items: center; gap: .5rem; max-width: 320px; border: 1px solid #fff; border-radius: 10px; padding: .3rem .3rem .3rem 1rem; }
   .av-news input { flex: 1 1 auto; min-width: 0; background: none; border: none; color: #fff; font: inherit; padding: .7rem 0; outline: none; -webkit-appearance: none; appearance: none; border-radius: 0; }
   .av-news input::placeholder { color: #cfcfcf; }
@@ -1111,7 +1142,7 @@
   .av-toast--err { background: #7a2222; }
   .av-toast__close { background: none; border: none; color: #bbb; cursor: pointer; font-size: .85rem; padding: .2rem; line-height: 1; }
   .av-toast__close:hover { color: #fff; }
-  .av-footer__bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .av-footer__bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 1.5rem; border-top: 1px solid #1f1f1f; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
   .av-copy { margin: 0; color: #cfcfcf; }
 
   /* Sticky bar */
@@ -1165,6 +1196,10 @@
   .av-drawer__pay { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .4rem; margin-top: 1rem; }
 
   /* Responsive */
+  @media (max-width: 1024px) {
+    /* Four columns get cramped before the mobile breakpoint: 2x2, newsletter last */
+    .av-footer__inner { grid-template-columns: 1fr 1fr; }
+  }
   @media (max-width: 900px) {
     .av-futil__card { grid-template-columns: repeat(2, 1fr); }
     .av-futil__item:not(:first-child) { border-left: none; }
@@ -1201,7 +1236,6 @@
     .av-review .av-stars { font-size: .78rem; margin-top: .5rem; }
     .av-stats__grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .av-futil__card { grid-template-columns: 1fr; }
-    .av-footer { padding-bottom: 120px; }
     .av-footer__inner { grid-template-columns: 1fr; gap: 2rem; }
   }
 {% endstylesheet %}
@@ -1595,15 +1629,35 @@
         }
       })();
 
-      /* Sticky bar */
+      /* Sticky bar — visible once the main CTA is scrolled past, hidden again over the footer */
       (function () {
         var bar = root.querySelector('[data-av-sticky]');
         var anchor = root.querySelector('.av-buybox .av-cta');
+        var footer = root.querySelector('.av-footer');
         if (!bar || !anchor || !('IntersectionObserver' in window)) return;
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (en) { bar.hidden = en.isIntersecting || en.boundingClientRect.top > 0; });
-        }, { rootMargin: '0px 0px -100% 0px' });
-        io.observe(anchor);
+
+        var pastAnchor = false; /* main CTA has scrolled off the top */
+        var atFooter = false;   /* footer has come into view */
+
+        function update() { bar.hidden = !pastAnchor || atFooter; }
+
+        /* Default viewport root: a zero-height root (rootMargin -100%) never flips
+           isIntersecting, so the callback would only ever fire once on init. */
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            /* Past it only once it has left upwards, not while still below the fold */
+            pastAnchor = !en.isIntersecting && en.boundingClientRect.bottom < 0;
+          });
+          update();
+        }).observe(anchor);
+
+        if (footer) {
+          /* Fires both ways, so scrolling back up out of the footer restores the bar */
+          new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) { atFooter = en.isIntersecting; });
+            update();
+          }).observe(footer);
+        }
       })();
     });
   })();
